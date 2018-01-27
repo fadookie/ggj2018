@@ -3,9 +3,11 @@ class EnemyPlayer : MarineShotgun {
 	}
 	States
 	{
-	  // Spawn: {
-		// Print(s:"Hello World");
-	  // }
+	  Spawn:
+		PLAY A 4 {
+		    A_Log("Hello World"); // foo
+			A_MarineLook();
+		}
   
     //Thing_Hate(3004,) // hate former humans
 	}
