@@ -6,12 +6,15 @@
 
 ClearEpisodes
 
-Episode "test map 01"
+Episode "MAP01"
 {
 	Name = "My Project"
 }
 
-Map "test map 01" "My Custom Map"
+Map MAP01 "Office Map" {
+}
+
+Map "MAP02" "My Custom Map"
 {
 	music = "d_dead"
 }
