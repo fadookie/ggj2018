@@ -1,0 +1,12 @@
+class EnemyPlayer : MarineShotgun {
+	Default {
+	}
+	States
+	{
+	  // Spawn: {
+		// Print(s:"Hello World");
+	  // }
+  
+    //Thing_Hate(3004,) // hate former humans
+	}
+}
