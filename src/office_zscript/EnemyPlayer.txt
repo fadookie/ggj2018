@@ -1,4 +1,5 @@
 class EnemyPlayer : MarineShotgun {
+	const HATED_TID = 22;
 	Default {
 	}
 	States
@@ -6,9 +7,11 @@ class EnemyPlayer : MarineShotgun {
 	  Spawn:
 		PLAY A 4 {
 		    A_Log("Hello World"); // foo
+			A_LogInt(tid);
+			A_Log("hates");
+			A_LogInt(HATED_TID);
+			Thing_Hate(tid, HATED_TID, 3);
 			A_MarineLook();
 		}
-  
-    //Thing_Hate(3004,) // hate former humans
 	}
 }
