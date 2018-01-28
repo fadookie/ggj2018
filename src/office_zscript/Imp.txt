@@ -28,7 +28,6 @@ class Imp: DoomPlayer
 	{
 		Spawn:
 		TNT1 A 2 {
-			A_Print("Spawned guy");
 		}
 		
 		Pain:  //CHECK HP... IF == 1 teleport
@@ -36,9 +35,7 @@ class Imp: DoomPlayer
 		{
 			if(A_JumpIfHealthLower(2,"Null"))
 			{
-				//teleport player here
-				A_Print("HEY BUDDY TELEPORT ME"); //take this out
-
+				// Simulated teleport
 				let teleporter = GetTeleporter();
 				if (!teleporter) {
 					A_Log("Teleporter null");
