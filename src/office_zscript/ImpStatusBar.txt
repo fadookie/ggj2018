@@ -1,5 +1,6 @@
 class ImpStatusBar : DoomStatusBar
 {
+/* Need to specify custom status bar in order for sbarinfo to work
     TextureID impMugTex;
     
     override void Init()
@@ -24,4 +25,5 @@ class ImpStatusBar : DoomStatusBar
         //DrawTexture(impMugTex, position, flags, iconAlpha, box, (iconScale, iconScale));
 		DrawTexture(impMugTex, position, flags);
 	}
+	*/
 }
