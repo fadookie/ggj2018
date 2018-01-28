@@ -1,0 +1,4 @@
+mugshot "Normal", health2
+{
+    { ST01 } 17;
+}
