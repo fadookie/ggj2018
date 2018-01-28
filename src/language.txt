@@ -1,0 +1,18 @@
+[enu default]
+//
+// UI strings
+//
+EP1TITLE = "Game";
+EP2TITLE = "Eliot's Test Episode 1";
+EP3TITLE = "Eliot's Game Test";
+MAP01TITLE = "Custom Episode 1 Text";
+MAP02TITLE = "Eliot's Test Level";
+MAP03TITLE = "Eliot's Game Level Test";
+
+// zdoom menu overrides
+MNU_NEWGAME = "Start";
+MNU_OPTIONS = "Options";
+MNU_LOADGAME = "Load Game";
+MNU_SAVEGAME = "Save Game";
+MNU_QUITGAME = "Quit";
+QUITMSG = "Quit?";
