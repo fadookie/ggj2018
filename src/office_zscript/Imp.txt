@@ -49,18 +49,12 @@ class Imp: DoomPlayer
 					// bool Teleport(Vector3 pos, double angle, int flags)
 					// bool TeleportMove(Vector3 pos, bool telefrag, bool modifyactor = true)
 					TeleportMove(teleporter.pos, true);
-					HealThing(STARTING_HEALTH); //TODO: why isn't this working?
+					HealThing(STARTING_HEALTH);
+					A_PlaySound("misc/teleport");
+					//A_PlaySound("bg/doomjazz", CHAN_BODY, 1, true);
+					ACS_NamedExecute("SetOfficeMusicPlaying", 0, true);
 				}
-				A_PlaySound("bg/doomjazz",4,1,1);
-				A_PlaySound("misc/teleport");
 			}
-		}
-		Goto Spawn;
-		
-		ImpTeleported:
-		TNT1 A 2
-		{
-			A_PlaySound("bg/doomjazz",4,1,1);
 		}
 		Goto Spawn;
 	}

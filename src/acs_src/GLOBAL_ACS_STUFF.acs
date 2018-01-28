@@ -1,6 +1,12 @@
 #library "GLOBAL_ACS_STUFF"
 #include "zcommon.acs"
 
+script 33 ENTER
+{
+  print (s:"Hello world!");
+  ACS_NamedExecute("SetOfficeMusicPlaying", 0, false);
+}
+
 script 1 (void)
 {
 	PlaySound(333, "impgibberishcoffee");
@@ -23,6 +29,7 @@ script 3 (void)
 	print(s:"\c[Green]Please Wait");
 	Delay(100);
 	Teleport(14);
+	ACS_NamedExecute("SetOfficeMusicPlaying", 0, false);
 	ClearInventory(); // take away imp gun
 	GiveInventory("Pistol", 1);
 	GiveInventory("Clip", 50);
@@ -39,4 +46,14 @@ script 3 (void)
 script 5 (void)
 {
 	Teleport(16);
+}
+ 
+script "SetOfficeMusicPlaying" (int playing)
+{
+	Log(s:"SetOfficeMusicPlaying:", i:playing);
+	if (playing) {
+		SetMusic("music/DoomJazz.mp3", 0);
+	} else {
+		SetMusic("D_RUNNIN", 0);
+	}
 }
