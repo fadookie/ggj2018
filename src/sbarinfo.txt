@@ -1,4 +1,44 @@
 mugshot "Normal", health2
 {
-    { ST01 } 17;
+    ST01 -1;
+}
+
+mugshot "Pain", healthspecial, directional
+{
+    ST01 -1;
+}
+
+mugshot "Rampage", health
+{
+    ST01 -1;
+}
+
+mugshot "Ouch", health
+{
+    ST01 -1;
+}
+
+mugshot "Grin", health
+{
+    ST01 -1;
+}
+
+mugshot "God"
+{
+    ST01 -1;
+}
+
+mugshot "GodAnimated"
+{
+    ST01 -1;
+}
+
+mugshot "Death"
+{
+    ST01 -1;
+}
+
+mugshot "XDeath"
+{
+    ST01 -1;
 }
