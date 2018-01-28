@@ -24,6 +24,7 @@ script 3 (void)
 	Delay(100);
 	Teleport(14);
 	delay(50);
+	PlaySound(333, "impgibberish1");
 	print(s:"\c[Yellow]What are you doing here?");
 	Delay(50);
 	print(s:"\c[Yellow]I'm covering this spot.");
