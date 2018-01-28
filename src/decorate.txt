@@ -4,6 +4,9 @@
 //
 //===========================================================================
 
+//Teleports
+#include "actors/teleporters.txt"
+
 // NPC Actors
 #include "actors/myactor.txt"
 

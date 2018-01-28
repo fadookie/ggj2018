@@ -1,0 +1,84 @@
+
+// ===========================
+// TELEPORTS   20500 - 20600
+// ===========================
+
+actor teleport100 : SpecialSpot 20500
+{
+	+INVISIBLE
+}
+
+actor teleport101 : SpecialSpot 20501
+{
+	+INVISIBLE
+}
+
+actor teleport102 : SpecialSpot 20502
+{
+	+INVISIBLE
+}
+
+actor teleport103 : SpecialSpot 20503
+{
+	+INVISIBLE
+}
+
+actor teleport104 : SpecialSpot 20504
+{
+	+INVISIBLE
+}
+
+actor teleport105 : SpecialSpot 20505
+{
+	+INVISIBLE
+}
+
+actor teleport106 : SpecialSpot 20506
+{
+	+INVISIBLE
+}
+
+actor teleport107 : SpecialSpot 20507
+{
+	+INVISIBLE
+}
+
+actor teleport108 : SpecialSpot 20508
+{
+	+INVISIBLE
+}
+
+actor teleport109 : SpecialSpot 20509
+{
+	+INVISIBLE
+}
+
+actor teleport110 : SpecialSpot 20510
+{
+	+INVISIBLE
+}
+
+actor teleport111 : SpecialSpot 20511
+{
+	+INVISIBLE
+}
+
+actor teleport112 : SpecialSpot 20512
+{
+	+INVISIBLE
+}
+
+actor teleport113 : SpecialSpot 20513
+{
+	+INVISIBLE
+}
+
+actor teleport114 : SpecialSpot 20514
+{
+	+INVISIBLE
+}
+
+actor teleport115 : SpecialSpot 20515
+{
+	+INVISIBLE
+}
