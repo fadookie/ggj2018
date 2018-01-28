@@ -9,6 +9,7 @@ class Imp: DoomPlayer
 		super.PostBeginPlay();
 		A_Log("Player init");
 		A_GiveInventory ("Mana1", 200);
+		//bInvulnerable = true;  // It works to set invulnerable flag here to switch to godmode mugshot - iddqd also works but not after teleport happens :/
 	}
 	
 
@@ -38,6 +39,7 @@ class Imp: DoomPlayer
 	{
 		Spawn:
 		TNT1 A 2 {
+			//A_Log("Imp.Spawn");
 		}
 		
 		Pain:  //CHECK HP... IF == 1 teleport
@@ -63,6 +65,20 @@ class Imp: DoomPlayer
 					ACS_NamedExecute("SetOfficeMusicPlaying", 0, true);
 				}
 			}
+		}
+		Goto Spawn;
+		
+		FormerHuman:
+		TNT1 A 2 {
+			//A_Log("Imp.FormerHuman");
+			bInvulnerable = true;
+		}
+		Loop;
+		
+		DisableGod: // Currently unused
+		TNT1 A 2 {
+			A_Log("Imp.DisableGod");
+			bInvulnerable = false;
 		}
 		Goto Spawn;
 	}

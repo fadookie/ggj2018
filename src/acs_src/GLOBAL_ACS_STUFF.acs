@@ -38,6 +38,8 @@ script 3 (void)
 	ClearInventory();
 	GiveInventory("Pistol", 1);
 	GiveInventory("Clip", 50);
+	//SetActorFlag(0, "Invulnerable", TRUE); //This doesn't enable god mode HUD unlike in ZScript :(
+	SetActorState(0, "FormerHuman", TRUE);
 	
 	delay(2 * 35);
 	PlaySound(333, "impgibberish1");
