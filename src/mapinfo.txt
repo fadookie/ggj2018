@@ -24,6 +24,12 @@ episode map03
 	optional
 	noskillmenu
 }
+episode map04
+{
+	name = "$EP4TITLE"
+	optional
+	noskillmenu
+}
 
 defaultmap
 {
@@ -41,6 +47,10 @@ map MAP02 lookup "MAP02TITLE"
 }
 
 map MAP03 lookup "MAP03TITLE"
+{
+}
+
+map MAP05 lookup "MAP04TITLE"
 {
 }
 

@@ -5,9 +5,10 @@
 EP1TITLE = "Game";
 EP2TITLE = "Eliot's Test Episode 1";
 EP3TITLE = "Eliot's Game Test";
+EP4TITLE = "Kyper's Test Episode";
 MAP01TITLE = "Custom Episode 1 Text";
 MAP02TITLE = "Eliot's Test Level";
-MAP03TITLE = "Eliot's Game Level Test";
+MAP03TITLE = "Kyper's Test Level";
 
 // zdoom menu overrides
 MNU_NEWGAME = "Start";
