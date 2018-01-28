@@ -1,13 +1,12 @@
-//20200 - projectiles
-actor IMPFIRE_MISSILE: Actor 20200
+actor CoffeeMug_Missile: Actor 20201
 {
 	+RANDOMIZE
 	Decal "Scorch"
 	Projectile
 	
 	Radius 6
-	Height 8
-	Speed 18
+	Height 4
+	Speed 8
 	Damage 1
 	
 	DeathSound "weapon/impfire"
@@ -15,11 +14,11 @@ actor IMPFIRE_MISSILE: Actor 20200
 	States
 	{
 		Spawn:
-		IHFP A 4 Bright
+		ICMP A 4
 		Loop
 		
 		Death:
-		IHFP A 4 Bright
+		ICMP A 4 Bright 
 		Stop
 	}
 }

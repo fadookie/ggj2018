@@ -1,0 +1,17 @@
+actor MugAmmo : Ammo
+{
+	Inventory.PickupMessage "#1 Boss Mug... Yea right!"
+	Inventory.Amount 1
+	Inventory.MaxAmount 1
+	Ammo.BackpackAmount 1
+	Ammo.BackpackMaxAmount 1
+	Tag "1# Boss Coffee Mug"
+	Inventory.Icon "ICMPA0"
+	
+	States
+	{
+		Spawn:
+		IMCP A 4
+		Loop
+	}
+}

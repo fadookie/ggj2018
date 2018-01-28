@@ -9,5 +9,5 @@
 ///WEAPON SOUNDS 
 ///==================
 
-$volume IHFSS 0.8
-weapon/impfire IHFSS
+$volume weapon/impfire 0.8
+weapon/impfire sounds/DoomFireball.mp3

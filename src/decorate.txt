@@ -13,3 +13,6 @@
 // Weapons & Projectiles
 #include "actors/ImpGun.txt" 
 #include "actors/IMPFIRE_MISSILE.txt"
+#include "actors/MugGun.txt"
+#include "actors/CoffeeMug_Missile.txt"
+#include "actors/MugAmmo.txt"

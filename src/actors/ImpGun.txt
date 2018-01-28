@@ -40,7 +40,7 @@ actor ImpGun: Weapon Replaces Pistol 20100
 		Goto ImpFire
 		
 		ImpFire:
-		IHFF A 0 A_Playsound("DSHOOF",CHAN_WEAPON,0.7)
+		IHFF A 0 A_Playsound("weapon/impfire",CHAN_WEAPON,0.7)
 		IHFF A 0 A_Recoil(4)
 		IHFF A 5 A_FireCustomMissile("IMPFIRE_MISSILE",0,0,0,-8)
 		IHFF A 5 A_Refire("ImpFire")
