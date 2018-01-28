@@ -1,4 +1,4 @@
-actor CustomBaron: BaronOfHell  //20202
+actor CustomBaron: BaronOfHell  20202
 {
 		States
 	{
