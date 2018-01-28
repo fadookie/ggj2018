@@ -9,6 +9,7 @@
 
 // NPC Actors
 #include "actors/myactor.txt"
+#include "actors/CustomImp.txt"
 
 // Player Actors 
 //#include "actors/Imp.txt"
