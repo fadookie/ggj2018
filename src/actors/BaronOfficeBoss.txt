@@ -1,4 +1,4 @@
-actor BaronOfficeBoss: BaronOfHell //20203
+actor BaronOfficeBoss: BaronOfHell 20203
 {
 			States
 	{
