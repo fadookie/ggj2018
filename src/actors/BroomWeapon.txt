@@ -9,6 +9,8 @@ actor BroomWeapon: Chainsaw 20103
 	Tag "Broom"
 	+WEAPON.MELEEWEAPON
 	
+	scale .2
+	
 	States
 	{
 		Ready:
@@ -29,7 +31,7 @@ actor BroomWeapon: Chainsaw 20103
 		goto Ready
 		
 		Spawn:
-		DBWS A -1
+		DBWP A -1
 		stop
 	}
 }
