@@ -6,18 +6,18 @@ class Imp: DoomPlayer
 	Default {
 		+BUDDHA
 		
-		Player.WeaponSlot 1, "ImpGun";
+		//Player.WeaponSlot 1, "ImpGun";
 		Player.WeaponSlot 2, "ImpGun";
-		Player.WeaponSlot 3, "ImpGun";
-		Player.WeaponSlot 4, "ImpGun";
-		Player.WeaponSlot 5, "ImpGun";
-		Player.WeaponSlot 6, "ImpGun";
-		Player.WeaponSlot 7, "ImpGun";
+		//Player.WeaponSlot 3, "ImpGun";
+		//Player.WeaponSlot 4, "ImpGun";
+		//Player.WeaponSlot 5, "ImpGun";
+		//Player.WeaponSlot 6, "ImpGun";
+		//Player.WeaponSlot 7, "ImpGun";
 		
 		Player.DisplayName "Imp";
 		Player.StartItem "ImpGun";
-		Player.StartItem "ImpGun";
-		Player.StartItem "Clip",50;
+		//Player.StartItem "ImpGun";
+		//Player.StartItem "Clip",5;
 		
 		
 		Speed 0.5;
