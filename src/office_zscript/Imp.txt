@@ -18,6 +18,7 @@ class Imp: DoomPlayer
 		
 		Player.WeaponSlot 1, "Fist";
 		Player.WeaponSlot 2, "ImpGun";
+		Player.WeaponSlot 3, "MugGun";
 		//Player.WeaponSlot 3, "ImpGun";
 		//Player.WeaponSlot 4, "ImpGun";
 		//Player.WeaponSlot 5, "ImpGun";
@@ -25,8 +26,8 @@ class Imp: DoomPlayer
 		//Player.WeaponSlot 7, "ImpGun";
 		
 		Player.DisplayName "Imp";
-		Player.StartItem "ImpGun";
 		Player.StartItem "Fist";
+		Player.StartItem "ImpGun";
 		//Player.StartItem "ImpGun";
 		//Player.StartItem "Clip",5;
 		

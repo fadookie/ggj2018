@@ -16,6 +16,7 @@ actor ImpFist: Weapon Replaces Fist 20102
 	
 	Inventory.PickupSound "weapon/impfire"
 	Inventory.PickupMessage "IMP GUN"
+	+INVENTORY.UNDROPPABLE
 	
 	States
 	{
