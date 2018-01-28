@@ -1,0 +1,25 @@
+//20200 - projectiles
+actor IMPFIRE_MISSILE: Actor 20200
+{
+	+RANDOMIZE
+	Decal "Scorch"
+	Projectile
+	
+	Radius 6
+	Height 8
+	Speed 18
+	Damage 1
+	
+	DeathSound "DSHOOF"
+	
+	States
+	{
+		Spawn:
+		IHFP A 4 Bright
+		Loop
+		
+		Death:
+		IHFP A 4 Bright
+		Stop
+	}
+}
