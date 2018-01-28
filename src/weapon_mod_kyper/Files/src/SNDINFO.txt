@@ -1,0 +1,5 @@
+
+$volume IMPHANDFIRE 0.8
+$random IMPHANDFIRE {DSHOOF}
+DSHOOF DSHOOF
+weapon/impfire IHFSS
