@@ -1,0 +1,24 @@
+actor Imp: DoomPlayer 20300 //using 20300+ for player classes 
+{
+	+BUDDHA
+	-PICKUP 
+	
+	Player.WeaponSlot 1, ImpGun
+	Player.WeaponSlot 2, ImpGun
+	Player.WeaponSlot 3, ImpGun
+	Player.WeaponSlot 4, ImpGun
+	Player.WeaponSlot 5, ImpGun
+	Player.WeaponSlot 6, ImpGun
+	Player.WeaponSlot 7, ImpGun
+	
+	Player.DisplayName "Imp"
+	Player.StartItem "ImpGun"
+	Player.StartItem "ImpGun"
+	Player.StartItem "Clip",50
+	
+	
+	Speed 0.5
+	Health 200
+	
+	
+}
