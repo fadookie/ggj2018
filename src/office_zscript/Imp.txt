@@ -3,6 +3,14 @@ class Imp: DoomPlayer
 	const TELEPORT_TARGET_TID = 13;
 	const STARTING_HEALTH = 100;
 	int numRespawns;
+	
+	override void PostBeginPlay()
+    {
+		super.PostBeginPlay();
+		A_Log("Player init");
+		A_GiveInventory ("Mana1", 200);
+	}
+	
 
 	Default {
 		+BUDDHA
