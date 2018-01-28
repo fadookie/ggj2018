@@ -6,6 +6,7 @@
 
 GameInfo{
 	PlayerClasses="Imp"
+	StatusBarClass = "ImpStatusBar"
 }
 
 ClearEpisodes
