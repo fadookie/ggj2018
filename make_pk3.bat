@@ -19,8 +19,8 @@ REM *******************************************************
 
 if exist %pk3name%.pk3 del %pk3name%.pk3
 
-call compile.bat
+REM call compile.bat
 
-cd ..\
+REM cd ..\
 
-7z a -r -x!src\ -x!acs\*.acs -x!maps\*.o -x!maps\*.acs -x!dialogs\ -x!*.dbs -x!*.bat -x!*.bak -x!*.backup* -x!*.db -ssw -tzip ..\%pk3name%.pk3 "*" 
+7z a -r -x!src\ -x!acs\*.acs -x!maps\*.o -x!maps\*.acs -x!dialogs\ -x!*.dbs -x!*.bat -x!*.bak -x!*.backup* -x!*.db -ssw -tzip %pk3name%.pk3 "*" 

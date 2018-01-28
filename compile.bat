@@ -17,11 +17,11 @@ REM *******************************************************
 
 REM Set the path to your game executable (ZDoom, GZDoom, whatever)
 REM and the executable itself below.
-set exepath=d:\games\doom
-set exename=zdoom.exe
+set exepath=C:\Users\physi_000\Desktop\DoomStuff\GZDOOM
+set exename=gzdoom.exe
 
 REM Set the path to your project below.
-set projectpath=d:\games\doom\myproj
+set projectpath=C:\Users\physi_000\Desktop\DoomStuff\ggj2018
 
 
 
