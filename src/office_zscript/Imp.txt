@@ -1,10 +1,10 @@
 class Imp: DoomPlayer
-{	
-	Actor teleporter;
-	
+{		
+	const TELEPORT_TARGET_TID = 13;
+	const STARTING_HEALTH = 100;
+
 	Default {
 		+BUDDHA
-		-PICKUP 
 		
 		Player.WeaponSlot 1, "ImpGun";
 		Player.WeaponSlot 2, "ImpGun";
@@ -21,17 +21,13 @@ class Imp: DoomPlayer
 		
 		
 		Speed 0.5;
-		Health 100;
+		Health STARTING_HEALTH;
 	}
-	
 	
 	States
 	{
 		Spawn:
 		TNT1 A 2 {
-			if (teleporter != null) {
-				teleporter = GetTeleporter();
-			}
 			A_Print("Spawned guy");
 		}
 		
@@ -42,11 +38,18 @@ class Imp: DoomPlayer
 			{
 				//teleport player here
 				A_Print("HEY BUDDY TELEPORT ME"); //take this out
-				//Teleport(0, 13, 0);
-				//A_Warp();
+
+				let teleporter = GetTeleporter();
+				if (!teleporter) {
+					A_Log("Teleporter null");
+				} else {
+					// Teleport is a ZScript actor function with the following signature:
+					// Teleport(Vector3 pos, double angle, int flags)
+					Teleport(teleporter.pos, 0.0, 0);
+					HealThing(STARTING_HEALTH); //TODO: why isn't this working?
+				}
 				A_PlaySound("bg/doomjazz",4,1,1);
-				//A_Teleport("ImpTeleported", "WHERE TO TP") //ADD THIS IN
-				
+				A_PlaySound("misc/teleport");
 			}
 		}
 		Goto Spawn;
@@ -61,15 +64,15 @@ class Imp: DoomPlayer
 	
 	Actor GetTeleporter()
     {
-        ThinkerIterator MonsterFinder = ThinkerIterator.Create("Actor");
-        Actor mo;
+		A_Log("GetTeleporter");
+        let MonsterFinder = ActorIterator.Create(TELEPORT_TARGET_TID);
+        Actor mo = null;
         while ( mo = Actor(MonsterFinder.Next()) )
         {
-            if ( mo.tid == 13 )
-            {
-                return mo;
-            }
+			A_Log("got actor");
+			A_LogInt(mo.tid);
+			return mo;
         }
-		return null;
+		return mo;
     }
 }
