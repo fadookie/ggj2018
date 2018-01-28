@@ -18,34 +18,52 @@ script 2 (void)
 	print(s:"\c[Red]What the hell are you doing?");
 	PlaySound(666, "bossthatdoesntwork");
 	delay(3 * 35);
-	print(s:"\c[Yellow]Get back to work? ... Platform 1 please!");
+	print(s:"\c[Red]Get back to work? ... Platform 1 please!");
 	PlaySound(666, "bossgetbacktowork");
 }
 
 script 3 (void)
 {
 	print(s:"\c[Green]Transmission in progress....");
+	PlaySound(111, "impgibberish3");
 	delay(70);
 	print(s:"\c[Green]Please Wait");
+	PlaySound(111, "impgibberish3");
 	Delay(100);
 	Teleport(14);
+	
 	ACS_NamedExecute("SetOfficeMusicPlaying", 0, false);
-	ClearInventory(); // take away imp gun
+	
+	// Switch from imp to former human guns
+	ClearInventory();
 	GiveInventory("Pistol", 1);
 	GiveInventory("Clip", 50);
-	delay(50);
+	
+	delay(2 * 35);
 	PlaySound(333, "impgibberish1");
 	print(s:"\c[Yellow]What are you doing here?");
-	Delay(50);
+	Delay(3 * 35);
 	print(s:"\c[Yellow]I'm covering this spot.");
-	delay(20);
+	delay(2 * 35);
 	Line_SetPortalTarget(35,34);
+	delay(70);
+	Floor_LowerToNearest(75,5);
+	PlaySound(444, "bg/doomjazz");
+	SetActorProperty (222, APROP_RenderStyle, STYLE_None);
 }
-
 
 script 5 (void)
 {
-	Teleport(16);
+	print(s:"\c[Red]That one isn't working right now.");
+	PlaySound(666, "bossthatdoesntwork");
+	delay(2 * 35);
+	print(s:"\c[Red]Get me some coffeeee.");
+	PlaySound(666, "bosscoffee");
+}
+
+script 6 (void)
+{
+	Log(s:"Script 6 removed due to Eliot's other audio stuff");
 }
  
 script "SetOfficeMusicPlaying" (int playing)
