@@ -10,6 +10,7 @@
 // NPC Actors
 #include "actors/myactor.txt"
 #include "actors/CustomImp.txt"
+#include "actors/CustomBaron.txt"
 
 // Player Actors 
 //#include "actors/Imp.txt"
