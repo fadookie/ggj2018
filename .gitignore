@@ -9,7 +9,7 @@ ehthumbs.db
 Thumbs.db
 myproj.pk3
 
-*.o
+/src/maps/*.o
 
 *.dbs
 

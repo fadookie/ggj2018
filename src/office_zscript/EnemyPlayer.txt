@@ -10,7 +10,7 @@ class EnemyPlayer : MarineShotgun {
 			A_LogInt(tid);
 			A_Log("hates");
 			A_LogInt(HATED_TID);
-			Thing_Hate(tid, HATED_TID, 3);
+			Thing_Hate(tid, HATED_TID, 4);
 			A_MarineLook();
 		}
 	}

@@ -1,0 +1,76 @@
+class Imp: DoomPlayer
+{		
+	const TELEPORT_TARGET_TID = 13;
+	const STARTING_HEALTH = 100;
+
+	Default {
+		+BUDDHA
+		
+		//Player.WeaponSlot 1, "ImpGun";
+		Player.WeaponSlot 2, "ImpGun";
+		//Player.WeaponSlot 3, "ImpGun";
+		//Player.WeaponSlot 4, "ImpGun";
+		//Player.WeaponSlot 5, "ImpGun";
+		//Player.WeaponSlot 6, "ImpGun";
+		//Player.WeaponSlot 7, "ImpGun";
+		
+		Player.DisplayName "Imp";
+		Player.StartItem "ImpGun";
+		//Player.StartItem "ImpGun";
+		//Player.StartItem "Clip",5;
+		
+		
+		Speed 0.5;
+		Health STARTING_HEALTH;
+	}
+	
+	States
+	{
+		Spawn:
+		TNT1 A 2 {
+		}
+		
+		Pain:  //CHECK HP... IF == 1 teleport
+		TNT1 A 2
+		{
+			if(A_JumpIfHealthLower(2,"Null"))
+			{
+				// Simulated teleport
+				let teleporter = GetTeleporter();
+				if (!teleporter) {
+					A_Log("Teleporter null");
+				} else {
+					// Teleport/TeleportFrag are a ZScript actor functions with the following signatures:
+					// bool Teleport(Vector3 pos, double angle, int flags)
+					// bool TeleportMove(Vector3 pos, bool telefrag, bool modifyactor = true)
+					TeleportMove(teleporter.pos, true);
+					HealThing(STARTING_HEALTH); //TODO: why isn't this working?
+				}
+				A_PlaySound("bg/doomjazz",4,1,1);
+				A_PlaySound("misc/teleport");
+			}
+		}
+		Goto Spawn;
+		
+		ImpTeleported:
+		TNT1 A 2
+		{
+			A_PlaySound("bg/doomjazz",4,1,1);
+		}
+		Goto Spawn;
+	}
+	
+	Actor GetTeleporter()
+    {
+		A_Log("GetTeleporter");
+        let MonsterFinder = ActorIterator.Create(TELEPORT_TARGET_TID);
+        Actor mo = null;
+        while ( mo = Actor(MonsterFinder.Next()) )
+        {
+			A_Log("got actor");
+			A_LogInt(mo.tid);
+			return mo;
+        }
+		return mo;
+    }
+}

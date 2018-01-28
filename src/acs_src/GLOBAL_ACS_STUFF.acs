@@ -1,0 +1,40 @@
+#library "GLOBAL_ACS_STUFF"
+#include "zcommon.acs"
+
+script 1 (void)
+{
+	PlaySound(333, "impgibberishcoffee");
+	print(s:"\c[Green]This coffee sucks!!!");
+}
+
+script 2 (void)
+{
+	print(s:"\c[Red]What the hell are you doing?");
+	PlaySound(666, "bossthatdoesntwork");
+	delay(3 * 35);
+	print(s:"\c[Yellow]Get back to work? ... Platform 1 please!");
+	PlaySound(666, "bossgetbacktowork");
+}
+
+script 3 (void)
+{
+	print(s:"\c[Green]Transmission in progress....");
+	delay(70);
+	print(s:"\c[Green]Please Wait");
+	Delay(100);
+	Teleport(14);
+	ClearInventory(); // take away imp gun
+	delay(50);
+	PlaySound(333, "impgibberish1");
+	print(s:"\c[Yellow]What are you doing here?");
+	Delay(50);
+	print(s:"\c[Yellow]I'm covering this spot.");
+	delay(20);
+	Line_SetPortalTarget(35,34);
+}
+
+
+script 5 (void)
+{
+	Teleport(16);
+}

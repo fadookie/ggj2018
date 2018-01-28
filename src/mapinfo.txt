@@ -6,6 +6,7 @@
 
 GameInfo{
 	PlayerClasses="Imp"
+	StatusBarClass = "ImpStatusBar"
 }
 
 ClearEpisodes
@@ -39,11 +40,11 @@ defaultmap
 {
 	//lightmode = 0
 	//pixelratio = 1.0
+	Sky1 = "SKY1"
 }
 
 map MAP01 lookup "MAP01TITLE"
 {
-	Sky1 = "SKY1"
 }
 
 map MAP02 lookup "MAP02TITLE"
@@ -61,4 +62,6 @@ map MAP05 lookup "MAP04TITLE"
 DoomEdNums
 {
 	20001 = EnemyPlayer
+	//using 20300+ for player classes
+	20300 = Imp
 }

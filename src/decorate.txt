@@ -11,7 +11,7 @@
 #include "actors/myactor.txt"
 
 // Player Actors 
-#include "actors/Imp.txt"
+//#include "actors/Imp.txt"
 
 // Weapons & Projectiles
 #include "actors/ImpGun.txt" 

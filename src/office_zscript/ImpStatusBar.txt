@@ -1,0 +1,27 @@
+class ImpStatusBar : DoomStatusBar
+{
+    TextureID impMugTex;
+    
+    override void Init()
+    {
+        Super.Init();
+        impMugTex = TexMan.CheckForTexture("AIFST01", 0);
+    }
+    
+    override void Draw(int state, double TicFrac)
+    {
+        Super.Draw(state, TicFrac);
+        
+		
+		Vector2 texsize = TexMan.GetScaledSize(impMugTex);
+		Vector2 position = (screen.GetWidth() / 2, screen.GetHeight() - texsize.Y);
+		int flags = 0;
+		//[position, flags] = AdjustPosition(position, flags, texsize.X, texsize.Y);
+		
+		let iconAlpha = 1.0;
+		double iconScale = 1;
+        Vector2 box = (-1, -1);
+        //DrawTexture(impMugTex, position, flags, iconAlpha, box, (iconScale, iconScale));
+		DrawTexture(impMugTex, position, flags);
+	}
+}
