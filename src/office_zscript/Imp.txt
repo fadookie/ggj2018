@@ -2,6 +2,7 @@ class Imp: DoomPlayer
 {		
 	const TELEPORT_TARGET_TID = 13;
 	const STARTING_HEALTH = 100;
+	int numRespawns;
 
 	Default {
 		+BUDDHA
@@ -36,6 +37,9 @@ class Imp: DoomPlayer
 		{
 			if(A_JumpIfHealthLower(2,"Null"))
 			{
+				numRespawns++;
+				A_Log("Respawns:");
+				A_LogInt(numRespawns);
 				// Simulated teleport
 				let teleporter = GetTeleporter();
 				if (!teleporter) {
