@@ -11,6 +11,19 @@
 
 bg/doomjazz music/DoomJazz.mp3
 
+//=============
+// OFFICE_SOUNDS
+// ============
+
+bosscoffee sounds/ImpBossCoffee.mp3
+bossgetbacktowork sounds/ImpBossGetBackkToWork.mp3
+bossthatdoesntwork sounds/ImpBossThatDoesntWork.mp3
+impgibberish1 sounds/ImpGibberish1.mp3
+impgibberish2 sounds/ImpGibberish2.mp3
+impgibberish3 sounds/ImpGibberish3.mp3
+impgibberishcoffee sounds/ImpGibberishCoffee.mp3
+
+
 //==================
 //WEAPON SOUNDS 
 //==================
