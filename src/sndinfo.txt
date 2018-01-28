@@ -16,7 +16,7 @@ bg/doomjazz music/DoomJazz.mp3
 // ============
 
 bosscoffee sounds/ImpBossCoffee.mp3
-bossgetbacktowork sounds/ImpBossGetBackkToWork.mp3
+bossgetbacktowork sounds/ImpBossGetBackToWork.mp3
 bossthatdoesntwork sounds/ImpBossThatDoesntWork.mp3
 impgibberish1 sounds/ImpGibberish1.mp3
 impgibberish2 sounds/ImpGibberish2.mp3

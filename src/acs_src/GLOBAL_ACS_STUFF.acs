@@ -3,14 +3,17 @@
 
 script 1 (void)
 {
+	PlaySound(333, "impgibberishcoffee");
 	print(s:"\c[Green]This coffee sucks!!!");
 }
 
 script 2 (void)
 {
 	print(s:"\c[Red]What the hell are you doing?");
-	delay(70);
+	PlaySound(666, "bossthatdoesntwork");
+	delay(3 * 35);
 	print(s:"\c[Yellow]Get back to work? ... Platform 1 please!");
+	PlaySound(666, "bossgetbacktowork");
 }
 
 script 3 (void)
