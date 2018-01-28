@@ -18,7 +18,25 @@ actor Imp: DoomPlayer 20300 //using 20300+ for player classes
 	
 	
 	Speed 0.5
-	Health 200
+	Health 100
+	
+	
+	States
+	{
+		Pain:  //CHECK HP... IF == 1 teleport
+		TNT1 A 2
+		{
+			if(A_JumpIfHealthLower(2,"Null"))
+			{
+				//teleport player here
+				A_Print("HEY BUDDY TELEPORT ME"); //take this out
+				//A_Teleport("STATE TO SWITCH TO WHEN TP FINISH", "WHERE TO TP")
+				
+			}
+		}
+		Goto Spawn
+				
+	}
 	
 	
 }
