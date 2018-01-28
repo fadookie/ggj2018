@@ -27,12 +27,13 @@ episode map03
 
 defaultmap
 {
-	lightmode = 0
+	//lightmode = 0
 	//pixelratio = 1.0
 }
 
 map MAP01 lookup "MAP01TITLE"
 {
+	Sky1 = "SKY1"
 }
 
 map MAP02 lookup "MAP02TITLE"
