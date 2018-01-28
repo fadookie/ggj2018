@@ -1,4 +1,4 @@
-actor CustomImp : DoomImp //20201
+actor CustomImp : DoomImp 20201
 {
 	
 	States
