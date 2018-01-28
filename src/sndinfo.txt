@@ -17,3 +17,10 @@ bg/doomjazz music/DoomJazz.mp3
 
 $volume weapon/impfire 0.8
 weapon/impfire sounds/DoomFireball.mp3
+
+//==================
+//OTHER
+//==================
+
+$alias DSTELEPT sounds/DoomTeleport.mp3
+
