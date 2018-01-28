@@ -5,9 +5,15 @@
 //===========================================================================
 
 
-///==================
-///WEAPON SOUNDS 
-///==================
+//===========
+//BACKGRUOND MUSIC
+//===========
+
+bg/doomjazz music/DoomJazz.mp3
+
+//==================
+//WEAPON SOUNDS 
+//==================
 
 $volume weapon/impfire 0.8
 weapon/impfire sounds/DoomFireball.mp3
