@@ -6,17 +6,41 @@
 
 ClearEpisodes
 
-Episode "MAP01"
+clearepisodes
+episode map01
 {
-	Name = "My Project"
+	name = "$EP1TITLE"
+	noskillmenu
+}
+episode map02
+{
+	name = "$EP2TITLE"
+	optional
+	noskillmenu
+}
+episode map33
+{
+	name = "$EP3TITLE"
+	optional
+	noskillmenu
 }
 
-Map MAP01 "Office Map" {
+defaultmap
+{
+	lightmode = 0
+	//pixelratio = 1.0
 }
 
-Map "MAP02" "My Custom Map"
+map MAP01 lookup "MAP01TITLE"
 {
-	music = "d_dead"
+}
+
+map MAP02 lookup "MAP02TITLE"
+{
+}
+
+map MAP32 lookup "MAP32TITLE"
+{
 }
 
 DoomEdNums
