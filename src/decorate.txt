@@ -19,3 +19,4 @@
 #include "actors/MugGun.txt"
 #include "actors/CoffeeMug_Missile.txt"
 #include "actors/MugAmmo.txt"
+#include "actors/ImpFist.txt"
