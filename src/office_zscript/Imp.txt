@@ -43,9 +43,10 @@ class Imp: DoomPlayer
 				if (!teleporter) {
 					A_Log("Teleporter null");
 				} else {
-					// Teleport is a ZScript actor function with the following signature:
-					// Teleport(Vector3 pos, double angle, int flags)
-					Teleport(teleporter.pos, 0.0, 0);
+					// Teleport/TeleportFrag are a ZScript actor functions with the following signatures:
+					// bool Teleport(Vector3 pos, double angle, int flags)
+					// bool TeleportMove(Vector3 pos, bool telefrag, bool modifyactor = true)
+					TeleportMove(teleporter.pos, true);
 					HealThing(STARTING_HEALTH); //TODO: why isn't this working?
 				}
 				A_PlaySound("bg/doomjazz",4,1,1);
