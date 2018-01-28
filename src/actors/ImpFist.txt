@@ -1,5 +1,5 @@
 //using 20100 -weapons
-actor ImpFist: Weapon Replaces Fist 20101
+actor ImpFist: Weapon Replaces Fist 20102
 {
 	Weapon.SlotNumber 2
 	Weapon.SlotPriority 1
