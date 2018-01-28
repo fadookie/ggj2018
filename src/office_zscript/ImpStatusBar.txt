@@ -11,13 +11,17 @@ class ImpStatusBar : DoomStatusBar
     override void Draw(int state, double TicFrac)
     {
         Super.Draw(state, TicFrac);
-		
-		// halfway up from center screen
-        Vector2 kmpos = (160, 50);
         
+		
+		Vector2 texsize = TexMan.GetScaledSize(impMugTex);
+		Vector2 position = (screen.GetWidth() / 2, screen.GetHeight() - texsize.Y);
+		int flags = 0;
+		//[position, flags] = AdjustPosition(position, flags, texsize.X, texsize.Y);
+		
 		let iconAlpha = 1.0;
-		double iconScale = 0.5;
+		double iconScale = 1;
         Vector2 box = (-1, -1);
-        DrawTexture(impMugTex, kmpos, 0, iconAlpha, box, (iconScale, iconScale));
+        //DrawTexture(impMugTex, position, flags, iconAlpha, box, (iconScale, iconScale));
+		DrawTexture(impMugTex, position, flags);
 	}
 }
