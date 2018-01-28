@@ -40,11 +40,11 @@ defaultmap
 {
 	//lightmode = 0
 	//pixelratio = 1.0
+	Sky1 = "SKY1"
 }
 
 map MAP01 lookup "MAP01TITLE"
 {
-	Sky1 = "SKY1"
 }
 
 map MAP02 lookup "MAP02TITLE"
