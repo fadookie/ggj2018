@@ -11,6 +11,7 @@
 #include "actors/myactor.txt"
 #include "actors/CustomImp.txt"
 #include "actors/CustomBaron.txt"
+#include "actors/BaronOfficeBoss.txt"
 
 // Player Actors 
 //#include "actors/Imp.txt"
