@@ -25,12 +25,12 @@ mugshot "Grin", health
 
 mugshot "God"
 {
-    ST01 -1;
+    ST00 -1;
 }
 
 mugshot "GodAnimated"
 {
-    ST01 -1;
+    ST00 -1;
 }
 
 mugshot "Death"
