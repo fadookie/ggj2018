@@ -1,5 +1,5 @@
 //using 20100 -weapons
-actor ImpGun: Weapon Replaces Pistol 20100
+actor ImpGun: Weapon Replaces RocketLauncher 20100
 {
 	Weapon.SlotNumber 2
 	Weapon.SlotPriority 1
