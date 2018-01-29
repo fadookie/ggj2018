@@ -63,7 +63,7 @@ class Imp: DoomPlayer
 					HealThing(STARTING_HEALTH);
 					A_PlaySound("misc/teleport");
 					//A_PlaySound("bg/doomjazz", CHAN_BODY, 1, true);
-					ACS_NamedExecute("SetOfficeMusicPlaying", 0, true);
+					ACS_NamedExecute("SetMusic", 1, true);
 				}
 			}
 		}

@@ -2,21 +2,39 @@
 
 #include "zcommon.acs"
 
+/***
+ * Global functions
+ */
+ 
+script "SetMusic" (int track)
+{
+	Log(s:"SetMusic:", i:track);
 
+	if (track == 0) {
+		SetMusic("D_E1M1", 0);
+	} else if (track == 1) {
+		SetMusic("music/DoomJazz.mp3", 0);
+	} else if (track == 2) {
+		SetMusic("D_E1M3", 0);
+	} else {
+		Log(s:"Unrecognized music track ", i:track);
+	}
+
+}
+
+/**
+ * Special trigger scripts
+ */
 
 script 33 ENTER
-
 {
-
-  ACS_NamedExecute("SetOfficeMusicPlaying", 0, false);
+  ACS_NamedExecute("SetMusic", 0, 0);
   
   GiveInventory("ImpGun",1);
   
   SetWeapon("ImpGun");
 
 }
-
-
 
 script 1 (void)
 
@@ -68,7 +86,7 @@ script 3 (void)
 
 	
 
-	ACS_NamedExecute("SetOfficeMusicPlaying", 0, false);
+	ACS_NamedExecute("SetMusic", 2, false);
 
 	
 
@@ -102,7 +120,7 @@ script 3 (void)
 
 	Floor_LowerToNearest(75,5);
 
-	ACS_NamedExecute("SetOfficeMusicPlaying", 0, true);
+	ACS_NamedExecute("SetMusic", 1, true);
 
 }
 
@@ -147,28 +165,6 @@ script 7 (void)
 	PlaySound(666, "bossgetbacktowork");
 
 }
-
- 
-
-script "SetOfficeMusicPlaying" (int playing)
-
-{
-
-	Log(s:"SetOfficeMusicPlaying:", i:playing);
-
-	if (playing) {
-
-		SetMusic("music/DoomJazz.mp3", 0);
-
-	} else {
-
-		SetMusic("D_RUNNIN", 0);
-
-	}
-
-}
-
-
 
 script 8 (void)
 
