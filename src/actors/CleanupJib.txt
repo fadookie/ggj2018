@@ -1,0 +1,30 @@
+actor CleanupJib: DoomImp 20800
+{
+	Health 200
+	Speed 0
+	PainSound ""
+	
+
+	States
+	{
+		Spawn:
+		FATT T 10 
+		loop
+		
+		See:
+		FATT T 10
+		goto spawn
+		
+		Pain:
+		FATT T 10 A_Pain
+		goto see
+		
+		Death:
+		TNT1 A 0
+		goto null
+		
+	}
+}
+
+
+
