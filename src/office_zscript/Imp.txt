@@ -16,7 +16,7 @@ class Imp: DoomPlayer
 	Default {
 		+BUDDHA
 		
-		Player.WeaponSlot 1, "Fist";
+		Player.WeaponSlot 1, "ImpFist";
 		Player.WeaponSlot 2, "ImpGun";
 		Player.WeaponSlot 3, "MugGun";
 		//Player.WeaponSlot 3, "ImpGun";
@@ -26,10 +26,10 @@ class Imp: DoomPlayer
 		//Player.WeaponSlot 7, "ImpGun";
 		
 		Player.DisplayName "Imp";
-		Player.StartItem "Fist";
+		//Player.StartItem "ImpFist";
 		Player.StartItem "ImpGun";
-		//Player.StartItem "ImpGun";
-		//Player.StartItem "Clip",5;
+		Player.StartItem "ImpGun";
+		Player.StartItem "Mana1",100;
 		
 		
 		Speed 0.5;
