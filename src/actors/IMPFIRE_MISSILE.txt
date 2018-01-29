@@ -1,5 +1,5 @@
 //20200 - projectiles
-actor IMPFIRE_MISSILE: Actor 20200
+actor IMPFIRE_MISSILE: DoomImpBall 20200
 {
 	+RANDOMIZE
 	Decal "Scorch"
@@ -15,11 +15,11 @@ actor IMPFIRE_MISSILE: Actor 20200
 	States
 	{
 		Spawn:
-		IHFP A 4 Bright
+		BAL1 AB 4 Bright
 		Loop
 		
 		Death:
-		IHFP A 4 Bright
+		BAL1 CDE 6 Bright
 		Stop
 	}
 }
