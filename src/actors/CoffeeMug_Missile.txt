@@ -1,4 +1,4 @@
-actor CoffeeMug_Missile : Actor // 20201
+actor CoffeeMug_Missile : Actor 20250
 {
 	+RANDOMIZE
 	Decal "Scorch"
@@ -14,11 +14,11 @@ actor CoffeeMug_Missile : Actor // 20201
 	States
 	{
 		Spawn:
-		BAL1 AB 4
+		ICMP A 4
 		Loop
 		
 		Death:
-		BAL1 CDE 6 Bright 
+		ICMP A 4 Bright 
 		Stop
 	}
 }
