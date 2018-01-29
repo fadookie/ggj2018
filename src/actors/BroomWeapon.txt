@@ -5,7 +5,7 @@ actor BroomWeapon: Chainsaw 20103
 	Weapon.BobRangeX 0.5
 	Weapon.BobRangeY 0.2
 	
-	Weapon.UpSound 0
+	Weapon.UpSound "weapon/broomsweep"
 	Weapon.ReadySound 0
 	
 	Inventory.PickupMessage "Time to start sweeping!"
@@ -29,7 +29,7 @@ actor BroomWeapon: Chainsaw 20103
 		loop
 		
 		Fire:
-		DBWF AB 4 A_Saw("weapon/broomsweep", "weapon/broomsweep")
+		DBWF AB 8 A_Saw("weapon/broomsweep", "weapon/broomsweep")
 		DBWF B 0 A_ReFire
 		goto Ready
 		
