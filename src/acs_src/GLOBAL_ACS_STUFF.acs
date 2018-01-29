@@ -9,6 +9,10 @@ script 33 ENTER
 {
 
   ACS_NamedExecute("SetOfficeMusicPlaying", 0, false);
+  
+  GiveInventory("ImpGun",1);
+  
+  SetWeapon("ImpGun");
 
 }
 
