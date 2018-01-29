@@ -1,4 +1,4 @@
-actor CoffeeMug_Missile: Actor 20201
+actor CoffeeMug_Missile : Actor // 20201
 {
 	+RANDOMIZE
 	Decal "Scorch"
