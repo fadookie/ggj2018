@@ -1,0 +1,83 @@
+actor CleanupGibImp: DoomImp 20800
+{
+	Health 150
+	Speed 0
+	PainSound ""
+	
+
+	States
+	{
+		Spawn:
+		TROO M 10 
+		loop
+		
+		See:
+		TROO M 10
+		goto spawn
+		
+		Pain:
+		TROO M 10 A_Pain
+		goto see
+		
+		Death:
+		TNT1 A 0
+		goto null
+	}
+}
+
+actor CleanupGibFormerHuman: DoomImp 20801
+{
+	Health 150
+	Speed 0
+	PainSound ""
+	
+
+	States
+	{
+		Spawn:
+		POSS L 10 
+		loop
+		
+		See:
+		POSS L 10
+		goto spawn
+		
+		Pain:
+		POSS L 10 A_Pain
+		goto see
+		
+		Death:
+		TNT1 A 0
+		goto null
+		
+	}
+}
+
+actor CleanupGibBaron: DoomImp 20802
+{
+	Health 200
+	Speed 0
+	PainSound ""
+	
+
+	States
+	{
+		Spawn:
+		BOSS O 10
+		loop
+		
+		See:
+		BOSS O 10
+		goto spawn
+		
+		Pain:
+		BOSS O 10 A_Pain
+		goto see
+		
+		Death:
+		TNT1 A 0
+		goto null
+		
+	}
+}
+
