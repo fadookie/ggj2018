@@ -81,3 +81,63 @@ actor CleanupGibBaron: DoomImp 20802
 	}
 }
 
+actor CleanupGibPlayerXDeath: DoomImp 20803
+{
+	Health 200
+	Speed 0
+	PainSound ""
+
+	States
+	{
+		Spawn:
+		PLAY W 10
+		loop
+		
+		See:
+		PLAY W 10
+		goto spawn
+		
+		Pain:
+		PLAY W 10 A_Pain
+		goto see
+		
+		Death:
+		TNT1 A 0
+		goto null
+		
+	}
+}
+
+// This is the base class for debris that can be cleaned up -
+// not sure if I can actually get this to work but having a shared base class might help
+// if we need to do some custom scripting
+actor CleanupDebrisBase : Actor
+{
+	Health 50
+	PainSound "imp/pain"
+	Monster // This makes it destructible but causes blood particles to spawn
+}
+
+// CleanupShotgut inherits from CleanupDebrisBase
+actor CleanupShotgun: CleanupDebrisBase 20804
+{
+	States
+	{
+		Spawn:
+		SHOT A 10
+		loop
+		
+		See:
+		SHOT A 10
+		goto spawn
+		
+		Pain:
+		SHOT A 10 A_Pain
+		goto see
+		
+		Death:
+		TNT1 A 0
+		goto null
+		
+	}
+}
