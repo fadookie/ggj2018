@@ -12,7 +12,7 @@
 #include "actors/CustomImp.txt"
 #include "actors/CustomBaron.txt"
 #include "actors/BaronOfficeBoss.txt"
-#include "actors/CleanupJib.txt" 
+#include "actors/CleanupGibs.txt" 
 
 // Player Actors 
 //#include "actors/Imp.txt"
