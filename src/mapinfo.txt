@@ -17,24 +17,24 @@ episode map01
 	name = "$EP1TITLE"
 	noskillmenu
 }
-episode map02
-{
-	name = "$EP2TITLE"
-	optional
-	noskillmenu
-}
-episode map03
-{
-	name = "$EP3TITLE"
-	optional
-	noskillmenu
-}
-episode map04
-{
-	name = "$EP4TITLE"
-	optional
-	noskillmenu
-}
+// episode map02
+// {
+	// name = "$EP2TITLE"
+	// optional
+	// noskillmenu
+// }
+// episode map03
+// {
+	// name = "$EP3TITLE"
+	// optional
+	// noskillmenu
+// }
+// episode map04
+// {
+	// name = "$EP4TITLE"
+	// optional
+	// noskillmenu
+// }
 
 defaultmap
 {
