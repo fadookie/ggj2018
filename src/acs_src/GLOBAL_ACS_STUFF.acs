@@ -18,6 +18,7 @@ script "SetMusic" (int track)
 		SetMusic("D_E1M3", 0);
 	} else {
 		Log(s:"Unrecognized music track ", i:track);
+		SetMusic("", 0);
 	}
 
 }
@@ -51,7 +52,6 @@ script 1 (void)
 script 2 (void)
 
 {
-
 	print(s:"\c[Red]What the hell are you doing?");
 
 	PlaySound(666, "bossthatdoesntwork");
@@ -69,7 +69,6 @@ script 2 (void)
 script 3 (void)
 
 {
-
 	print(s:"\c[Green]Transmission in progress...");;
 
 	PlaySound(111, "impgibberish3");
@@ -86,7 +85,7 @@ script 3 (void)
 
 	
 
-	ACS_NamedExecute("SetMusic", 2, false);
+	ACS_NamedExecute("SetMusic", 0, 2);
 
 	
 
@@ -120,8 +119,7 @@ script 3 (void)
 
 	Floor_LowerToNearest(75,5);
 
-	ACS_NamedExecute("SetMusic", 1, true);
-
+	ACS_NamedExecute("SetMusic", 0, 1);
 }
 
 
@@ -169,6 +167,7 @@ script 7 (void)
 script 8 (void)
 
 {
+	ACS_NamedExecute("SetMusic", 0, 2);
 
 	print(s:"\c[Green]Demotion Accepted");
 
