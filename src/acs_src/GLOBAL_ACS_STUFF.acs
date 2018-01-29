@@ -167,7 +167,7 @@ script 7 (void)
 script 8 (void)
 
 {
-	ACS_NamedExecute("SetMusic", 0, 2);
+	//ACS_NamedExecute("SetMusic", 0, 2); // On second thought, leaving the office music is kinda funny here
 
 	print(s:"\c[Green]Demotion Accepted");
 
