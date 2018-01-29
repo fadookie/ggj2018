@@ -15,7 +15,7 @@ class Imp: DoomPlayer
 
 	Default {
 		+BUDDHA
-		-PICKUP
+		//-PICKUP
 		
 		Player.WeaponSlot 1, "ImpFist";
 		Player.WeaponSlot 2, "ImpGun";
