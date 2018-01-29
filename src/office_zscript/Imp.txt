@@ -15,6 +15,7 @@ class Imp: DoomPlayer
 
 	Default {
 		+BUDDHA
+		-PICKUP
 		
 		Player.WeaponSlot 1, "ImpFist";
 		Player.WeaponSlot 2, "ImpGun";
@@ -73,6 +74,12 @@ class Imp: DoomPlayer
 		TNT1 A 2 {
 			//A_Log("Imp.FormerHuman");
 			bInvulnerable = true;
+		}
+		Loop;
+		
+		CanPickup:
+		TNT1 A 2 {
+			bPickup = true;
 		}
 		Loop;
 		

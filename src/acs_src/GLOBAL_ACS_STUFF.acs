@@ -36,6 +36,7 @@ script 3 (void)
 	
 	// Switch from imp to former human guns
 	ClearInventory();
+	GiveInventory("Fist", 1);
 	GiveInventory("Pistol", 1);
 	GiveInventory("Clip", 50);
 	//SetActorFlag(0, "Invulnerable", TRUE); //This doesn't enable god mode HUD unlike in ZScript :(
