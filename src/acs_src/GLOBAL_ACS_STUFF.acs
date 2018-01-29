@@ -8,6 +8,11 @@ script 33 ENTER
 
 {
 
+<<<<<<< HEAD
+=======
+  print (s:"Hello world!");
+
+>>>>>>> 4ce4c0315fe49a239498cf4e98643d66a218ce55
   ACS_NamedExecute("SetOfficeMusicPlaying", 0, false);
 
 }
@@ -84,7 +89,11 @@ script 3 (void)
 
 	
 
+<<<<<<< HEAD
 	print(s:"\c[Green]Transmission Complete");
+=======
+	print(s:"\c[Green]Transmission Complete!");
+>>>>>>> 4ce4c0315fe49a239498cf4e98643d66a218ce55
 
 	delay(3 * 35);
 
@@ -104,7 +113,11 @@ script 3 (void)
 
 	ACS_NamedExecute("SetOfficeMusicPlaying", 0, true);
 
+<<<<<<< HEAD
 	//SetActorProperty (222, APROP_RenderStyle, STYLE_None);
+=======
+	SetActorProperty (222, APROP_RenderStyle, STYLE_None);
+>>>>>>> 4ce4c0315fe49a239498cf4e98643d66a218ce55
 
 }
 
@@ -120,11 +133,19 @@ script 5 (void)
 
 	delay(2 * 35);
 
+<<<<<<< HEAD
 	print(s:"\c[Red]Get me some coffeeee!");
 
 	PlaySound(666, "bosscoffee");
 
 	//SetActorProperty (222, APROP_RenderStyle, STYLE_Normal);
+=======
+	print(s:"\c[Red]Get me some coffeeee.");
+
+	PlaySound(666, "bosscoffee");
+
+	SetActorProperty (222, APROP_RenderStyle, STYLE_Normal);
+>>>>>>> 4ce4c0315fe49a239498cf4e98643d66a218ce55
 
 }
 
@@ -194,4 +215,9 @@ script 9 (void)
 
 	Teleport(17);
 
+<<<<<<< HEAD
+=======
+	ACS_NamedExecute("SetOfficeMusicPlaying", 0, false);
+
+>>>>>>> 4ce4c0315fe49a239498cf4e98643d66a218ce55
 }
