@@ -114,7 +114,9 @@ actor CleanupGibPlayerXDeath: DoomImp 20803
 actor CleanupDebrisBase : Actor
 {
 	Health 50
+	+FRIENDLY
 	PainSound "imp/pain"
+	BloodType "BulletPuff"
 	Monster // This makes it destructible but causes blood particles to spawn
 }
 
