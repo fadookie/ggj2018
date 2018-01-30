@@ -13,6 +13,7 @@
 #include "actors/CustomBaron.txt"
 #include "actors/BaronOfficeBoss.txt"
 #include "actors/CleanupGibs.txt" 
+#include "actors/FormerHumanOffice.txt"
 
 // Player Actors 
 //#include "actors/Imp.txt"
