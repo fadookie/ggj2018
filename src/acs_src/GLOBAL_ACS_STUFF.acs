@@ -7,7 +7,7 @@
  */
  int corps_left = 845667;
  bool got_cup = false;
- bool doingit = false;
+ bool bosstalk = false;
 
 /***
  * Global functions
@@ -44,7 +44,7 @@ script 33 ENTER
  
 }
 
-script 1 (void)
+script 1 (void) //Cross line near coffee guy
 
 {
 
@@ -56,7 +56,7 @@ script 1 (void)
 
 
 
-script 2 (void)
+script 2 (void) //Cross first line into to boss office area
 
 {
 	print(s:"\c[Red]What the hell are you doing?");
@@ -73,7 +73,7 @@ script 2 (void)
 
 
 
-script 3 (void)
+script 3 (void) //First teleport out to work
 
 {
 	print(s:"\c[Green]Transmission in progress...");;
@@ -131,82 +131,66 @@ script 3 (void)
 
 
 
-script 5 (void)
+script 5 (void) // Player aproaches broken telepad 
 
 {
-
-	print(s:"\c[Red]That one isn't working right now.");
-
-	PlaySound(666, "bossthatdoesntwork");
-
-	delay(2 * 35);
-	
-	if (doingit == false)
+	if (bosstalk == false)
 	{
+		bosstalk = true;
+		
+		print(s:"\c[Red]That one isn't working right now.");
+
+		PlaySound(666, "bossthatdoesntwork");
+
+		delay(2 * 35);
+	
 		if (got_cup == true)
-		{
-		
-		doingit = true;
+			{
 
-		print(s:"\c[Red]Get back to work!");
+			print(s:"\c[Red]Get back to work!");
 
-		PlaySound(666, "bossgetbacktowork");
+			PlaySound(666, "bossgetbacktowork");
+			
+			delay(5 * 35);
+			
+			}
 		
-		delay(5 * 35);
-		
-		doingit = false;
-		
-		}
-		
-		else
-		
-		{
-		
-		doingit = true;
-		
-		print(s:"\c[Red]Get me some coffeeee!");
-		
-		PlaySound(666, "bosscoffee");
-		
-		delay(5 * 35);
-		
-		doingit = false;
-		
-		}
+			else
+			
+			{
+			
+			print(s:"\c[Red]Get me some coffeeee!");
+			
+			PlaySound(666, "bosscoffee");
+			
+			delay(5 * 35);
+			
+			}
+			
+			bosstalk = false;
 	}
 
 }
 
 
-
-script 6 (void)
-
+script "oops" (void) //Throw coffee
 {
-
-	Log(s:"Script 6 removed due to Eliot's other audio stuff");
-
-}
-
-
-
-script 7 (void)
-
-{
-
 	got_cup = true;
-
-}
-
-script "oops" (void)
-{
+	
+	bosstalk = true;
+	
 	delay(2 * 35);
 	
 	door_raise(901,110,0,0);
 
 	PlaySound(666, "bossgetbacktowork");
+	
+	delay(2 * 35);
+	
+	bosstalk = false;
 }
 
-script 8 (void)
+script 8 (void) //Demotion Accepted
 
 {
 	//ACS_NamedExecute("SetMusic", 0, 2); // On second thought, leaving the office music is kinda funny here
@@ -219,9 +203,7 @@ script 8 (void)
 
 }
 
-
-
-script 9 (void)
+script 9 (void) //Janitor Teleport
 
 {
 
@@ -229,30 +211,28 @@ script 9 (void)
 
 }
 
-script 10 (void)
+script 10 (void) //When you bump his desk
 {
-	if (doingit == false)
+	if (bosstalk == false)
 	{
+		bosstalk = true;
 		if (got_cup == true)
 		{
-		doingit = true;
 		print(s:"\c[Red]Get back to work!");
 		PlaySound(666, "bossgetbacktowork");
 		delay(5 * 35);
-		doingit = false;
 		}
 		else
 		{
-		doingit = true;
 		print(s:"\c[Red]GET ME SOME COFFEEEE!");
 		PlaySound(666, "bosscoffee");
 		delay(5 * 35);
-		doingit = false;
 		}
+		bosstalk = false;
 	}
 }
 
-script 11 (void)
+script 11 (void) //Janitorial counter
 {
 	if (corps_left <= 845661)
 	{
@@ -268,5 +248,4 @@ script 11 (void)
 	print(s:"\c[Green]Things to clean up: ",d:corps_left);
 	corps_left--;
 	}
-	
 }
