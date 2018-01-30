@@ -186,3 +186,8 @@ script 9 (void)
 	Teleport(17);
 
 }
+
+script 10 (void)
+{
+	PlaySound(666, "bosscoffee");
+}
