@@ -36,7 +36,7 @@ actor MugGun: ImpGun 20101
 		Loop
 		
 		Fire:
-		ICMF A 4
+		ICMF A 4 ACS_NamedExecute("oops",0)
 		Goto ThrowMug
 		
 		ThrowMug:

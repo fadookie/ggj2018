@@ -194,13 +194,16 @@ script 7 (void)
 {
 
 	got_cup = true;
-	
-	delay(3 * 35);
 
+}
+
+script "oops" (void)
+{
+	delay(2 * 35);
+	
 	door_raise(901,110,0,0);
 
 	PlaySound(666, "bossgetbacktowork");
-
 }
 
 script 8 (void)

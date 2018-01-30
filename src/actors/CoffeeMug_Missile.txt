@@ -1,6 +1,7 @@
 actor CoffeeMug_Missile : Actor 20250
 {
 	+RANDOMIZE
+	+FORCEPAIN
 	Decal "Scorch"
 	Projectile
 	
@@ -18,7 +19,7 @@ actor CoffeeMug_Missile : Actor 20250
 		Loop
 		
 		Death:
-		ICMP A 4 Bright 
+		ICMP A 4 Bright
 		Stop
 	}
 }
