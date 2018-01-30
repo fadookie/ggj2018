@@ -26,3 +26,9 @@ weapon/impfire sounds/DoomFireball.mp3
 
 $volume weapon/broomsweep 8.0
 weapon/broomsweep sounds/154376__semccab__broom-sweep.wav
+
+//==================
+//MISC
+//==================
+
+slop sounds/DSSLOP
