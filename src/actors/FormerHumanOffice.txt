@@ -1,26 +1,27 @@
-actor BaronOfficeBoss: BaronOfHell 20203
-{
+actor FormerHumanOffice : ZombieMan 20205
+{	
+	+FRIENDLY
 	States
 	{
-		Spawn: //used as idle state 
-		CDBB AB 10 //actively looks for player
+		Spawn:
+		FHOC A 1
 		Loop
 		
 		See:  
-		CDBB AB 10
+		FHOC A 1
 		goto spawn
 		
 		Pain:  //pain frames 
-		CDBB A 30
-		CDBB B 30 A_Pain
+		FHOC A 1
 		Goto See
 		
 		Melee:     //works like a switch statement , should carry down
 		Missile:
-		CDBB AB 50 A_FaceTarget
+		FHOC A 1
 		Goto See
 		
 		Death:
 		goto null
+		
 	}
 }
