@@ -1,6 +1,7 @@
 class EnemyPlayer : MarineShotgun {
 	const HATED_TID = 22;
 	Default {
+		+BUDDHA
 	}
 	States
 	{
