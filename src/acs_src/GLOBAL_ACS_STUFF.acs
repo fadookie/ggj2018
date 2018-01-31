@@ -116,9 +116,6 @@ script 3 (void) //First teleport out to work
 
 			ACS_NamedExecute("SetMusic", 0, 2);
 			
-			SpawnSpot("enemyplayer",546,0,180);
-
-			
 
 			// Switch from imp to former human guns
 
@@ -142,11 +139,25 @@ script 3 (void) //First teleport out to work
 
 			PlaySound(333, "impgibberish1");
 
-			print(s:"\c[Yellow]What are you doing here?");
+			print(s:"\c[Yellow]Terry? Heyy buddy, what's up?");
 
+			Delay(3 * TICS_PER_SECOND);
+
+			print(s:"\c[Yellow]Haven't seen much of you since you got transferred to E1M1.");
+			
+			Delay(3 * TICS_PER_SECOND);
+
+			print(s:"\c[Yellow]How are the kids?");
+			
+			Delay(3 * TICS_PER_SECOND);
+
+			print(s:"\c[Yellow]Hang on... sounds like we've got a live one.");
+			
 			Delay(2 * TICS_PER_SECOND);
-
-			print(s:"\c[Yellow]I'm covering this spot.");
+			
+			int fakePlayerTid = 100;
+			SpawnSpot("enemyplayer",546,fakePlayerTid,180);
+			Thing_SetGoal(fakePlayerTid, 98, 0, 0);
 		}
 
 }
