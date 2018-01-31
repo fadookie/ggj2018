@@ -168,7 +168,7 @@ script 5 (void) // Player aproaches broken telepad
 
 				PlaySound(666, "bossgetbacktowork");
 				
-				delay(5 * 35);
+				delay(3 * 35);
 				
 			}
 			
@@ -180,7 +180,7 @@ script 5 (void) // Player aproaches broken telepad
 				
 				PlaySound(666, "bosscoffee");
 				
-				delay(5 * 35);
+				delay(3 * 35);
 				
 			}	
 			
@@ -242,13 +242,13 @@ script 10 (void) //When you bump his desk
 			{
 			print(s:"\c[Red]Get back to work!");
 			PlaySound(666, "bossgetbacktowork");
-			delay(5 * 35);
+			delay(3 * 35);
 			}
 			else
 			{
 			print(s:"\c[Red]GET ME SOME COFFEEEE!");
 			PlaySound(666, "bosscoffee");
-			delay(5 * 35);
+			delay(3 * 35);
 			}
 			bosstalk = false;
 		}
