@@ -23,3 +23,28 @@ actor CustomImp : DoomImp 20201
 		Goto See
 	}
 }
+
+actor CustomFormerHuman : ZombieMan 20210
+{
+	States
+	{
+		Spawn: //used as idle state 
+		CFHW A 5 A_Look //actively looks for player
+		Loop
+		
+		See:  
+		CFHW AB 8 A_Chase //player found - chase
+		Loop
+		
+		Pain:  //pain frames 
+		CFHW A 3
+		CFHW A 3 A_Pain
+		Goto See
+		
+		Melee:     //works like a switch statement , should carry down
+		Missile:
+		CFHW A 16 A_FaceTarget
+		CFHW AB 6 A_TroopAttack
+		Goto See
+	}
+}
