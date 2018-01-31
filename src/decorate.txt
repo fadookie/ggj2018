@@ -14,6 +14,7 @@
 #include "actors/BaronOfficeBoss.txt"
 #include "actors/CleanupGibs.txt" 
 #include "actors/FormerHumanOffice.txt"
+#include "actors/FormerHumanOffice_Meme.txt"
 
 // Player Actors 
 //#include "actors/Imp.txt"

@@ -35,6 +35,13 @@ episode map04
 	optional
 	noskillmenu
 }
+episode Meme_Stage
+{
+	name = "Meme Stage"
+	optional
+	noskillmenu
+}
+
 
 defaultmap
 {
@@ -58,6 +65,11 @@ map MAP03 lookup "MAP03TITLE"
 map MAP05 lookup "MAP04TITLE"
 {
 }
+
+map Meme_Stage lookup "Meme_StageTITLE"
+{
+}
+
 
 DoomEdNums
 {

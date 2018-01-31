@@ -1,0 +1,28 @@
+actor FormerHumanOffice_Meme : ZombieMan 29999
+{	
+	+INVULNERABLE
+
+	States
+	{
+		Spawn:
+		FHOC A 1
+		Loop
+		
+		See:  
+		FHOC A 1
+		goto spawn
+		
+		Pain:  //pain frames 
+		FHOC A 1
+		Goto See
+		
+		Melee:     //works like a switch statement , should carry down
+		Missile:
+		FHOC A 1
+		Goto See
+		
+		Death:
+		goto null
+		
+	}
+}
