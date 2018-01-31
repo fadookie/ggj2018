@@ -93,6 +93,8 @@ script 3 (void) //First teleport out to work
 	
 
 	ACS_NamedExecute("SetMusic", 0, 2);
+	
+	SpawnSpot("enemyplayer",546,0,180);
 
 	
 
@@ -112,21 +114,16 @@ script 3 (void) //First teleport out to work
 
 	print(s:"\c[Green]Transmission Complete");
 
-	delay(3 * 35);
+	delay(2 * 35);
 
 	PlaySound(333, "impgibberish1");
 
 	print(s:"\c[Yellow]What are you doing here?");
 
-	Delay(3 * 35);
+	Delay(2 * 35);
 
 	print(s:"\c[Yellow]I'm covering this spot.");
 
-	delay(2 * 35);
-
-	Floor_LowerToNearest(75,5);
-
-	ACS_NamedExecute("SetMusic", 0, 1);
 }
 
 

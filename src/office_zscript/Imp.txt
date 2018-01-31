@@ -72,7 +72,7 @@ class Imp: DoomPlayer
 		FormerHuman:
 		TNT1 A 2 {
 			//A_Log("Imp.FormerHuman");
-			bInvulnerable = true;
+			bInvulnerable = false;
 		}
 		Loop;
 		
