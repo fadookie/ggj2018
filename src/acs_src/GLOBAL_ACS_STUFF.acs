@@ -3,11 +3,18 @@
 #include "zcommon.acs"
 
 /***
+ * Constants
+ */
+#define TICS_PER_SECOND 35
+#define CORPSES_TO_CLEAN 6
+#define FAKE_CORPSES_TO_CLEAN_TOTAL 65535
+
+/***
  * Variables
  */
- int corps_left = 845667;
- bool got_cup = false;
- bool bosstalk = false;
+bool got_cup = false;
+bool bosstalk = false;
+int corpses_cleaned = 0;
 
 /***
  * Global functions
@@ -75,7 +82,7 @@ script 2 (void) //Cross first line into to boss office area
 
 			PlaySound(666, "bossthatdoesntwork");
 
-			delay(3 * 35);
+			delay(3 * TICS_PER_SECOND);
 
 			print(s:"\c[Red]Get back to work! ... Platform 1 please!");
 
@@ -131,13 +138,13 @@ script 3 (void) //First teleport out to work
 
 			print(s:"\c[Green]Transmission Complete");
 
-			delay(2 * 35);
+			delay(2 * TICS_PER_SECOND);
 
 			PlaySound(333, "impgibberish1");
 
 			print(s:"\c[Yellow]What are you doing here?");
 
-			Delay(2 * 35);
+			Delay(2 * TICS_PER_SECOND);
 
 			print(s:"\c[Yellow]I'm covering this spot.");
 		}
@@ -159,7 +166,7 @@ script 5 (void) // Player aproaches broken telepad
 
 			PlaySound(666, "bossthatdoesntwork");
 
-			delay(2 * 35);
+			delay(2 * TICS_PER_SECOND);
 		
 			if (got_cup == true)
 			{
@@ -168,7 +175,7 @@ script 5 (void) // Player aproaches broken telepad
 
 				PlaySound(666, "bossgetbacktowork");
 				
-				delay(3 * 35);
+				delay(3 * TICS_PER_SECOND);
 				
 			}
 			
@@ -180,7 +187,7 @@ script 5 (void) // Player aproaches broken telepad
 				
 				PlaySound(666, "bosscoffee");
 				
-				delay(3 * 35);
+				delay(3 * TICS_PER_SECOND);
 				
 			}	
 			
@@ -195,7 +202,7 @@ script "coffeehitboss" (void) //Hit boss with coffee
 	ACS_NamedTerminate("oops",0);
 	got_cup = true;
 	
-	delay(2 * 35);
+	delay(2 * TICS_PER_SECOND);
 	
 	door_raise(901,110,0,0);
 
@@ -206,7 +213,7 @@ script "coffeehitboss" (void) //Hit boss with coffee
 script "oops" (void) //Throw coffee
 {
 	SpawnSpot("MugGun",545);
-	delay(3 * 35);
+	delay(3 * TICS_PER_SECOND);
 	PlaySound(666, "bosscoffee");
 }
 
@@ -242,13 +249,13 @@ script 10 (void) //When you bump his desk
 			{
 			print(s:"\c[Red]Get back to work!");
 			PlaySound(666, "bossgetbacktowork");
-			delay(3 * 35);
+			delay(3 * TICS_PER_SECOND);
 			}
 			else
 			{
 			print(s:"\c[Red]GET ME SOME COFFEEEE!");
 			PlaySound(666, "bosscoffee");
-			delay(3 * 35);
+			delay(3 * TICS_PER_SECOND);
 			}
 			bosstalk = false;
 		}
@@ -257,18 +264,19 @@ script 10 (void) //When you bump his desk
 
 script 11 (void) //Janitorial counter
 {
-	if (corps_left <= 845661)
+	int fake_corpses_to_clean = FAKE_CORPSES_TO_CLEAN_TOTAL - corpses_cleaned;
+	if (corpses_cleaned >= CORPSES_TO_CLEAN)
 	{
-	Playsound(0,"slop");
-	print(s:"\c[Green]Things to clean up: ",d:corps_left);
-	fadeto(0, 0, 0, 1.0, 3.0);
-	Delay(4 * 35);
-	Teleport_EndGame();
+		Playsound(0,"slop");
+		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
+		fadeto(0, 0, 0, 1.0, 3.0);
+		Delay(4 * TICS_PER_SECOND);
+		Teleport_EndGame();
 	}
 	else
 	{
-	Playsound(0,"slop");
-	print(s:"\c[Green]Things to clean up: ",d:corps_left);
-	corps_left--;
+		Playsound(0,"slop");
+		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
+		corpses_cleaned++;
 	}
 }
