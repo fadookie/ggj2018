@@ -2,7 +2,6 @@ class Imp: DoomPlayer
 {		
 	const TELEPORT_TARGET_TID = 13;
 	const STARTING_HEALTH = 100;
-	int numRespawns;
 	
 	override void PostBeginPlay()
     {
@@ -48,7 +47,10 @@ class Imp: DoomPlayer
 		{
 			if(A_JumpIfHealthLower(2,"Null"))
 			{
+				let numRespawnsCVar = CVar.FindCVar("numPlayerRespawns");
+				let numRespawns = numRespawnsCVar.GetInt();
 				numRespawns++;
+				numRespawnsCVar.SetInt(numRespawns);
 				A_Log("Respawns:");
 				A_LogInt(numRespawns);
 				// Simulated teleport

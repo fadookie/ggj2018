@@ -36,6 +36,9 @@ script "SetMusic" (int track)
 
 script 33 ENTER
 {
+
+  SetCVar ("numPlayerRespawns", 0);
+  
   ACS_NamedExecute("SetMusic", 0, 0);
   
   GiveInventory("ImpGun",1);
@@ -48,9 +51,15 @@ script 1 (void) //Cross line near coffee guy
 
 {
 
-	PlaySound(333, "impgibberishcoffee");
+	if (GetCVar ("numPlayerRespawns") == 1)
+	
+		{
 
-	print(s:"\c[Green]This coffee sucks!!!");
+		PlaySound(333, "impgibberishcoffee");
+
+		print(s:"\c[Green]This coffee sucks!!!");
+		
+		}
 
 }
 
@@ -59,16 +68,19 @@ script 1 (void) //Cross line near coffee guy
 script 2 (void) //Cross first line into to boss office area
 
 {
-	print(s:"\c[Red]What the hell are you doing?");
 
-	PlaySound(666, "bossthatdoesntwork");
+	if (GetCVar ("numPlayerRespawns") == 1)
+		{
+			print(s:"\c[Red]What the hell are you doing?");
 
-	delay(3 * 35);
+			PlaySound(666, "bossthatdoesntwork");
 
-	print(s:"\c[Red]Get back to work! ... Platform 1 please!");
+			delay(3 * 35);
 
-	PlaySound(666, "bossgetbacktowork");
+			print(s:"\c[Red]Get back to work! ... Platform 1 please!");
 
+			PlaySound(666, "bossgetbacktowork");
+		}
 }
 
 
@@ -76,53 +88,59 @@ script 2 (void) //Cross first line into to boss office area
 script 3 (void) //First teleport out to work
 
 {
-	print(s:"\c[Green]Transmission in progress...");;
-
-	PlaySound(111, "impgibberish3");
-
-	delay(70);
-
-	print(s:"\c[Green]Please Wait");
-
-	PlaySound(111, "impgibberish3");
-
-	Delay(100);
-
-	Teleport(14);
-
+	if (GetCVar ("numPlayerRespawns") == 1)
 	
+		{
+			print(s:"\c[Green]Transmission in progress...");;
 
-	ACS_NamedExecute("SetMusic", 0, 2);
-	
-	SpawnSpot("enemyplayer",546,0,180);
+			PlaySound(111, "impgibberish3");
 
-	
+			delay(70);
 
-	// Switch from imp to former human guns
+			print(s:"\c[Green]Please Wait");
 
-	ClearInventory();
+			PlaySound(111, "impgibberish3");
 
-	GiveInventory("Fist", 1);
+			Delay(100);
 
-	GiveInventory("Pistol", 1);
+			Teleport(14);
 
-	GiveInventory("Clip", 50);
+			
 
-	//SetActorFlag(0, "Invulnerable", TRUE); //This doesn't enable god mode HUD unlike in ZScript :(
+			ACS_NamedExecute("SetMusic", 0, 2);
+			
+			SpawnSpot("enemyplayer",546,0,180);
 
-	SetActorState(0, "FormerHuman", TRUE);
+			
 
-	print(s:"\c[Green]Transmission Complete");
+			// Switch from imp to former human guns
 
-	delay(2 * 35);
+			ClearInventory();
 
-	PlaySound(333, "impgibberish1");
+			GiveInventory("Fist", 1);
 
-	print(s:"\c[Yellow]What are you doing here?");
+			GiveInventory("Pistol", 1);
 
-	Delay(2 * 35);
+			GiveInventory("Clip", 50);
 
-	print(s:"\c[Yellow]I'm covering this spot.");
+			//SetActorFlag(0, "Invulnerable", TRUE); //This doesn't enable god mode HUD unlike in ZScript :(
+
+			SetActorState(0, "FormerHuman", TRUE);
+			
+			SpawnSpot("MugGun",545,222,90);
+
+			print(s:"\c[Green]Transmission Complete");
+
+			delay(2 * 35);
+
+			PlaySound(333, "impgibberish1");
+
+			print(s:"\c[Yellow]What are you doing here?");
+
+			Delay(2 * 35);
+
+			print(s:"\c[Yellow]I'm covering this spot.");
+		}
 
 }
 
@@ -131,46 +149,51 @@ script 3 (void) //First teleport out to work
 script 5 (void) // Player aproaches broken telepad 
 
 {
-	if (bosstalk == false)
+	if (GetCVar ("numPlayerRespawns") == 2)
 	{
-		bosstalk = true;
+		if (bosstalk == false)
+		{
+			bosstalk = true;
+			
+			print(s:"\c[Red]That one isn't working right now.");
+
+			PlaySound(666, "bossthatdoesntwork");
+
+			delay(2 * 35);
 		
-		print(s:"\c[Red]That one isn't working right now.");
-
-		PlaySound(666, "bossthatdoesntwork");
-
-		delay(2 * 35);
-	
-		if (got_cup == true)
+			if (got_cup == true)
 			{
 
-			print(s:"\c[Red]Get back to work!");
+				print(s:"\c[Red]Get back to work!");
 
-			PlaySound(666, "bossgetbacktowork");
-			
-			delay(5 * 35);
-			
+				PlaySound(666, "bossgetbacktowork");
+				
+				delay(5 * 35);
+				
 			}
-		
+			
 			else
-			
+				
 			{
+				
+				print(s:"\c[Red]Get me some coffeeee!");
+				
+				PlaySound(666, "bosscoffee");
+				
+				delay(5 * 35);
+				
+			}	
 			
-			print(s:"\c[Red]Get me some coffeeee!");
-			
-			PlaySound(666, "bosscoffee");
-			
-			delay(5 * 35);
-			
-			}
-			
-			bosstalk = false;
+		}
+		bosstalk = false;
 	}
 
 }
 
 script "coffeehitboss" (void) //Hit boss with coffee
 {
+	ACS_NamedTerminate("oops",0);
+	got_cup = true;
 	
 	delay(2 * 35);
 	
@@ -182,10 +205,9 @@ script "coffeehitboss" (void) //Hit boss with coffee
 
 script "oops" (void) //Throw coffee
 {
-
-	PlaySound(666, "bosscoffee");
 	SpawnSpot("MugGun",545);
-	
+	delay(3 * 35);
+	PlaySound(666, "bosscoffee");
 }
 
 script 8 (void) //Demotion Accepted
@@ -211,22 +233,25 @@ script 9 (void) //Janitor Teleport
 
 script 10 (void) //When you bump his desk
 {
-	if (bosstalk == false)
+	if (GetCVar ("numPlayerRespawns") == 2)
 	{
-		bosstalk = true;
-		if (got_cup == true)
+		if (bosstalk == false)
 		{
-		print(s:"\c[Red]Get back to work!");
-		PlaySound(666, "bossgetbacktowork");
-		delay(5 * 35);
+			bosstalk = true;
+			if (got_cup == true)
+			{
+			print(s:"\c[Red]Get back to work!");
+			PlaySound(666, "bossgetbacktowork");
+			delay(5 * 35);
+			}
+			else
+			{
+			print(s:"\c[Red]GET ME SOME COFFEEEE!");
+			PlaySound(666, "bosscoffee");
+			delay(5 * 35);
+			}
+			bosstalk = false;
 		}
-		else
-		{
-		print(s:"\c[Red]GET ME SOME COFFEEEE!");
-		PlaySound(666, "bosscoffee");
-		delay(5 * 35);
-		}
-		bosstalk = false;
 	}
 }
 
