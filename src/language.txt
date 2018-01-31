@@ -6,7 +6,7 @@ EP1TITLE = "Game";
 EP2TITLE = "Eliot's Test Episode 1";
 EP3TITLE = "Eliot's Game Test";
 EP4TITLE = "Kyper's Test Episode";
-MAP01TITLE = "Custom Episode 1 Text";
+MAP01TITLE = "Imps 'R Us";
 MAP02TITLE = "Eliot's Test Level";
 MAP03TITLE = "Kyper's Test Level";
 
