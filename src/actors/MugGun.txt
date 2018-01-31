@@ -43,7 +43,7 @@ actor MugGun: ImpGun 20101
 		ICMF A 0 A_Playsound("weapon/impfire",CHAN_WEAPON,0.7)
 		ICMF A 0 A_Recoil(4)
 		ICMF A 5 A_FireCustomMissile("CoffeeMug_Missile",0,1,0,-6)
-		ICMF A 5 A_Refire("ThrowMug")
+		ICMF A 5 A_TakeInventory("MugGun",1)
 		Goto Ready
 	}
 	
