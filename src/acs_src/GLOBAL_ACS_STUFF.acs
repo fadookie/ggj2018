@@ -172,12 +172,8 @@ script 5 (void) // Player aproaches broken telepad
 
 }
 
-
-script "oops" (void) //Throw coffee
+script "coffeehitboss" (void) //Hit boss with coffee
 {
-	got_cup = true;
-	
-	bosstalk = true;
 	
 	delay(2 * 35);
 	
@@ -185,9 +181,14 @@ script "oops" (void) //Throw coffee
 
 	PlaySound(666, "bossgetbacktowork");
 	
-	delay(2 * 35);
+}
+
+script "oops" (void) //Throw coffee
+{
+
+	PlaySound(666, "bosscoffee");
+	SpawnSpot("MugGun",545);
 	
-	bosstalk = false;
 }
 
 script 8 (void) //Demotion Accepted

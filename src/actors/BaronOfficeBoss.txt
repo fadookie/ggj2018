@@ -11,7 +11,7 @@ actor BaronOfficeBoss: BaronOfHell 20203
 		goto spawn
 		
 		Pain:  //pain frames 
-		CDBB A 30
+		CDBB A 30 ACS_NamedExecute("coffeehitboss",0)
 		CDBB B 30 A_Pain
 		Goto See
 		
