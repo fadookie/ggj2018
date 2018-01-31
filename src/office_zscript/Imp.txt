@@ -72,7 +72,11 @@ class Imp: DoomPlayer
 		FormerHuman:
 		TNT1 A 2 {
 			//A_Log("Imp.FormerHuman");
+<<<<<<< HEAD
 			bInvulnerable = false;
+=======
+			//bInvulnerable = true; //Try to get former human mugshot to show on HUD. doesn't seem to work after you take damage once.
+>>>>>>> 734a37882666624f10ea481dbd38b334a25af9b7
 		}
 		Loop;
 		
@@ -85,7 +89,7 @@ class Imp: DoomPlayer
 		DisableGod: // Currently unused
 		TNT1 A 2 {
 			A_Log("Imp.DisableGod");
-			bInvulnerable = false;
+			//bInvulnerable = false;
 		}
 		Goto Spawn;
 	}
