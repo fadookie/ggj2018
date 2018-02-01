@@ -26,8 +26,12 @@ class BuddyImp : DoomImp
 		TROO I 8;
 		TROO J 8; //A_Scream
 		TROO K 6;
-		TROO L 6; //A_NoBlocking
-		//TROO M -1
-		Goto Raise;
+		TROO L 6 A_NoBlocking;
+		TROO M -1 {
+			A_Log("BuddyTID");
+			A_LogInt(tid);
+			Thing_Raise(tid, true);
+		}
+		Stop;
 	}
 }
