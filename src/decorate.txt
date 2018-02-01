@@ -15,6 +15,7 @@
 #include "actors/CleanupGibs.txt" 
 #include "actors/FormerHumanOffice.txt"
 #include "actors/FormerHumanOffice_Meme.txt"
+#include "actors/BuddyImp.txt"
 
 // Player Actors 
 //#include "actors/Imp.txt"
