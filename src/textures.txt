@@ -13,3 +13,12 @@ Texture hibrick, 512, 256
 	}
 }
 
+Texture hibrick2, 512, 256
+{
+	XScale 2.0
+	YScale 2.0
+	Patch hibrick2, 0, 0
+	{
+	}
+}
+
