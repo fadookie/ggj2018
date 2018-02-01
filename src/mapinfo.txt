@@ -76,4 +76,5 @@ DoomEdNums
 	20001 = EnemyPlayer
 	//using 20300+ for player classes
 	20300 = Imp
+	20249 = BuddyImp
 }

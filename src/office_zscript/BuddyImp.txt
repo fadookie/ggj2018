@@ -1,0 +1,33 @@
+class BuddyImp : DoomImp
+{
+	
+	States
+	{
+		Spawn: //used as idle state 
+		CDIW A 5 A_Look; //actively looks for player
+		Loop;
+		
+		See:  
+		CDIW AB 8 A_Chase; //player found - chase
+		Loop;
+		
+		Pain:  //pain frames 
+		CDIP A 3;
+		CDIP A 3 A_Pain;
+		Goto See;
+		
+		Melee:     //works like a switch statement , should carry down
+		Missile:
+		CDIA A 16 A_FaceTarget;
+		CDIA AB 6 A_TroopAttack;
+		Goto See;
+		
+		Death:
+		TROO I 8;
+		TROO J 8; //A_Scream
+		TROO K 6;
+		TROO L 6; //A_NoBlocking
+		//TROO M -1
+		Goto Raise;
+	}
+}
