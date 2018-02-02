@@ -25,6 +25,7 @@
 /***
  * Variables
  */
+bool talked_to_buddy = false;
 bool got_cup = false;
 bool bosstalk = false;
 int corpses_cleaned = 0;
@@ -79,14 +80,15 @@ script "SetPlayerType" (int type)
 
 script "BuddyRaise" (void)
 {
-	Delay(1 * TICS_PER_SECOND);
 	PrintBold(s:"\c[Yellow]Very funny, Terry. Quit screwing around or we might get busted again.");
 	Delay(3 * TICS_PER_SECOND);
 	// HudMessage(s:"\c[Yellow]Have you been out on that ledge so long you forgot how to talk to people?\nPress the ", k:"+use", s:" key.";
 		// HUDMSG_PLAIN, 1, CR_YELLOW, 1.5, 0.5, 3); // Nnot working...
-	PrintBold(s:"\c[Yellow]Have you been out on that ledge so long you forgot how to talk to people?");
-	Delay(3 * TICS_PER_SECOND);
-	PrintBold(s:"\c[Yellow]Press the ", k:"+use", s:" key, wise guy.");
+	if (!talked_to_buddy) {
+		PrintBold(s:"\c[Yellow]Have you been out on that ledge so long you forgot how to talk to people?");
+		Delay(3 * TICS_PER_SECOND);
+		PrintBold(s:"\c[Yellow]Press the ", k:"+use", s:" key, wise guy.");
+	}
 }
 
 script "E1M3PlayerEnter" (void) {
@@ -344,4 +346,13 @@ script 12 (void) //Second door opens on last office visit
 	Door_Raise(983,128,0,0);
 	Door_Close(982,128,0);
 	}
+}
+
+script 13 (void) // Exit dialogue with buddy
+{
+	Log(s:"Exit dialoge script called");
+	talked_to_buddy = true;
+	ACS_Terminate(3, 0);
+	Delay(10 * TICS_PER_SECOND);
+	ACS_NamedExecute("E1M3PlayerEnter", 0);
 }

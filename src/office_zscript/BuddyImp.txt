@@ -31,12 +31,20 @@ class BuddyImp : DoomImp
 		TROO L 6 A_NoBlocking;
 		TROO M -1 {
 			if (lastDamageWasFriendly) {
-				Thing_Raise(0);
 				ACS_Terminate(3, 0);
-				ACS_NamedExecute("BuddyRaise", 0);
+				return ResolveState("BuddyRaise");
 			}
+			return ResolveState(null);
 		}
 		Stop;
+		
+		BuddyRaise:
+		TROO ML 8;
+		TROO KJI 6;
+		TROO I 1 {
+			ACS_NamedExecute("BuddyRaise", 0);
+		}
+		Goto See;
 	}
 	
 	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags = 0, double angle = 0) {
