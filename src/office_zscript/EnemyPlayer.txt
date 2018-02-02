@@ -1,18 +1,40 @@
-class EnemyPlayer : MarineShotgun {
+class EnemyPlayerBase : ScriptedMarine {
 	const HATED_TID = 22;
+	
+	override void PostBeginPlay()
+    {
+		super.PostBeginPlay();
+		A_Log("Hello World"); // foo
+		A_LogInt(tid);
+		A_Log("hates");
+		A_LogInt(HATED_TID);
+		Thing_Hate(tid, HATED_TID, 4);
+	}
+	
 	Default {
 		+BUDDHA
+		Speed 8 * 2;
 	}
 	States
 	{
-	  Spawn:
-		PLAY A 4 {
-		    A_Log("Hello World"); // foo
-			A_LogInt(tid);
-			A_Log("hates");
-			A_LogInt(HATED_TID);
-			Thing_Hate(tid, HATED_TID, 4);
-			A_MarineLook();
-		}
+	  See: 
+		PLAY ABCD 3 A_MarineChase;
+		Loop;
 	}
+}
+
+class EnemyPlayerPistol : EnemyPlayerBase {
+  States
+  {
+	Missile:
+		Goto ScriptedMarine::Missile.Pistol;
+  }
+}
+
+class EnemyPlayerShotgun : EnemyPlayerBase {
+  States
+  {
+	Missile:
+		Goto ScriptedMarine::Missile.Shotgun;
+  }
 }

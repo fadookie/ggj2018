@@ -73,7 +73,8 @@ map Meme_Stage lookup "Meme_StageTITLE"
 
 DoomEdNums
 {
-	20001 = EnemyPlayer
+	20001 = EnemyPlayerPistol
+	20002 = EnemyPlayerShotgun
 	//using 20300+ for player classes
 	20300 = Imp
 	20249 = BuddyImp

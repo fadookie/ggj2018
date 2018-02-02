@@ -9,6 +9,17 @@
 #define CORPSES_TO_CLEAN 6
 #define FAKE_CORPSES_TO_CLEAN_TOTAL 65535
 
+#define FAKE_PLAYER_TID 100
+#define BUDDY_TID 333
+#define BOSS_TID 666
+
+#define PLAYER_TYPE_IMP 0
+#define PLAYER_TYPE_FORMERHUMAN 1
+
+#define MUSIC_E1M1 0
+#define MUSIC_OFFICE 1
+#define MUSIC_E1M3 2
+
 /***
  * Variables
  */
@@ -24,17 +35,42 @@ script "SetMusic" (int track)
 {
 	Log(s:"SetMusic:", i:track);
 
-	if (track == 0) {
-		SetMusic("D_E1M1", 0);
-	} else if (track == 1) {
-		SetMusic("music/DoomJazz.mp3", 0);
-	} else if (track == 2) {
-		SetMusic("D_E1M3", 0);
-	} else {
-		Log(s:"Unrecognized music track ", i:track);
-		SetMusic("", 0);
+	switch (track) {
+		case MUSIC_E1M1:
+			SetMusic("D_E1M1", 0);
+			break;
+		case MUSIC_OFFICE:
+			SetMusic("music/DoomJazz.mp3", 0);
+			break;
+		case MUSIC_E1M3:
+			SetMusic("D_E1M3", 0);
+			break;
+		default: {
+			Log(s:"Unrecognized music track ", i:track);
+			SetMusic("", 0);
+			break;
+		}
 	}
+}
 
+script "SetPlayerType" (int type)
+{
+	switch (type) {
+		case PLAYER_TYPE_IMP:
+			ClearInventory();
+			GiveInventory("ImpGun", 1);
+			break;
+		case PLAYER_TYPE_FORMERHUMAN: {
+			ClearInventory();
+			GiveInventory("Fist", 1);
+			GiveInventory("Pistol", 1);
+			GiveInventory("Clip", 50);
+			break;
+		}
+		default:
+			Log(s:"Unrecognized PlayerType ", i:type);
+			break;
+	}
 }
 
 /**
@@ -46,7 +82,7 @@ script 33 ENTER
 
   SetCVar ("numPlayerRespawns", 0);
   
-  ACS_NamedExecute("SetMusic", 0, 0);
+  ACS_NamedExecute("SetMusic", 0, MUSIC_E1M1);
   
   GiveInventory("ImpGun",1);
   
@@ -62,7 +98,7 @@ script 1 (void) //Cross line near coffee guy
 	
 		{
 
-		PlaySound(333, "impgibberishcoffee");
+		PlaySound(BUDDY_TID, "impgibberishcoffee");
 
 		print(s:"\c[Green]This coffee sucks!!!");
 		
@@ -80,13 +116,13 @@ script 2 (void) //Cross first line into to boss office area
 		{
 			print(s:"\c[Red]What the hell are you doing?");
 
-			PlaySound(666, "bossthatdoesntwork");
+			PlaySound(BOSS_TID, "bossthatdoesntwork");
 
 			delay(3 * TICS_PER_SECOND);
 
 			print(s:"\c[Red]Get back to work! ... Platform 1 please!");
 
-			PlaySound(666, "bossgetbacktowork");
+			PlaySound(BOSS_TID, "bossgetbacktowork");
 			
 			door_raise(982,128,0,0);
 			
@@ -117,18 +153,9 @@ script 3 (void) //First teleport out to work
 
 			Teleport(14);
 
-			ACS_NamedExecute("SetMusic", 0, 2);
-			
+			ACS_NamedExecute("SetMusic", 0, MUSIC_E1M3);
 
-			// Switch from imp to former human guns
-
-			ClearInventory();
-
-			GiveInventory("Fist", 1);
-
-			GiveInventory("Pistol", 1);
-
-			GiveInventory("Clip", 50);
+			ACS_NamedExecute("SetPlayerType", 0, PLAYER_TYPE_FORMERHUMAN);
 
 			//SetActorFlag(0, "Invulnerable", TRUE); //This doesn't enable god mode HUD unlike in ZScript :(
 
@@ -140,7 +167,7 @@ script 3 (void) //First teleport out to work
 
 			delay(2 * TICS_PER_SECOND);
 
-			PlaySound(333, "impgibberish1");
+			PlaySound(BUDDY_TID, "impgibberish1");
 
 			print(s:"\c[Yellow]Terry? Heyy buddy, what's up?");
 
@@ -158,9 +185,9 @@ script 3 (void) //First teleport out to work
 			
 			Delay(2 * TICS_PER_SECOND);
 			
-			int fakePlayerTid = 100;
-			SpawnSpot("enemyplayer",546,fakePlayerTid,180);
-			Thing_SetGoal(fakePlayerTid, 98, 0, 0);
+			SpawnSpot("EnemyPlayerShotgun", 546, FAKE_PLAYER_TID, 180);
+			Thing_SetGoal(FAKE_PLAYER_TID, 98, 0, 0);
+			Thing_Hate(BUDDY_TID, FAKE_PLAYER_TID, 0);
 			
 		}
 
@@ -179,7 +206,7 @@ script 5 (void) // Player aproaches broken telepad
 			
 			print(s:"\c[Red]That one isn't working right now.");
 
-			PlaySound(666, "bossthatdoesntwork");
+			PlaySound(BOSS_TID, "bossthatdoesntwork");
 
 			delay(2 * TICS_PER_SECOND);
 		
@@ -188,7 +215,7 @@ script 5 (void) // Player aproaches broken telepad
 
 				print(s:"\c[Red]Get back to work!");
 
-				PlaySound(666, "bossgetbacktowork");
+				PlaySound(BOSS_TID, "bossgetbacktowork");
 				
 				delay(3 * TICS_PER_SECOND);
 				
@@ -200,7 +227,7 @@ script 5 (void) // Player aproaches broken telepad
 				
 				print(s:"\c[Red]Get me some coffeeee!");
 				
-				PlaySound(666, "bosscoffee");
+				PlaySound(BOSS_TID, "bosscoffee");
 				
 				delay(3 * TICS_PER_SECOND);
 				
@@ -221,7 +248,7 @@ script "coffeehitboss" (void) //Hit boss with coffee
 	
 	door_raise(901,110,0,0);
 
-	PlaySound(666, "bossgetbacktowork");
+	PlaySound(BOSS_TID, "bossgetbacktowork");
 	
 }
 
@@ -229,7 +256,7 @@ script "oops" (void) //Throw coffee
 {
 	SpawnSpot("MugGun",545);
 	delay(3 * TICS_PER_SECOND);
-	PlaySound(666, "bosscoffee");
+	PlaySound(BOSS_TID, "bosscoffee");
 }
 
 script 8 (void) //Demotion Accepted
@@ -263,13 +290,13 @@ script 10 (void) //When you bump his desk
 			if (got_cup == true)
 			{
 			print(s:"\c[Red]Get back to work!");
-			PlaySound(666, "bossgetbacktowork");
+			PlaySound(BOSS_TID, "bossgetbacktowork");
 			delay(3 * TICS_PER_SECOND);
 			}
 			else
 			{
 			print(s:"\c[Red]GET ME SOME COFFEEEE!");
-			PlaySound(666, "bosscoffee");
+			PlaySound(BOSS_TID, "bosscoffee");
 			delay(3 * TICS_PER_SECOND);
 			}
 			bosstalk = false;

@@ -66,6 +66,10 @@ class Imp: DoomPlayer
 					A_PlaySound("misc/teleport");
 					//A_PlaySound("bg/doomjazz", CHAN_BODY, 1, true);
 					ACS_NamedExecute("SetMusic", 1, true);
+					
+					if (numRespawns == 2) {
+						ACS_NamedExecute("SetPlayerType", 0, 0);
+					}
 				}
 			}
 		}
