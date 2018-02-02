@@ -353,6 +353,6 @@ script 13 (void) // Exit dialogue with buddy
 	Log(s:"Exit dialoge script called");
 	talked_to_buddy = true;
 	ACS_Terminate(3, 0);
-	Delay(10 * TICS_PER_SECOND);
+	Delay(5 * TICS_PER_SECOND);
 	ACS_NamedExecute("E1M3PlayerEnter", 0);
 }

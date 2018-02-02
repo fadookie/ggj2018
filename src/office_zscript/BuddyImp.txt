@@ -1,7 +1,7 @@
 class BuddyImp : DoomImp
 {
 	bool lastDamageWasFriendly;
-	
+
 	States
 	{
 		Spawn: //used as idle state 
@@ -14,7 +14,13 @@ class BuddyImp : DoomImp
 		
 		Pain:  //pain frames 
 		CDIP A 3;
-		CDIP A 3 A_Pain;
+		CDIP A 2 A_Pain;
+		CDIP A 1 {
+			if (lastDamageWasFriendly) {
+				return ResolveState("FakeDeath");
+			}
+			return ResolveState(null);
+		}
 		Goto See;
 		
 		Melee:     //works like a switch statement , should carry down
@@ -23,25 +29,25 @@ class BuddyImp : DoomImp
 		CDIA AB 6 A_TroopAttack;
 		Goto See;
 		
-		Death:
-		XDeath:
-		TROO I 8;
+		FakeDeath:
+		TROO I 1 {
+			bInvulnerable = true;
+		}
+		TROO I 7;
 		TROO J 8; //A_Scream
 		TROO K 6;
-		TROO L 6 A_NoBlocking;
-		TROO M -1 {
-			if (lastDamageWasFriendly) {
-				ACS_Terminate(3, 0);
-				return ResolveState("BuddyRaise");
-			}
-			return ResolveState(null);
+		TROO L 6;
+		TROO M 1 {
+			A_Log("FakeDeath");
+			ACS_Terminate(3, 0);
 		}
-		Stop;
+		Goto BuddyRaise;
 		
 		BuddyRaise:
 		TROO ML 8;
 		TROO KJI 6;
 		TROO I 1 {
+			bInvulnerable = false;
 			ACS_NamedExecute("BuddyRaise", 0);
 		}
 		Goto See;
@@ -50,6 +56,7 @@ class BuddyImp : DoomImp
 	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags = 0, double angle = 0) {
 		//A_Log("Damaged by:" .. source .. ", friendly:" .. source.bFriendly);
 		lastDamageWasFriendly = source.bFriendly;
+		bBuddha = lastDamageWasFriendly;
 		return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
 	}
 }
