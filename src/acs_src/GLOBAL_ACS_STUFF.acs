@@ -80,6 +80,7 @@ script "SetPlayerType" (int type)
 script 33 ENTER
 {
 
+  //SetCVar ("numPlayerRespawns", 1); // Set this to 1 and add player start in office to test teleporter 1
   SetCVar ("numPlayerRespawns", 0);
   
   ACS_NamedExecute("SetMusic", 0, MUSIC_E1M1);
@@ -186,8 +187,9 @@ script 3 (void) //First teleport out to work
 			Delay(2 * TICS_PER_SECOND);
 			
 			SpawnSpot("EnemyPlayerShotgun", 546, FAKE_PLAYER_TID, 180);
-			Thing_SetGoal(FAKE_PLAYER_TID, 98, 0, 0);
-			Thing_Hate(BUDDY_TID, FAKE_PLAYER_TID, 0);
+			Thing_Hate(BUDDY_TID, FAKE_PLAYER_TID, 6);
+			Thing_Hate(FAKE_PLAYER_TID, BUDDY_TID, 4);
+			Thing_SetGoal(FAKE_PLAYER_TID, 98, 0, true);
 			
 		}
 
