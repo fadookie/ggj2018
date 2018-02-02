@@ -22,3 +22,73 @@ Texture hibrick2, 512, 256
 	}
 }
 
+Texture COMPLY, 128, 128
+{
+	XScale 1.0
+	YScale 1.0
+	Patch COMPLY, 0, 0
+}
+
+Texture FLOOR71, 64, 64
+{
+	XScale 1.0
+	YScale 1.0
+	Patch FLOOR71, 0, 0
+}
+
+Texture MOOD, 128, 128
+{
+	XScale 1.0
+	YScale 1.0
+	Patch MOOD, 0, 0
+}
+
+Texture NWALL, 128, 128
+{
+	XScale 1.0
+	YScale 1.0
+	Patch NWALL, 0, 0
+}
+
+Texture NWALL2, 128, 128
+{
+	XScale 1.0
+	YScale 1.0
+	Patch NWALL2, 0, 0
+}
+
+Texture NWBOARD, 128, 128
+{
+	XScale 1.0
+	YScale 1.0
+	Patch NWBOARD, 0, 0
+}
+
+Texture NWVENT, 128, 128
+{
+	XScale 1.0
+	YScale 1.0
+	Patch NWVENT, 0, 0
+}
+
+Texture NWVENT2, 128, 128
+{
+	XScale 1.0
+	YScale 1.0
+	Patch NWVENT2, 0, 0
+}
+
+Texture SYNERG, 128, 128
+{
+	XScale 1.0
+	YScale 1.0
+	Patch SYNERG, 0, 0
+}
+
+Texture WOOD, 128, 128
+{
+	XScale 1.0
+	YScale 1.0
+	Patch WOOD, 0, 0
+}
+
