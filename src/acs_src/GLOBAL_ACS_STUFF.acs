@@ -5,7 +5,7 @@
 /***
  * Constants
  */
-#define PLAYER_RESPAWNS_INITIAL 1 // Set this to 1 and add player 1 start in office to test teleporter
+#define PLAYER_RESPAWNS_INITIAL 0 // Set this to 1 and add player 1 start in office to test teleporter
  
 #define TICS_PER_SECOND 35
 #define CORPSES_TO_CLEAN 6
