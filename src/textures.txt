@@ -13,3 +13,9 @@ Texture hibrick, 512, 256
 	}
 }
 
+Texture ELIOTPLAT, 512, 256
+{
+	Patch ELIOTPLAT, 0, 0
+	{
+	}
+}
