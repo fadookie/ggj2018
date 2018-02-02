@@ -87,6 +87,9 @@ script 2 (void) //Cross first line into to boss office area
 			print(s:"\c[Red]Get back to work! ... Platform 1 please!");
 
 			PlaySound(666, "bossgetbacktowork");
+			
+			door_raise(982,128,0,0);
+			
 		}
 }
 
@@ -98,6 +101,8 @@ script 3 (void) //First teleport out to work
 	if (GetCVar ("numPlayerRespawns") == 1)
 	
 		{
+			Door_Raise(982,128,0,0);
+			
 			print(s:"\c[Green]Transmission in progress...");;
 
 			PlaySound(111, "impgibberish3");
@@ -111,8 +116,6 @@ script 3 (void) //First teleport out to work
 			Delay(100);
 
 			Teleport(14);
-
-			
 
 			ACS_NamedExecute("SetMusic", 0, 2);
 			
@@ -158,6 +161,7 @@ script 3 (void) //First teleport out to work
 			int fakePlayerTid = 100;
 			SpawnSpot("enemyplayer",546,fakePlayerTid,180);
 			Thing_SetGoal(fakePlayerTid, 98, 0, 0);
+			
 		}
 
 }
@@ -289,5 +293,14 @@ script 11 (void) //Janitorial counter
 		Playsound(0,"slop");
 		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
 		corpses_cleaned++;
+	}
+}
+
+script 12 (void) //Second door opens on last office visit
+{
+	if (GetCVar ("numPlayerRespawns") != 1)
+	{
+	Door_Raise(983,128,0,0);
+	Door_Close(982,128,0);
 	}
 }
