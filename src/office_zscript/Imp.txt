@@ -65,7 +65,7 @@ class Imp: DoomPlayer
 					HealThing(STARTING_HEALTH);
 					A_PlaySound("misc/teleport");
 					//A_PlaySound("bg/doomjazz", CHAN_BODY, 1, true);
-					ACS_NamedExecute("SetMusic", 1, true);
+					ACS_NamedExecute("SetMusic", 0, true);
 					
 					if (numRespawns == 2) {
 						ACS_NamedExecute("SetPlayerType", 0, 0);

@@ -32,6 +32,7 @@ class BuddyImp : DoomImp
 		TROO M -1 {
 			if (lastDamageWasFriendly) {
 				Thing_Raise(0);
+				ACS_NamedExecute("BuddyRaise", 0);
 			}
 		}
 		Stop;

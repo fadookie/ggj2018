@@ -73,6 +73,18 @@ script "SetPlayerType" (int type)
 	}
 }
 
+script "BuddyRaise" (void)
+{
+	Delay(1 * TICS_PER_SECOND);
+	PrintBold(s:"\c[Yellow]Very funny, Terry. Quit screwing around or we might get busted again.");
+	Delay(3 * TICS_PER_SECOND);
+	// HudMessage(s:"\c[Yellow]Have you been out on that ledge so long you forgot how to talk to people?\nPress the ", k:"+use", s:" key.";
+		// HUDMSG_PLAIN, 1, CR_YELLOW, 1.5, 0.5, 3); // Nnot working...
+	PrintBold(s:"\c[Yellow]Have you been out on that ledge so long you forgot how to talk to people?");
+	Delay(2 * TICS_PER_SECOND);
+	PrintBold(s:"\c[Yellow]Press the ", k:"+use", s:" key, wise guy.");
+}
+
 /**
  * Special trigger scripts
  */
