@@ -111,13 +111,13 @@ actor CleanupGibPlayerXDeath: DoomImp 20803
 // This is the base class for debris that can be cleaned up -
 // not sure if I can actually get this to work but having a shared base class might help
 // if we need to do some custom scripting
-actor CleanupDebrisBase : Actor
+actor CleanupDebrisBase : DoomImp
 {
 	Health 50
+	Speed 0
+	PainSound ""
 	+FRIENDLY
-	PainSound "imp/pain"
 	BloodType "BulletPuff"
-	Monster // This makes it destructible but causes blood particles to spawn
 }
 
 // CleanupShotgut inherits from CleanupDebrisBase
