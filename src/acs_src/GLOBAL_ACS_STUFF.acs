@@ -22,6 +22,11 @@
 #define MUSIC_OFFICE 1
 #define MUSIC_E1M3 2
 
+#define TELEPORT1_EDGE 52
+#define	DOOR1 982
+#define	DOOR2 983
+#define	DOOR3 984
+
 /***
  * Variables
  */
@@ -149,7 +154,9 @@ script 2 (void) //Cross first line into to boss office area
 
 			PlaySound(BOSS_TID, "bossgetbacktowork");
 			
-			door_raise(982,128,0,0);
+			Ceiling_RaiseByValue(DOOR1,32,64);
+			Door_Close(DOOR3,128,0);
+			
 			
 		}
 }
@@ -162,7 +169,6 @@ script 3 (void) //First teleport out to work
 	if (GetCVar ("numPlayerRespawns") == 1)
 	
 		{
-			Door_Raise(982,128,0,0);
 			
 			print(s:"\c[Green]Transmission in progress...");;
 
@@ -343,8 +349,8 @@ script 12 (void) //Second door opens on last office visit
 {
 	if (GetCVar ("numPlayerRespawns") != 1)
 	{
-	Door_Raise(983,128,0,0);
-	Door_Close(982,128,0);
+	Ceiling_RaiseByValue(DOOR2,32,64);
+	Door_Close(DOOR1,128,0);
 	}
 }
 
