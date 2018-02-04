@@ -352,6 +352,25 @@ script 11 (void) //Corpse clean counter
 	}
 }
 
+script 15 (void) //Debris clean counter
+{
+	int fake_corpses_to_clean = FAKE_CORPSES_TO_CLEAN_TOTAL - corpses_cleaned;
+	if (corpses_cleaned >= CORPSES_TO_CLEAN)
+	{
+		Playsound(0,"item");
+		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
+		fadeto(0, 0, 0, 1.0, 3.0);
+		Delay(4 * TICS_PER_SECOND);
+		Teleport_EndGame();
+	}
+	else
+	{
+		Playsound(0,"item");
+		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
+		corpses_cleaned++;
+	}
+}
+
 script 12 (void) //Second door opens on last office visit
 {
 	if (GetCVar ("numPlayerRespawns") != 1)
