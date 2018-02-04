@@ -195,6 +195,8 @@ script 3 (void) //First teleport out to work
 			SpawnSpot("MugGun",545,222,90);
 			
 			Thing_SetSpecial (222, 80, 14,0,0); //Make mug special script trigger
+			
+			SetLineSpecial (42,80,12);
 
 			print(s:"\c[Green]Transmission Complete");
 
@@ -331,7 +333,7 @@ script 10 (void) //When you bump his desk
 	}
 }
 
-script 11 (void) //Janitorial counter
+script 11 (void) //Corpse clean counter
 {
 	int fake_corpses_to_clean = FAKE_CORPSES_TO_CLEAN_TOTAL - corpses_cleaned;
 	if (corpses_cleaned >= CORPSES_TO_CLEAN)
