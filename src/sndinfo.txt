@@ -32,3 +32,4 @@ weapon/broomsweep sounds/154376__semccab__broom-sweep.wav
 //==================
 
 slop sounds/DSSLOP
+item sounds/DSITEMUP
