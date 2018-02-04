@@ -1,0 +1,26 @@
+class BaronOfficeBoss: BaronOfHell
+{
+	States
+	{
+		Spawn: //used as idle state 
+		CDBB AB 10; //actively looks for player
+		Loop;
+		
+		See:  
+		CDBB AB 10;
+		goto spawn;
+		
+		Pain:  //pain frames 
+		CDBB A 30 ACS_NamedExecute("coffeehitboss",0);
+		CDBB B 30 A_Pain;
+		Goto See;
+		
+		Melee:     //works like a switch statement , should carry down
+		Missile:
+		CDBB AB 50 A_FaceTarget;
+		Goto See;
+		
+		Death:
+		Stop;
+	}
+}

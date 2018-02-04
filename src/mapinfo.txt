@@ -76,6 +76,7 @@ DoomEdNums
 {
 	20001 = EnemyPlayerPistol
 	20002 = EnemyPlayerShotgun
+	20203 = BaronOfficeBoss
 	//using 20300+ for player classes
 	20300 = Imp
 	20249 = BuddyImp

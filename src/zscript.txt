@@ -1,5 +1,6 @@
 version "2.5.0"
 
+#include "office_zscript/BaronOfficeBoss.txt"
 #include "office_zscript/BuddyImp.txt"
 #include "office_zscript/EnemyPlayer.txt"
 #include "office_zscript/Imp.txt"
