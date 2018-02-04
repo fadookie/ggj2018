@@ -1,5 +1,7 @@
 class BaronOfficeBoss: BaronOfHell
 {
+	bool lastDamageWasCoffee;
+	
 	States
 	{
 		Spawn: //used as idle state 
@@ -22,5 +24,11 @@ class BaronOfficeBoss: BaronOfHell
 		
 		Death:
 		Stop;
+	}
+	
+	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags = 0, double angle = 0) {
+		lastDamageWasCoffee = inflictor.GetClassName() == "CoffeeMug_Missile";
+		A_Log("Damaged by inflictor:" .. inflictor.GetClassName() .. " lastDamageWasCoffee:" .. lastDamageWasCoffee);
+		return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
 	}
 }
