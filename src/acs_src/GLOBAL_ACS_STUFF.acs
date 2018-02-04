@@ -193,6 +193,8 @@ script 3 (void) //First teleport out to work
 			SetActorState(0, "FormerHuman", TRUE);
 			
 			SpawnSpot("MugGun",545,222,90);
+			
+			Thing_SetSpecial (222, 80, 14,0,0); //Make mug special script trigger
 
 			print(s:"\c[Green]Transmission Complete");
 
@@ -263,14 +265,16 @@ script 5 (void) // Player aproaches broken telepad
 
 script "coffeehitboss" (void) //Hit boss with coffee
 {
+	if (got_cup == true)
+	{
 	ACS_NamedTerminate("oops",0);
-	got_cup = true;
 	
 	delay(2 * TICS_PER_SECOND);
 	
 	door_raise(901,110,0,0);
 
 	PlaySound(BOSS_TID, "bossgetbacktowork");
+	}
 	
 }
 
@@ -279,6 +283,7 @@ script "oops" (void) //Throw coffee
 	SpawnSpot("MugGun",545);
 	delay(3 * TICS_PER_SECOND);
 	PlaySound(BOSS_TID, "bosscoffee");
+	got_cup = false;
 }
 
 script 8 (void) //Demotion Accepted
@@ -361,4 +366,9 @@ script 13 (void) // Exit dialogue with buddy
 	ACS_Terminate(3, 0);
 	Delay(5 * TICS_PER_SECOND);
 	ACS_NamedExecute("E1M3PlayerEnter", 0);
+}
+
+script 14 (void) //Cup pickup
+{
+		got_cup = true;
 }
