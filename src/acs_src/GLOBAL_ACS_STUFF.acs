@@ -302,8 +302,16 @@ script "coffeehitboss" (void) //Hit boss with coffee
 script "oops" (void) //Throw coffee
 {
 	SpawnSpot("MugGun",545);
-	delay(1 * TICS_PER_SECOND);
-	PlaySound(BOSS_TID, "bosscoffee");
+	if(boss_wantsit == true)
+	{
+		delay(1 * TICS_PER_SECOND);
+		PlaySound(BOSS_TID, "bosscoffee");
+	}
+	else
+	{
+		delay(1 * TICS_PER_SECOND);
+		PlaySound(BOSS_TID, "bossgetbacktowork");
+	}
 	got_cup = false;
 }
 
