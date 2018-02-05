@@ -11,6 +11,7 @@
 bosscoffee sounds/ImpBossCoffee.mp3
 bossgetbacktowork sounds/ImpBossGetBackToWork.mp3
 bossthatdoesntwork sounds/ImpBossThatDoesntWork.mp3
+bossthatdoesntworkrev sounds/ImpBossThatDoesntWork_rev.mp3
 impgibberish1 sounds/ImpGibberish1.mp3
 impgibberish2 sounds/ImpGibberish2.mp3
 impgibberish3 sounds/ImpGibberish3.mp3

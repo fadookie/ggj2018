@@ -34,6 +34,7 @@ bool talked_to_buddy = false;
 bool got_cup = false;
 bool boss_wantsit = true;
 bool bosstalk = false;
+bool firstdooropened = false;
 int corpses_cleaned = 0;
 
 /***
@@ -147,7 +148,7 @@ script 2 (void) //Cross first line into to boss office area
 		{
 			print(s:"\c[Red]What the hell are you doing?");
 
-			PlaySound(BOSS_TID, "bossthatdoesntwork");
+			PlaySound(BOSS_TID, "bossthatdoesntworkrev");
 
 			delay(3 * TICS_PER_SECOND);
 
@@ -155,8 +156,15 @@ script 2 (void) //Cross first line into to boss office area
 
 			PlaySound(BOSS_TID, "bossgetbacktowork");
 			
-			Ceiling_RaiseByValue(DOOR1,32,64);
-			Door_Close(DOOR3,128,0);
+			if	(firstdooropened == false)
+			{
+				firstdooropened = true;
+				Ceiling_RaiseByValue(DOOR1,32,64);
+				Door_Close(DOOR3,128,0);
+			}
+				
+			
+			
 			
 			
 		}
@@ -170,6 +178,12 @@ script 3 (void) //First teleport out to work
 	if (GetCVar ("numPlayerRespawns") == 1)
 	
 		{
+			if	(firstdooropened == false)
+			{
+				firstdooropened = true;
+				Ceiling_RaiseByValue(DOOR1,32,64);
+				Door_Close(DOOR3,128,0);
+			}
 			
 			print(s:"\c[Green]Transmission in progress...");;
 
@@ -184,6 +198,8 @@ script 3 (void) //First teleport out to work
 			Delay(100);
 
 			Teleport(14);
+			
+			ChangeSky("SKY1","SKY1");
 
 			ACS_NamedExecute("SetMusic", 0, MUSIC_E1M3);
 
@@ -286,7 +302,7 @@ script "coffeehitboss" (void) //Hit boss with coffee
 script "oops" (void) //Throw coffee
 {
 	SpawnSpot("MugGun",545);
-	delay(3 * TICS_PER_SECOND);
+	delay(1 * TICS_PER_SECOND);
 	PlaySound(BOSS_TID, "bosscoffee");
 	got_cup = false;
 }
@@ -355,25 +371,6 @@ script 11 (void) //Corpse clean counter
 	}
 }
 
-script 15 (void) //Debris clean counter
-{
-	int fake_corpses_to_clean = FAKE_CORPSES_TO_CLEAN_TOTAL - corpses_cleaned;
-	if (corpses_cleaned >= CORPSES_TO_CLEAN)
-	{
-		Playsound(0,"item");
-		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
-		fadeto(0, 0, 0, 1.0, 3.0);
-		Delay(4 * TICS_PER_SECOND);
-		Teleport_EndGame();
-	}
-	else
-	{
-		Playsound(0,"item");
-		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
-		corpses_cleaned++;
-	}
-}
-
 script 12 (void) //Second door opens on last office visit
 {
 	if (GetCVar ("numPlayerRespawns") != 1)
@@ -395,4 +392,28 @@ script 13 (void) // Exit dialogue with buddy
 script 14 (void) //Cup pickup
 {
 		got_cup = true;
+}
+
+script 15 (void) //Debris clean counter
+{
+	int fake_corpses_to_clean = FAKE_CORPSES_TO_CLEAN_TOTAL - corpses_cleaned;
+	if (corpses_cleaned >= CORPSES_TO_CLEAN)
+	{
+		Playsound(0,"item");
+		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
+		fadeto(0, 0, 0, 1.0, 3.0);
+		Delay(4 * TICS_PER_SECOND);
+		Teleport_EndGame();
+	}
+	else
+	{
+		Playsound(0,"item");
+		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
+		corpses_cleaned++;
+	}
+}
+
+script 16 (void) //Sky Change to Sky3
+{
+	ChangeSky("SKY3","SKY3");
 }
