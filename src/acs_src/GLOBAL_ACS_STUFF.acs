@@ -32,6 +32,7 @@
  */
 bool talked_to_buddy = false;
 bool got_cup = false;
+bool boss_wantsit = true;
 bool bosstalk = false;
 int corpses_cleaned = 0;
 
@@ -236,7 +237,7 @@ script 5 (void) // Player aproaches broken telepad
 
 			delay(2 * TICS_PER_SECOND);
 		
-			if (got_cup == true)
+			if (boss_wantsit == false)
 			{
 
 				print(s:"\c[Red]Get back to work!");
@@ -267,9 +268,11 @@ script 5 (void) // Player aproaches broken telepad
 
 script "coffeehitboss" (void) //Hit boss with coffee
 {
-	if (got_cup == true)
+	if (boss_wantsit == true)
 	{
 	ACS_NamedTerminate("oops",0);
+	
+	boss_wantsit = false;
 	
 	delay(2 * TICS_PER_SECOND);
 	
@@ -316,7 +319,7 @@ script 10 (void) //When you bump his desk
 		if (bosstalk == false)
 		{
 			bosstalk = true;
-			if (got_cup == true)
+			if (boss_wantsit == false)
 			{
 			print(s:"\c[Red]Get back to work!");
 			PlaySound(BOSS_TID, "bossgetbacktowork");
