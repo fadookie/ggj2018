@@ -27,6 +27,8 @@
 #define	DOOR2 983
 #define	DOOR3 984
 
+#define MEME_TELEPORTER 1001
+
 /***
  * Variables
  */
@@ -424,4 +426,10 @@ script 15 (void) //Debris clean counter
 script 16 (void) //Sky Change to Sky3
 {
 	ChangeSky("SKY3","SKY3");
+}
+
+script 17 (void) //Meme teleporter
+{
+	Teleport(MEME_TELEPORTER, 0, false);
+	SetActorState(0, "MemeTeleported", true);
 }

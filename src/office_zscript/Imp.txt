@@ -3,6 +3,8 @@ class Imp: DoomPlayer
 	const TELEPORT_TARGET_TID = 13;
 	const STARTING_HEALTH = 100;
 	
+	bool justUsedMemeTeleporter;
+	
 	override void PostBeginPlay()
     {
 		super.PostBeginPlay();
@@ -49,10 +51,16 @@ class Imp: DoomPlayer
 			{
 				let numRespawnsCVar = CVar.FindCVar("numPlayerRespawns");
 				let numRespawns = numRespawnsCVar.GetInt();
-				numRespawns++;
-				numRespawnsCVar.SetInt(numRespawns);
-				A_Log("Respawns:");
-				A_LogInt(numRespawns);
+				
+				if (justUsedMemeTeleporter) {
+					A_Log("Skipping count for teleporting back from meme level");
+					justUsedMemeTeleporter = false;
+				} else {
+					numRespawns++;
+					numRespawnsCVar.SetInt(numRespawns);
+					A_Log("Respawns:");
+					A_LogInt(numRespawns);
+				}
 				// Simulated teleport
 				let teleporter = GetTeleporter();
 				if (!teleporter) {
@@ -72,6 +80,13 @@ class Imp: DoomPlayer
 					}
 				}
 			}
+		}
+		Goto Spawn;
+		
+		MemeTeleported:
+		TNT1 A 0 {
+			A_Log("Imp.MemeTeleported");
+			justUsedMemeTeleporter = true;
 		}
 		Goto Spawn;
 		
