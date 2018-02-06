@@ -177,14 +177,15 @@ script 3 (void) //First teleport out to work
 		
 		print(s:"\c[Green]Transmission in progress...");;
 
-		PlaySound(111, "impgibberish3");
+		//PlaySound(111, "impgibberish3");
+		PlaySound(111, "TeleportWarmup");
 
 		delay(2 * TICS_PER_SECOND);
 
 		print(s:"\c[Green]Downloading profile for Former Human Soldier...");
 
 		ACS_NamedExecute("SetPlayerType", 0, PLAYER_TYPE_FORMERHUMAN);
-		PlaySound(111, "impgibberish3");
+		//PlaySound(111, "impgibberish3");
 
 		Delay(2 * TICS_PER_SECOND);
 
