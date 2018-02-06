@@ -96,7 +96,7 @@ script "BuddyRaise" (void)
 	if (!talked_to_buddy) {
 		PrintBold(s:"\c[Yellow]Have you been out on that ledge so long you forgot how to talk to people?");
 		Delay(3 * TICS_PER_SECOND);
-		PrintBold(s:"\c[Yellow]Press the ", k:"+use", s:" key, wise guy.");
+		PrintBold(s:"\c[Yellow]Press the ", k:"+use", s:" key, fool.");
 	}
 }
 
@@ -121,128 +121,118 @@ script 33 ENTER
   
   ACS_NamedExecute("SetMusic", 0, MUSIC_E1M1);
   
-  ACS_NamedExecute("SetPlayerType", 0, PLAYER_TYPE_IMP);
+  ACS_NamedExecute("SetPlayerType", 0, PLAYER_TYPE_IMP); 
 }
 
 script 1 (void) //Cross line near coffee guy
-
 {
-
-	if (GetCVar ("numPlayerRespawns") == 1)
-	
-		{
-
+	if (GetCVar ("numPlayerRespawns") == 1) {
 		PlaySound(BUDDY_TID, "impgibberishcoffee");
 
-		print(s:"\c[Green]This coffee sucks!!!");
-		
-		}
+		print(s:"\c[Green]This coffee sucks!!!");	
+	}
 
 }
 
 
 
 script 2 (void) //Cross first line into to boss office area
-
 {
+	SetFont("BIGFONT");
 
 	if (GetCVar ("numPlayerRespawns") == 1)
+	{
+		print(s:"\c[Red]What the hell are you doing?");
+
+		PlaySound(BOSS_TID, "bossthatdoesntworkrev");
+
+		delay(3 * TICS_PER_SECOND);
+
+		print(s:"\c[Red]Get back to work! ... Platform 1 please!");
+
+		PlaySound(BOSS_TID, "bossgetbacktowork");
+		
+		if	(firstdooropened == false)
 		{
-			print(s:"\c[Red]What the hell are you doing?");
-
-			PlaySound(BOSS_TID, "bossthatdoesntworkrev");
-
-			delay(3 * TICS_PER_SECOND);
-
-			print(s:"\c[Red]Get back to work! ... Platform 1 please!");
-
-			PlaySound(BOSS_TID, "bossgetbacktowork");
-			
-			if	(firstdooropened == false)
-			{
-				firstdooropened = true;
-				Ceiling_RaiseByValue(DOOR1,32,64);
-				Door_Close(DOOR3,128,0);
-			}
-				
-			
-			
-			
-			
-		}
+			firstdooropened = true;
+			Ceiling_RaiseByValue(DOOR1,32,64);
+			Door_Close(DOOR3,128,0);
+		}	
+		
+	}
 }
 
 
 
 script 3 (void) //First teleport out to work
-
 {
 	if (GetCVar ("numPlayerRespawns") == 1)
-	
+	{
+		if	(firstdooropened == false)
 		{
-			if	(firstdooropened == false)
-			{
-				firstdooropened = true;
-				Ceiling_RaiseByValue(DOOR1,32,64);
-				Door_Close(DOOR3,128,0);
-			}
-			
-			print(s:"\c[Green]Transmission in progress...");;
-
-			PlaySound(111, "impgibberish3");
-
-			delay(70);
-
-			print(s:"\c[Green]Please Wait");
-
-			PlaySound(111, "impgibberish3");
-
-			Delay(100);
-
-			Teleport(14);
-			
-			ChangeSky("SKY1","SKY1");
-
-			ACS_NamedExecute("SetMusic", 0, MUSIC_E1M3);
-
-			ACS_NamedExecute("SetPlayerType", 0, PLAYER_TYPE_FORMERHUMAN);
-
-			//SetActorFlag(0, "Invulnerable", TRUE); //This doesn't enable god mode HUD unlike in ZScript :(
-
-			SetActorState(0, "FormerHuman", TRUE);
-			
-			SpawnSpot("MugGun",545,222,90);
-			
-			Thing_SetSpecial (222, 80, 14,0,0); //Make mug special script trigger
-			
-			SetLineSpecial (42,80,12);
-
-			print(s:"\c[Green]Transmission Complete");
-
-			delay(2 * TICS_PER_SECOND);
-
-			PlaySound(BUDDY_TID, "impgibberish1");
-
-			print(s:"\c[Yellow]Terry? Heyy buddy, what's up?");
-
-			Delay(3 * TICS_PER_SECOND);
-
-			print(s:"\c[Yellow]Haven't seen much of you since you got transferred to E1M1.");
-			
-			Delay(3 * TICS_PER_SECOND);
-			
-			PrintBold(s:"\c[Yellow]Have you been out on that ledge so long you forgot how to talk to people?");
-			Delay(3 * TICS_PER_SECOND);
-			PrintBold(s:"\c[Yellow]Press the ", k:"+use", s:" key, wise guy.");
+			firstdooropened = true;
+			Ceiling_RaiseByValue(DOOR1,32,64);
+			Door_Close(DOOR3,128,0);
 		}
+		
+		print(s:"\c[Green]Transmission in progress...");;
 
+		PlaySound(111, "impgibberish3");
+
+		delay(2 * TICS_PER_SECOND);
+
+		print(s:"\c[Green]Downloading profile for Former Human Soldier...");
+
+		ACS_NamedExecute("SetPlayerType", 0, PLAYER_TYPE_FORMERHUMAN);
+		PlaySound(111, "impgibberish3");
+
+		Delay(2 * TICS_PER_SECOND);
+
+		print(s:"\c[Green]Stand by for transmission to E1M3...");
+
+		Delay(2 * TICS_PER_SECOND);
+
+		Teleport(14);
+		
+		ChangeSky("SKY1","SKY1");
+
+		ACS_NamedExecute("SetMusic", 0, MUSIC_E1M3);
+
+		//SetActorFlag(0, "Invulnerable", TRUE); //This doesn't enable god mode HUD unlike in ZScript :(
+
+		SetActorState(0, "FormerHuman", TRUE);
+		
+		SpawnSpot("MugGun",545,222,90);
+		
+		Thing_SetSpecial (222, 80, 14,0,0); //Make mug special script trigger
+		
+		SetLineSpecial (42,80,12);
+
+		print(s:"\c[Green]Transmission Complete");
+
+		delay(2 * TICS_PER_SECOND);
+
+		PlaySound(BUDDY_TID, "impgibberish1");
+
+		print(s:"\c[Yellow]Terry? Heyy buddy, what's up?");
+
+		Delay(3 * TICS_PER_SECOND);
+
+		print(s:"\c[Yellow]Haven't seen much of you since you got transferred to E1M1.");
+		
+		Delay(3 * TICS_PER_SECOND);
+		
+		PrintBold(s:"\c[Yellow]Have you been out on that ledge so long you forgot how to talk to people?");
+		Delay(3 * TICS_PER_SECOND);
+		PrintBold(s:"\c[Yellow]Press the ", k:"+use", s:" key, silly.");
+	}
 }
 
 
 
 script 5 (void) // Player aproaches broken telepad 
-
 {
+	SetFont("BIGFONT");
 	if (GetCVar ("numPlayerRespawns") == 2)
 	{
 		if (bosstalk == false)
@@ -288,15 +278,15 @@ script "coffeehitboss" (void) //Hit boss with coffee
 {
 	if (boss_wantsit == true)
 	{
-	ACS_NamedTerminate("oops",0);
-	
-	boss_wantsit = false;
-	
-	delay(2 * TICS_PER_SECOND);
-	
-	door_raise(901,110,0,0);
+		ACS_NamedTerminate("oops",0);
+		
+		boss_wantsit = false;
+		
+		delay(2 * TICS_PER_SECOND);
+		
+		door_raise(901,110,0,0);
 
-	PlaySound(BOSS_TID, "bossgetbacktowork");
+		PlaySound(BOSS_TID, "bossgetbacktowork");
 	}
 	
 }
@@ -318,7 +308,6 @@ script "oops" (void) //Throw coffee
 }
 
 script 8 (void) //Demotion Accepted
-
 {
 	//ACS_NamedExecute("SetMusic", 0, 2); // On second thought, leaving the office music is kinda funny here
 
@@ -331,7 +320,6 @@ script 8 (void) //Demotion Accepted
 }
 
 script 9 (void) //Janitor Teleport
-
 {
 
 	Teleport(17);
@@ -340,6 +328,7 @@ script 9 (void) //Janitor Teleport
 
 script 10 (void) //When you bump his desk
 {
+	SetFont("BIGFONT");
 	if (GetCVar ("numPlayerRespawns") == 2)
 	{
 		if (bosstalk == false)
