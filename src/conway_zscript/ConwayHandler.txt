@@ -1,30 +1,32 @@
 class ConwayHandler : EventHandler
 {
 	const TICS_PER_SECOND = 35;
-	const UPDATE_FREQUENCY_SECONDS = 3;
+	const UPDATE_FREQUENCY_SECONDS = 1;
 
-    const BOARD_SPOT_TID = 65534;
+	const BOARD_SPOT_TID = 65534;
 	
-	const GRID_SIZE = 40;
+	const GRID_SIZE = 10;
+	const GRID_TO_WORLD_SCALE = 50;
 	bool board[GRID_SIZE][GRID_SIZE];
 	bool boardNext[GRID_SIZE][GRID_SIZE];
 	
 	int lastUpdateTime;
-    int generationCount;
+	int generationCount;
 	
 	ConwayPlayer player;
-    Actor boardSpot;
+	Actor boardSpot;
 	
 	override void WorldLoaded(WorldEvent e) {
 		Console.Printf("Hello World!");
-        boardSpot = FindActor(BOARD_SPOT_TID);
+		boardSpot = FindActor(BOARD_SPOT_TID);
 		player = FindPlayer();
 		InitBoard();
+		SpawnBoardMarkers();
 		PrintBoard();
 	}
 	
-    override void WorldTick()
-    {
+	override void WorldTick()
+	{
 		let timeSeconds = level.time / TICS_PER_SECOND; // int division chops decimal
 		//Console.Printf("timeSeconds=" .. timeSeconds .. " lastUpdate=" .. lastUpdateTime .. "dt=" .. timeSeconds - lastUpdateTime);
 		if (timeSeconds - lastUpdateTime >= UPDATE_FREQUENCY_SECONDS) {
@@ -37,12 +39,12 @@ class ConwayHandler : EventHandler
 	
 	Actor FindActor(int tid) {
 		let actorFinder = ActorIterator.Create(tid);
-        return actorFinder.Next(); 
+		return actorFinder.Next(); 
 	}
 	
 	ConwayPlayer FindPlayer() {
-	    ThinkerIterator playerFinder = ThinkerIterator.Create("ConwayPlayer");
-        let playerResult = ConwayPlayer(playerFinder.Next());
+		ThinkerIterator playerFinder = ThinkerIterator.Create("ConwayPlayer");
+		let playerResult = ConwayPlayer(playerFinder.Next());
 		if (playerResult == null) {
 			Console.Printf("Error! No player found.");
 		} else {
@@ -71,8 +73,7 @@ class ConwayHandler : EventHandler
 	}
 	
 	Vector3 GetWorldPosForGrid(int x, int y) {
-		let scale = 100;
-		return (boardSpot.pos.x + (x * scale), boardSpot.pos.y + (y * scale), boardSpot.pos.z);
+		return (boardSpot.pos.x + (x * GRID_TO_WORLD_SCALE), boardSpot.pos.y + (y * GRID_TO_WORLD_SCALE), boardSpot.pos.z);
 	}
 	
 	bool IsDead(Actor actor) {
@@ -137,6 +138,13 @@ class ConwayHandler : EventHandler
 			//Console.Printf(l);
 		}
 	}
+
+	void SpawnBoardMarkers() {
+		player.Spawn("Column", GetWorldPosForGrid(0, 0), NO_REPLACE); 
+		player.Spawn("Column", GetWorldPosForGrid(0, GRID_SIZE), NO_REPLACE); 
+		player.Spawn("Column", GetWorldPosForGrid(GRID_SIZE, 0), NO_REPLACE); 
+		player.Spawn("Column", GetWorldPosForGrid(GRID_SIZE, GRID_SIZE), NO_REPLACE); 
+	}
 	
 	void ClearBoardNext() {
 		for(let i = 0; i < GRID_SIZE; ++i) {
@@ -190,6 +198,6 @@ class ConwayHandler : EventHandler
 		}
 		
 		CopyNextToCurrent();
-        ++generationCount;
+		++generationCount;
 	}
 }
