@@ -1,7 +1,7 @@
 class ConwayHandler : EventHandler
 {
 	const TICS_PER_SECOND = 35;
-	const UPDATE_FREQUENCY_SECONDS = 2;
+	const UPDATE_FREQUENCY_SECONDS = 3;
 	
 	const GRID_SIZE = 5;
 	bool board[GRID_SIZE][GRID_SIZE];
@@ -43,38 +43,80 @@ class ConwayHandler : EventHandler
 	
 	void InitBoard() {
 		//Try to make a glider
-		board[0][1] = true;
+		// board[0][1] = true;
+		// board[1][2] = true;
+		// board[2][0] = true;
+		// board[2][1] = true;
+		// board[2][2] = true;
+		
+		//Spinner
+		board[1][1] = true;
 		board[1][2] = true;
-		board[2][0] = true;
-		board[2][1] = true;
-		board[2][2] = true;
+		board[1][3] = true;
 	}
 	
-	// This basically hashes two numbers into a unique third number, see https://stackoverflow.com/a/13871379/350761
+	// This basically hashes two positive numbers into a unique third number, see https://stackoverflow.com/a/13871379/350761
 	int SzudzikPair(int a, int b) {
 		return a >= b ? a * a + a + b : a + b * b;
 	}
 	
-	void RessurectCell(int x, int y) {
-		let cellActor = player.Spawn("DoomImp", (player.pos.x + (x * 100), player.pos.y + (y * 100), player.pos.z), NO_REPLACE);
-		cellActor.ChangeTid(SzudzikPair(x, y));
-		cellActor.bFriendly = true;
-		Console.Printf("CellActor tid:" .. cellActor.tid);
+	Actor FindActor(int tid) {
+		let actorFinder = ActorIterator.Create(tid);
+        return actorFinder.Next(); 
+	}
+	
+	Vector3 GetWorldPosForGrid(int x, int y) {
+		let scale = 100;
+		return (player.pos.x + (x * scale), player.pos.y + (y * scale), player.pos.z);
+	}
+	
+	void SpawnOrRessurectCell(int x, int y) {
+		let cellTid = SzudzikPair(x, y);
+		let cellActor = FindActor(cellTid);
+		//Console.Printf("Spawn Cell tid:" .. cellTid);
+		if (cellActor == null) {
+			Console.Printf("SPAWN:SPAWN " .. cellTid);
+			cellActor = player.Spawn("DoomImp", GetWorldPosForGrid(x, y), NO_REPLACE);
+			cellActor.ChangeTid(cellTid);
+		} else {
+			// Raise if dead, otherwise do nothing
+			if (cellActor.InStateSequence(cellActor.CurState, cellActor.ResolveState("XDeath"))) {
+				Console.Printf("SPAWN:REZ " .. cellTid);
+				cellActor.SetState(cellActor.ResolveState("Raise"));
+				//Thing_Raise(cellTid, true);
+			} else {
+				Console.Printf("SPAWN:NOP " .. cellTid);
+			}
+		}
+		cellActor.bFRIENDLY = true;
+		cellActor.bSTANDSTILL = true;
+		cellActor.bINVULNERABLE = true;
+		//Thing_Deactivate(cellTid);
 	}
 	
 	void KillCell(int x, int y) {
-		let targetTid = SzudzikPair(x, y);
-		Console.Printf("KillCell tid:" .. targetTid);
-		Thing_Destroy(targetTid);
+		let cellTid = SzudzikPair(x, y);
+		let cellActor = FindActor(cellTid);
+		if (cellActor != null) {
+			//Thing_Destroy(cellTid);
+			cellActor.SetState(cellActor.ResolveState("XDeath"));
+			Console.Printf("KillCell tid:" .. cellTid);
+		}
 	}
 	
+	// override void WorldThingRevived(WorldEvent e) {
+		// Console.Printf("WorldThingRevived:" .. e.Thing);
+		// e.Thing.bDormant = true;
+	// }
+	
 	void PrintBoard() {
+		Console.Printf("======NEW GENERATION=====");
 		for (let x = 0; x < GRID_SIZE; x++) {
 			let l = "";
 			for (let y = 0; y < GRID_SIZE; y++) {
 				if (board[x][y]) {
 					l = l .. "X";
-					RessurectCell(x, y);
+					SpawnOrRessurectCell(x, y);
 				} else {
 					l = l .. "_";
 					KillCell(x, y);
