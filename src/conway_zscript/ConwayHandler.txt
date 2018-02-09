@@ -4,7 +4,7 @@ class ConwayHandler : EventHandler
 
 	const BOARD_SPOT_TID = 65534;
 	
-	const GRID_SIZE = 50; //Keep this within one char/byte for tag packing
+	const GRID_SIZE = 5; //Keep this within 7 bits (127 or less) for tag packing
 	const GRID_TO_WORLD_SCALE = 50;
 	bool board[GRID_SIZE][GRID_SIZE];
 	bool boardNext[GRID_SIZE][GRID_SIZE];
@@ -37,6 +37,16 @@ class ConwayHandler : EventHandler
 			UpdateWorldBoardView();
 			PrintBoard();
 			Console.Printf("Updated, generation=".. generationCount.. ", timeSeconds=" .. timeSeconds);
+		}
+	}
+
+	override void WorldThingDamaged(WorldEvent e) {
+		//Console.Printf("WorldThingDamaged thing:" .. e.Thing.GetClassName() .. ", DamageSource: " .. e.DamageSource.GetClassName());
+		let gridCell = GridCell(e.thing);
+		if (gridCell != null) {
+			int x, y;
+			[x, y] = gridCell.GetCoords();
+			Console.Printf("Cell shot at x:" .. x .. ", y:" .. y);
 		}
 	}
 	
@@ -76,11 +86,11 @@ class ConwayHandler : EventHandler
 		//board[4][4] = true;
 		//board[5][4] = true;
 
-		board[22][24] = true;
-		board[22][25] = true;
-		board[23][23] = true;
-		board[23][24] = true;
-		board[24][24] = true;
+		//board[22][24] = true;
+		//board[22][25] = true;
+		//board[23][23] = true;
+		//board[23][24] = true;
+		//board[24][24] = true;
 	}
 	
 	// This basically hashes two positive numbers into a unique third number, see https://stackoverflow.com/a/13871379/350761
@@ -175,11 +185,8 @@ class ConwayHandler : EventHandler
 	void SpawnBoardInteractables() {
 		for (let x = 0; x < GRID_SIZE; x++) {
 			for (let y = 0; y < GRID_SIZE; y++) {
-				let cell = player.Spawn("GridCell", GetWorldPosForGrid(x, y), NO_REPLACE); 
-				// Pack X/Y coordinates into 2 byte tag since I'm not sure how to parse ints in zscript :P
-				let tag = String.Format("%c%c", x, y);
-				// Console.Printf("Spawn cell with tag:" .. tag);
-				cell.SetTag(tag);
+				let cell = GridCell(player.Spawn("GridCell", GetWorldPosForGrid(x, y), NO_REPLACE)); 
+				cell.SetCoords(x, y);
 			}
 		}
 	}

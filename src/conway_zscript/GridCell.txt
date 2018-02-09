@@ -3,14 +3,31 @@ class GridCell : Candlestick
 	Default
 	{
 		+SHOOTABLE;
-		+INVULNERABLE;
+		+BUDDHA;
+		+DONTTHRUST;
+		BloodType "BulletPuff";
 	}
 
 	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags = 0, double angle = 0) {
-		let tag = GetTag();
-		let coordX = tag.CharCodeAt(0);
-		let coordY = tag.CharCodeAt(1);
+		int coordX, coordY;
+		[coordX, coordY] = GetCoords();
 		A_Log("GridCell coordX:" .. coordX .. " y:" .. coordY .. " Damaged by inflictor:" .. inflictor.GetClassName());
 		return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+	}
+
+	void SetCoords(int x, int y) {
+		Console.Printf("SetCoords [%i,%i]", x, y);
+		// Pack X/Y coordinates into 2 byte tag since I'm not sure how to parse ints in zscript :P
+		// Have to shift them up by one since apparently CharCodeAt ignores NULL bytes
+		let tag = String.Format("%c%c", x + 1, y + 1);
+		SetTag(tag);
+	}
+
+	int, int GetCoords() {
+		let tag = GetTag();
+		let coordX = tag.CharCodeAt(0) - 1;
+		let coordY = tag.CharCodeAt(1) - 1;
+		//Console.Printf("GetCoords %s = [%i, %i]", tag, coordX, coordY);
+		return coordX, coordY;
 	}
 }
