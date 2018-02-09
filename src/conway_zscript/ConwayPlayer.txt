@@ -1,0 +1,7 @@
+class ConwayPlayer: DoomPlayer
+{
+	// override void PostBeginPlay()
+    // {
+		// A_Log("ConwayPlayer init");
+	// }
+}

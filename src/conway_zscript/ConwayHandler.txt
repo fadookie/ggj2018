@@ -9,6 +9,38 @@ class ConwayHandler : EventHandler
 	
 	int lastUpdateTime;
 	
+	ConwayPlayer player;
+	
+	override void WorldLoaded(WorldEvent e) {
+		Console.Printf("Hello World!");
+		player = FindPlayer();
+		InitBoard();
+		PrintBoard();
+	}
+	
+    override void WorldTick()
+    {
+		let timeSeconds = level.time / TICS_PER_SECOND; // int division chops decimal
+		//Console.Printf("timeSeconds=" .. timeSeconds .. " lastUpdate=" .. lastUpdateTime .. "dt=" .. timeSeconds - lastUpdateTime);
+		if (timeSeconds - lastUpdateTime >= UPDATE_FREQUENCY_SECONDS) {
+			lastUpdateTime = timeSeconds;
+			Console.Printf("Updating, timeSeconds=" .. timeSeconds);
+			NextGen();
+			PrintBoard();
+		}
+	}
+	
+	ConwayPlayer FindPlayer() {
+	    ThinkerIterator playerFinder = ThinkerIterator.Create("ConwayPlayer");
+        let playerResult = ConwayPlayer(playerFinder.Next());
+		if (playerResult == null) {
+			Console.Printf("Error! No player found.");
+		} else {
+			Console.Printf("Found player: " .. playerResult);
+		}
+		return playerResult;
+	}
+	
 	void InitBoard() {
 		//Try to make a glider
 		board[0][1] = true;
@@ -18,14 +50,35 @@ class ConwayHandler : EventHandler
 		board[2][2] = true;
 	}
 	
+	// This basically hashes two numbers into a unique third number, see https://stackoverflow.com/a/13871379/350761
+	int SzudzikPair(int a, int b) {
+		return a >= b ? a * a + a + b : a + b * b;
+	}
+	
+	void RessurectCell(int x, int y) {
+		let cellActor = player.Spawn("DoomImp", (player.pos.x + (x * 100), player.pos.y + (y * 100), player.pos.z), NO_REPLACE);
+		cellActor.ChangeTid(SzudzikPair(x, y));
+		cellActor.bFriendly = true;
+		Console.Printf("CellActor tid:" .. cellActor.tid);
+	}
+	
+	void KillCell(int x, int y) {
+		let targetTid = SzudzikPair(x, y);
+		Console.Printf("KillCell tid:" .. targetTid);
+		Thing_Destroy(targetTid);
+	}
+	
 	void PrintBoard() {
 		for (let x = 0; x < GRID_SIZE; x++) {
 			let l = "";
 			for (let y = 0; y < GRID_SIZE; y++) {
-				if (board[x][y])
+				if (board[x][y]) {
 					l = l .. "X";
-				else
+					RessurectCell(x, y);
+				} else {
 					l = l .. "_";
+					KillCell(x, y);
+				}
 			}
 			Console.Printf(l);
 		}
@@ -83,23 +136,5 @@ class ConwayHandler : EventHandler
 		}
 		
 		CopyNextToCurrent();
-	}
-	
-	override void WorldLoaded(WorldEvent e) {
-		Console.Printf("Hello World!");
-		InitBoard();
-		PrintBoard();
-	}
-	
-    override void WorldTick()
-    {
-		let timeSeconds = level.time / TICS_PER_SECOND; // int division chops decimal
-		//Console.Printf("timeSeconds=" .. timeSeconds .. " lastUpdate=" .. lastUpdateTime .. "dt=" .. timeSeconds - lastUpdateTime);
-		if (timeSeconds - lastUpdateTime >= UPDATE_FREQUENCY_SECONDS) {
-			lastUpdateTime = timeSeconds;
-			Console.Printf("Updating, timeSeconds=" .. timeSeconds);
-			NextGen();
-			PrintBoard();
-		}
 	}
 }

@@ -1,3 +1,4 @@
 version "2.5.0"
 
 #include "conway_zscript/ConwayHandler.txt"
+#include "conway_zscript/ConwayPlayer.txt"

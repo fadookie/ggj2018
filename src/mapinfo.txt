@@ -7,6 +7,7 @@
 GameInfo
 {
     AddEventHandlers = "ConwayHandler"
+	PlayerClasses="ConwayPlayer"
 }
 
 
@@ -20,4 +21,9 @@ Episode "test map 01"
 Map "test map 01" "My Custom Map"
 {
 	music = "d_dead"
+}
+
+DoomEdNums
+{
+	//20001 = ConwayPlayer // Not neccessary to place player in editor
 }
