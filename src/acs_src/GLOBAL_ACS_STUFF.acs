@@ -108,7 +108,8 @@ script "E1M3PlayerEnter" (void) {
 	SpawnSpot("EnemyPlayerShotgun", 546, FAKE_PLAYER_TID, 180);
 	Thing_Hate(BUDDY_TID, FAKE_PLAYER_TID, 6);
 	Thing_Hate(FAKE_PLAYER_TID, BUDDY_TID, 4);
-	Thing_SetGoal(FAKE_PLAYER_TID, 98, 0, true);		
+	Thing_SetGoal(FAKE_PLAYER_TID, 98, 0, true);
+	Thing_SetTranslation(FAKE_PLAYER_TID, -1);
 }
 
 /**
@@ -122,6 +123,9 @@ script 33 ENTER
   ACS_NamedExecute("SetMusic", 0, MUSIC_E1M1);
   
   ACS_NamedExecute("SetPlayerType", 0, PLAYER_TYPE_IMP); 
+  
+  //Make EnemyPlayer green (causes fake player to inherit the real player's default palette swap)
+  Thing_SetTranslation(FAKE_PLAYER_TID, -1);
 }
 
 script 1 (void) //Cross line near coffee guy
