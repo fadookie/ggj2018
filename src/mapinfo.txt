@@ -25,5 +25,5 @@ Map "test map 01" "My Custom Map"
 
 DoomEdNums
 {
-	//20001 = ConwayPlayer // Not neccessary to place player in editor
+	20000 = GridCell
 }

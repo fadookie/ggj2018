@@ -1,15 +1,15 @@
 class ConwayHandler : EventHandler
 {
-	const TICS_PER_SECOND = 35;
 	const UPDATE_FREQUENCY_SECONDS = 1;
 
 	const BOARD_SPOT_TID = 65534;
 	
-	const GRID_SIZE = 50;
+	const GRID_SIZE = 50; //Keep this within one char/byte for tag packing
 	const GRID_TO_WORLD_SCALE = 50;
 	bool board[GRID_SIZE][GRID_SIZE];
 	bool boardNext[GRID_SIZE][GRID_SIZE];
 	
+	bool running;
 	int lastUpdateTime;
 	int generationCount;
 	
@@ -22,15 +22,16 @@ class ConwayHandler : EventHandler
 		player = FindPlayer();
 		InitBoard();
 		SpawnBoardMarkers();
+		SpawnBoardInteractables();
 		UpdateWorldBoardView();
 		PrintBoard();
 	}
 	
 	override void WorldTick()
 	{
-		let timeSeconds = level.time / TICS_PER_SECOND; // int division chops decimal
+		let timeSeconds = Thinker.Tics2Seconds(level.time);
 		//Console.Printf("timeSeconds=" .. timeSeconds .. " lastUpdate=" .. lastUpdateTime .. "dt=" .. timeSeconds - lastUpdateTime);
-		if (timeSeconds - lastUpdateTime >= UPDATE_FREQUENCY_SECONDS) {
+		if (running && timeSeconds - lastUpdateTime >= UPDATE_FREQUENCY_SECONDS) {
 			lastUpdateTime = timeSeconds;
 			NextGen();
 			UpdateWorldBoardView();
@@ -169,6 +170,18 @@ class ConwayHandler : EventHandler
 		player.Spawn("Column", GetWorldPosForGrid(0, GRID_SIZE), NO_REPLACE); 
 		player.Spawn("Column", GetWorldPosForGrid(GRID_SIZE, 0), NO_REPLACE); 
 		player.Spawn("Column", GetWorldPosForGrid(GRID_SIZE, GRID_SIZE), NO_REPLACE); 
+	}
+
+	void SpawnBoardInteractables() {
+		for (let x = 0; x < GRID_SIZE; x++) {
+			for (let y = 0; y < GRID_SIZE; y++) {
+				let cell = player.Spawn("GridCell", GetWorldPosForGrid(x, y), NO_REPLACE); 
+				// Pack X/Y coordinates into 2 byte tag since I'm not sure how to parse ints in zscript :P
+				let tag = String.Format("%c%c", x, y);
+				// Console.Printf("Spawn cell with tag:" .. tag);
+				cell.SetTag(tag);
+			}
+		}
 	}
 	
 	void ClearBoardNext() {

@@ -1,0 +1,16 @@
+class GridCell : Candlestick
+{
+	Default
+	{
+		+SHOOTABLE;
+		+INVULNERABLE;
+	}
+
+	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags = 0, double angle = 0) {
+		let tag = GetTag();
+		let coordX = tag.CharCodeAt(0);
+		let coordY = tag.CharCodeAt(1);
+		A_Log("GridCell coordX:" .. coordX .. " y:" .. coordY .. " Damaged by inflictor:" .. inflictor.GetClassName());
+		return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
+	}
+}
