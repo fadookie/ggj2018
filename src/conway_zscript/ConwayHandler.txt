@@ -5,7 +5,7 @@ class ConwayHandler : EventHandler
 
 	const BOARD_SPOT_TID = 65534;
 	
-	const GRID_SIZE = 10;
+	const GRID_SIZE = 50;
 	const GRID_TO_WORLD_SCALE = 50;
 	bool board[GRID_SIZE][GRID_SIZE];
 	bool boardNext[GRID_SIZE][GRID_SIZE];
@@ -22,6 +22,7 @@ class ConwayHandler : EventHandler
 		player = FindPlayer();
 		InitBoard();
 		SpawnBoardMarkers();
+		UpdateWorldBoardView();
 		PrintBoard();
 	}
 	
@@ -32,6 +33,7 @@ class ConwayHandler : EventHandler
 		if (timeSeconds - lastUpdateTime >= UPDATE_FREQUENCY_SECONDS) {
 			lastUpdateTime = timeSeconds;
 			NextGen();
+			UpdateWorldBoardView();
 			PrintBoard();
 			Console.Printf("Updated, generation=".. generationCount.. ", timeSeconds=" .. timeSeconds);
 		}
@@ -55,16 +57,29 @@ class ConwayHandler : EventHandler
 	
 	void InitBoard() {
 		//Glider
-		board[0][1] = true;
-		board[1][2] = true;
-		board[2][0] = true;
-		board[2][1] = true;
-		board[2][2] = true;
+		// board[0][1] = true;
+		// board[1][2] = true;
+		// board[2][0] = true;
+		// board[2][1] = true;
+		// board[2][2] = true;
 		
 		//Spinner
 		// board[1][1] = true;
 		// board[1][2] = true;
 		// board[1][3] = true;
+
+		//R-Pentominos
+		//board[3][4] = true;
+		//board[3][5] = true;
+		//board[4][3] = true;
+		//board[4][4] = true;
+		//board[5][4] = true;
+
+		board[22][24] = true;
+		board[22][25] = true;
+		board[23][23] = true;
+		board[23][24] = true;
+		board[24][24] = true;
 	}
 	
 	// This basically hashes two positive numbers into a unique third number, see https://stackoverflow.com/a/13871379/350761
@@ -122,20 +137,30 @@ class ConwayHandler : EventHandler
 		// e.Thing.bDormant = true;
 	// }
 	
-	void PrintBoard() {
-		//Console.Printf("======NEW GENERATION=====");
+	void UpdateWorldBoardView() {
 		for (let x = 0; x < GRID_SIZE; x++) {
-			//let l = "";
 			for (let y = 0; y < GRID_SIZE; y++) {
 				if (board[x][y]) {
-					// l = l .. "X";
 					SpawnOrRessurectCell(x, y);
 				} else {
-					// l = l .. "_";
 					KillCell(x, y);
 				}
 			}
-			//Console.Printf(l);
+		}
+	}
+
+	void PrintBoard() {
+		Console.Printf("======NEW GENERATION=====");
+		for (let x = 0; x < GRID_SIZE; x++) {
+			let l = "";
+			for (let y = 0; y < GRID_SIZE; y++) {
+				if (board[x][y]) {
+					l = l .. "X";
+				} else {
+					l = l .. "_";
+				}
+			}
+			Console.Printf(l);
 		}
 	}
 
