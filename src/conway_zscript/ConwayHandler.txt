@@ -1,9 +1,13 @@
 class ConwayHandler : EventHandler
 {
 	const TICS_PER_SECOND = 35;
+	const UPDATE_FREQUENCY_SECONDS = 2;
 	
-	const GRID_SIZE = 10;
+	const GRID_SIZE = 5;
 	bool board[GRID_SIZE][GRID_SIZE];
+	bool boardNext[GRID_SIZE][GRID_SIZE];
+	
+	int lastUpdateTime;
 	
 	void InitBoard() {
 		//Try to make a glider
@@ -21,10 +25,64 @@ class ConwayHandler : EventHandler
 				if (board[x][y])
 					l = l .. "X";
 				else
-					l = l .. ".";
+					l = l .. "_";
 			}
 			Console.Printf(l);
 		}
+	}
+	
+	void ClearBoardNext() {
+		for(let i = 0; i < GRID_SIZE; ++i) {
+			for(let j = 0; j < GRID_SIZE; ++j) {
+				boardNext[i][j] = false;
+			}
+		}
+	}
+	
+	void CopyNextToCurrent() {
+		for(let i = 0; i < GRID_SIZE; ++i) {
+			for(let j = 0; j < GRID_SIZE; ++j) {
+				board[i][j] = boardNext[i][j];
+			}
+		}
+	}
+	
+	// Implementation of life rules based on https://rosettacode.org/wiki/Conway%27s_Game_of_Life#JavaScript
+	void NextGen() {
+		ClearBoardNext();
+		
+		for (let x = 0; x < GRID_SIZE; x++) {
+			for (let y = 0; y < GRID_SIZE; y++) {
+				let n = 0;
+				for (let dx = -1; dx <= 1; dx++) {
+					for (let dy = -1; dy <= 1; dy++) {
+						if ( dx == 0 && dy == 0) {
+						} else if (x+dx < GRID_SIZE
+								&& y+dy < GRID_SIZE
+								&& board[x+dx][y+dy]) {
+							n++;
+						}
+					}
+				}
+				let c = board[x][y];
+				switch (n) {
+					case 0:
+					case 1:
+						c = 0;
+						break;
+					case 2:
+						break;
+					case 3:
+						c = 1;
+						break;
+					default:
+						c = 0;
+				}
+				boardNext[x][y] = c;
+			}
+		}
+		
+		CopyNextToCurrent();
 	}
 	
 	override void WorldLoaded(WorldEvent e) {
@@ -35,6 +93,13 @@ class ConwayHandler : EventHandler
 	
     override void WorldTick()
     {
-		Console.Printf("time (s)=" .. level.time / double(TICS_PER_SECOND));
+		let timeSeconds = level.time / TICS_PER_SECOND; // int division chops decimal
+		//Console.Printf("timeSeconds=" .. timeSeconds .. " lastUpdate=" .. lastUpdateTime .. "dt=" .. timeSeconds - lastUpdateTime);
+		if (timeSeconds - lastUpdateTime >= UPDATE_FREQUENCY_SECONDS) {
+			lastUpdateTime = timeSeconds;
+			Console.Printf("Updating, timeSeconds=" .. timeSeconds);
+			NextGen();
+			PrintBoard();
+		}
 	}
 }
