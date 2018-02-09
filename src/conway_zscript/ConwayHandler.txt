@@ -2,17 +2,22 @@ class ConwayHandler : EventHandler
 {
 	const TICS_PER_SECOND = 35;
 	const UPDATE_FREQUENCY_SECONDS = 3;
+
+    const BOARD_SPOT_TID = 65534;
 	
-	const GRID_SIZE = 5;
+	const GRID_SIZE = 40;
 	bool board[GRID_SIZE][GRID_SIZE];
 	bool boardNext[GRID_SIZE][GRID_SIZE];
 	
 	int lastUpdateTime;
+    int generationCount;
 	
 	ConwayPlayer player;
+    Actor boardSpot;
 	
 	override void WorldLoaded(WorldEvent e) {
 		Console.Printf("Hello World!");
+        boardSpot = FindActor(BOARD_SPOT_TID);
 		player = FindPlayer();
 		InitBoard();
 		PrintBoard();
@@ -24,10 +29,15 @@ class ConwayHandler : EventHandler
 		//Console.Printf("timeSeconds=" .. timeSeconds .. " lastUpdate=" .. lastUpdateTime .. "dt=" .. timeSeconds - lastUpdateTime);
 		if (timeSeconds - lastUpdateTime >= UPDATE_FREQUENCY_SECONDS) {
 			lastUpdateTime = timeSeconds;
-			Console.Printf("Updating, timeSeconds=" .. timeSeconds);
 			NextGen();
 			PrintBoard();
+			Console.Printf("Updated, generation=".. generationCount.. ", timeSeconds=" .. timeSeconds);
 		}
+	}
+	
+	Actor FindActor(int tid) {
+		let actorFinder = ActorIterator.Create(tid);
+        return actorFinder.Next(); 
 	}
 	
 	ConwayPlayer FindPlayer() {
@@ -60,14 +70,9 @@ class ConwayHandler : EventHandler
 		return a >= b ? a * a + a + b : a + b * b;
 	}
 	
-	Actor FindActor(int tid) {
-		let actorFinder = ActorIterator.Create(tid);
-        return actorFinder.Next(); 
-	}
-	
 	Vector3 GetWorldPosForGrid(int x, int y) {
 		let scale = 100;
-		return (player.pos.x + (x * scale), player.pos.y + (y * scale), player.pos.z);
+		return (boardSpot.pos.x + (x * scale), boardSpot.pos.y + (y * scale), boardSpot.pos.z);
 	}
 	
 	bool IsDead(Actor actor) {
@@ -80,17 +85,17 @@ class ConwayHandler : EventHandler
 		let cellActor = FindActor(cellTid);
 		//Console.Printf("Spawn Cell tid:" .. cellTid);
 		if (cellActor == null) {
-			Console.Printf("SPAWN:SPAWN " .. cellTid);
+			//Console.Printf("SPAWN:SPAWN " .. cellTid);
 			cellActor = player.Spawn("DoomImp", GetWorldPosForGrid(x, y), NO_REPLACE);
 			cellActor.ChangeTid(cellTid);
 		} else {
 			// Raise if dead, otherwise do nothing
 			if (IsDead(cellActor)) {
-				Console.Printf("SPAWN:REZ " .. cellTid);
+				//Console.Printf("SPAWN:REZ " .. cellTid);
 				cellActor.SetState(cellActor.ResolveState("Raise"));
 				//Thing_Raise(cellTid, true);
 			} else {
-				Console.Printf("SPAWN:NOP " .. cellTid);
+				//Console.Printf("SPAWN:NOP " .. cellTid);
 			}
 		}
 		cellActor.bFRIENDLY = true;
@@ -106,7 +111,7 @@ class ConwayHandler : EventHandler
 			//Thing_Destroy(cellTid);
 			if (!IsDead(cellActor)) {
 				cellActor.SetState(cellActor.ResolveState("XDeath"));
-				Console.Printf("KillCell tid:" .. cellTid);
+				//Console.Printf("KillCell tid:" .. cellTid);
 			}
 		}
 	}
@@ -117,19 +122,19 @@ class ConwayHandler : EventHandler
 	// }
 	
 	void PrintBoard() {
-		Console.Printf("======NEW GENERATION=====");
+		//Console.Printf("======NEW GENERATION=====");
 		for (let x = 0; x < GRID_SIZE; x++) {
-			let l = "";
+			//let l = "";
 			for (let y = 0; y < GRID_SIZE; y++) {
 				if (board[x][y]) {
-					l = l .. "X";
+					// l = l .. "X";
 					SpawnOrRessurectCell(x, y);
 				} else {
-					l = l .. "_";
+					// l = l .. "_";
 					KillCell(x, y);
 				}
 			}
-			Console.Printf(l);
+			//Console.Printf(l);
 		}
 	}
 	
@@ -185,5 +190,6 @@ class ConwayHandler : EventHandler
 		}
 		
 		CopyNextToCurrent();
+        ++generationCount;
 	}
 }
