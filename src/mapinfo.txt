@@ -6,7 +6,6 @@
 
 GameInfo{
 	PlayerClasses="Imp"
-	StatusBarClass = "ImpStatusBar"
 	CorrectPrintBold = true
 }
 
