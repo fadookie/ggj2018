@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<head>
+<script>
+	const GRID_SIZE = 5;
+	const board = new Array(GRID_SIZE);
+	for (let i = 0; i < GRID_SIZE; ++i) { //fill was not creating new objects for each sub-array
+		board[i] = new Array(GRID_SIZE).fill(false);
+	}
+
+	const onCheckboxChanged = (mouseEvent) => {
+		const checkbox = mouseEvent.target;
+		console.log("onCheckboxChanged:", checkbox.id, checkbox.checked);
+		const coords = checkbox.id.split("_");
+		board[coords[0]][coords[1]] = checkbox.checked;
+
+		console.log(board);
+	}
+
+	window.onload = () => {
+
+		//Glider
+		board[0][1] = true;
+		board[1][2] = true;
+		board[2][0] = true;
+		board[2][1] = true;
+		board[2][2] = true;
+
+		console.log(board);
+
+		const table = document.createElement("table");
+
+		for (let i = 0; i < GRID_SIZE; ++i) {
+			const tr = document.createElement("tr");
+			table.appendChild(tr);
+			for (let j = 0; j < GRID_SIZE; ++j) {
+				const td = document.createElement("td");
+				tr.appendChild(td);
+
+				const checkbox = document.createElement('input');
+				checkbox.type = "checkbox";
+				checkbox.name = "name";
+				checkbox.value = "value";
+				checkbox.id = `${i}_${j}`;
+				checkbox.checked = board[i][j];
+				checkbox.onclick = onCheckboxChanged;
+
+				td.appendChild(checkbox);
+			}
+		}
+
+		document.body.appendChild(table);
+	};
+</script>
+</head>
+<body>
+</body>
