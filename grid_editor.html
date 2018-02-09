@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <head>
 <script>
-	const GRID_SIZE = 5;
+	const GRID_SIZE = 10;
 	const board = new Array(GRID_SIZE);
 	for (let i = 0; i < GRID_SIZE; ++i) { //fill was not creating new objects for each sub-array
 		board[i] = new Array(GRID_SIZE).fill(false);
+	}
+
+	const printBoard = () => {
+		let boardText = "";
+		for (let i = 0; i < GRID_SIZE; ++i) {
+			for (let j = 0; j < GRID_SIZE; ++j) {
+				const cell = board[i][j];
+				if (cell) {
+					boardText += `board[${i}][${j}] = ${cell};\n`;
+				}
+			}
+		}
+		document.getElementById("output").textContent = boardText;
 	}
 
 	const onCheckboxChanged = (mouseEvent) => {
@@ -13,20 +26,10 @@
 		const coords = checkbox.id.split("_");
 		board[coords[0]][coords[1]] = checkbox.checked;
 
-		console.log(board);
+		printBoard();
 	}
 
-	window.onload = () => {
-
-		//Glider
-		board[0][1] = true;
-		board[1][2] = true;
-		board[2][0] = true;
-		board[2][1] = true;
-		board[2][2] = true;
-
-		console.log(board);
-
+	const createBoardEditor = () => {
 		const table = document.createElement("table");
 
 		for (let i = 0; i < GRID_SIZE; ++i) {
@@ -48,9 +51,18 @@
 			}
 		}
 
-		document.body.appendChild(table);
+		const gridElement = document.getElementById("grid");
+		grid.replaceChild(table, grid.firstElementChild);
+	}
+
+	window.onload = () => {
+		createBoardEditor();
 	};
 </script>
 </head>
 <body>
+	<h1>Grid Editor</h1>
+	<p>This thing generates code for creating board start conditions.</p>
+	<div id="grid"><a name="placeholder"></a></div>
+	<p><pre id="output"></pre></p>
 </body>
