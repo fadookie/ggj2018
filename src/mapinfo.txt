@@ -4,6 +4,12 @@
 //
 //===========================================================================
 
+GameInfo
+{
+    AddEventHandlers = "ConwayHandler"
+}
+
+
 ClearEpisodes
 
 Episode "test map 01"

@@ -1,0 +1,40 @@
+class ConwayHandler : EventHandler
+{
+	const TICS_PER_SECOND = 35;
+	
+	const GRID_SIZE = 10;
+	bool board[GRID_SIZE][GRID_SIZE];
+	
+	void InitBoard() {
+		//Try to make a glider
+		board[0][1] = true;
+		board[1][2] = true;
+		board[2][0] = true;
+		board[2][1] = true;
+		board[2][2] = true;
+	}
+	
+	void PrintBoard() {
+		for (let x = 0; x < GRID_SIZE; x++) {
+			let l = "";
+			for (let y = 0; y < GRID_SIZE; y++) {
+				if (board[x][y])
+					l = l .. "X";
+				else
+					l = l .. ".";
+			}
+			Console.Printf(l);
+		}
+	}
+	
+	override void WorldLoaded(WorldEvent e) {
+		Console.Printf("Hello World!");
+		InitBoard();
+		PrintBoard();
+	}
+	
+    override void WorldTick()
+    {
+		Console.Printf("time (s)=" .. level.time / double(TICS_PER_SECOND));
+	}
+}
