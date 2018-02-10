@@ -82,3 +82,33 @@ actor teleport115 : SpecialSpot 20515
 {
 	+INVISIBLE
 }
+
+
+// ===========================
+// OFFICE DECOR 20600 - 20700
+// ===========================
+
+actor watercooler : Actor 20601
+{
+	
+	+SOLID
+	
+	States
+	{
+		Spawn:
+		WTRC A -1
+		loop
+	}
+}
+
+actor plant1 : Actor 20602
+{
+	+SOLID
+	
+	States
+	{
+		Spawn:
+		OFPL A -1
+		loop
+	}
+}
