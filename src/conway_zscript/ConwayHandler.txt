@@ -4,12 +4,12 @@ class ConwayHandler : EventHandler
 
 	const BOARD_SPOT_TID = 65534;
 	
-	const GRID_SIZE = 5; //Keep this within 7 bits (127 or less) for tag packing
+	const GRID_SIZE = 20; //Keep this within 7 bits (127 or less) for tag packing
 	const GRID_TO_WORLD_SCALE = 50;
 	bool board[GRID_SIZE][GRID_SIZE];
 	bool boardNext[GRID_SIZE][GRID_SIZE];
 	
-	bool running;
+	CVar runningCV;
 	int lastUpdateTime;
 	int generationCount;
 	
@@ -18,6 +18,7 @@ class ConwayHandler : EventHandler
 	
 	override void WorldLoaded(WorldEvent e) {
 		Console.Printf("Hello World!");
+		runningCV = CVar.FindCVar("running");
 		boardSpot = FindActor(BOARD_SPOT_TID);
 		player = FindPlayer();
 		InitBoard();
@@ -31,6 +32,7 @@ class ConwayHandler : EventHandler
 	{
 		let timeSeconds = Thinker.Tics2Seconds(level.time);
 		//Console.Printf("timeSeconds=" .. timeSeconds .. " lastUpdate=" .. lastUpdateTime .. "dt=" .. timeSeconds - lastUpdateTime);
+		let running = runningCV.GetInt() != 0;
 		if (running && timeSeconds - lastUpdateTime >= UPDATE_FREQUENCY_SECONDS) {
 			lastUpdateTime = timeSeconds;
 			NextGen();
@@ -41,14 +43,36 @@ class ConwayHandler : EventHandler
 	}
 
 	override void WorldThingDamaged(WorldEvent e) {
-		//Console.Printf("WorldThingDamaged thing:" .. e.Thing.GetClassName() .. ", DamageSource: " .. e.DamageSource.GetClassName());
+		//For some reason e.Inflictor is null here so we have to save it off in GridCell#DamageMobj
+		//Console.Printf("WorldThingDamaged thing:" .. e.Thing.GetClassName() .. ", Inflictor: " .. e.Inflictor);
+		int x, y;
 		let gridCell = GridCell(e.thing);
 		if (gridCell != null) {
-			int x, y;
 			[x, y] = gridCell.GetCoords();
-			Console.Printf("Cell shot at x:" .. x .. ", y:" .. y);
+			Console.Printf("Cell shot at x:" .. x .. ", y:" .. y .. " by inflictor:" .. gridCell.lastInflictor.GetClassName());
+			board[x][y] = true;
+			MakeCellAlive(x, y);
+			return;
+		}
+		let imp = DoomImp(e.Thing);
+		if (imp != null) {
+			[x, y] = SzudzikUnpair(imp.tid);
+			if (!IsDead(imp)) {
+				Console.Printf("fired on dead imp at %i, %i", x, y);
+				MakeCellDead(x, y);
+			}
+			return;
 		}
 	}
+
+	//override void ConsoleProcess(ConsoleEvent e) {
+	//	if (e.Name == "start") {
+	//		self.running = true;
+	//	} else if (e.Name == "stop") {
+	//		self.running = false;
+	//	}
+	//}
+	
 	
 	Actor FindActor(int tid) {
 		let actorFinder = ActorIterator.Create(tid);
@@ -97,6 +121,15 @@ class ConwayHandler : EventHandler
 	int SzudzikPair(int a, int b) {
 		return a >= b ? a * a + a + b : a + b * b;
 	}
+
+	int, int SzudzikUnpair(int z) {
+	  let sqrtz = floor(sqrt(z)),
+		sqz = sqrtz * sqrtz;
+		if ((z - sqz) >= sqrtz) {
+			return sqrtz, z - sqz - sqrtz;
+		}
+	  	return z - sqz, sqrtz;
+	}
 	
 	Vector3 GetWorldPosForGrid(int x, int y) {
 		return (boardSpot.pos.x + (x * GRID_TO_WORLD_SCALE), boardSpot.pos.y + (y * GRID_TO_WORLD_SCALE), boardSpot.pos.z);
@@ -107,7 +140,7 @@ class ConwayHandler : EventHandler
 			|| actor.InStateSequence(actor.CurState, actor.ResolveState("Death"));
 	}
 	
-	void SpawnOrRessurectCell(int x, int y) {
+	void MakeCellAlive(int x, int y) {
 		let cellTid = SzudzikPair(x, y);
 		let cellActor = FindActor(cellTid);
 		//Console.Printf("Spawn Cell tid:" .. cellTid);
@@ -127,18 +160,19 @@ class ConwayHandler : EventHandler
 		}
 		cellActor.bFRIENDLY = true;
 		cellActor.bSTANDSTILL = true;
-		cellActor.bINVULNERABLE = true;
+		cellActor.bBUDDHA = true;
+		cellActor.bDONTTHRUST = true;
 		//Thing_Deactivate(cellTid);
 	}
 	
-	void KillCell(int x, int y) {
+	void MakeCellDead(int x, int y) {
 		let cellTid = SzudzikPair(x, y);
 		let cellActor = FindActor(cellTid);
 		if (cellActor != null) {
 			//Thing_Destroy(cellTid);
 			if (!IsDead(cellActor)) {
 				cellActor.SetState(cellActor.ResolveState("XDeath"));
-				//Console.Printf("KillCell tid:" .. cellTid);
+				//Console.Printf("MakeCellDead tid:" .. cellTid);
 			}
 		}
 	}
@@ -152,9 +186,9 @@ class ConwayHandler : EventHandler
 		for (let x = 0; x < GRID_SIZE; x++) {
 			for (let y = 0; y < GRID_SIZE; y++) {
 				if (board[x][y]) {
-					SpawnOrRessurectCell(x, y);
+					MakeCellAlive(x, y);
 				} else {
-					KillCell(x, y);
+					MakeCellDead(x, y);
 				}
 			}
 		}

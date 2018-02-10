@@ -1,5 +1,7 @@
 class GridCell : Candlestick
 {
+	Actor lastInflictor;
+
 	Default
 	{
 		+SHOOTABLE;
@@ -9,6 +11,7 @@ class GridCell : Candlestick
 	}
 
 	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags = 0, double angle = 0) {
+		lastInflictor = inflictor;
 		int coordX, coordY;
 		[coordX, coordY] = GetCoords();
 		A_Log("GridCell coordX:" .. coordX .. " y:" .. coordY .. " Damaged by inflictor:" .. inflictor.GetClassName());
