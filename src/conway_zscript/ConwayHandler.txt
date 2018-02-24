@@ -19,8 +19,12 @@ class ConwayHandler : EventHandler
 	override void WorldLoaded(WorldEvent e) {
 		Console.Printf("Hello World!");
 		runningCV = CVar.FindCVar("running");
-		boardSpot = FindActor(BOARD_SPOT_TID);
 		player = FindPlayer();
+		boardSpot = FindActor(BOARD_SPOT_TID);
+		if (boardSpot == null) {
+			Console.Printf("No board spot found with TID " .. BOARD_SPOT_TID .. ", creating one...");
+			boardSpot = player.Spawn("Shotgun", (0,0,0), NO_REPLACE);
+		}
 		InitBoard();
 		SpawnBoardMarkers();
 		SpawnBoardInteractables();
