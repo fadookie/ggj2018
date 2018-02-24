@@ -48,22 +48,25 @@ class ConwayHandler : EventHandler
 
 	override void WorldThingDamaged(WorldEvent e) {
 		//For some reason e.Inflictor is null here so we have to save it off in GridCell#DamageMobj
-		//Console.Printf("WorldThingDamaged thing:" .. e.Thing.GetClassName() .. ", Inflictor: " .. e.Inflictor);
+		Console.Printf("WorldThingDamaged thing:" .. e.Thing.GetClassName() .. ", Inflictor: " .. e.Inflictor);
 		int x, y;
 		let gridCell = GridCell(e.thing);
 		if (gridCell != null) {
 			[x, y] = gridCell.GetCoords();
-			Console.Printf("Cell shot at x:" .. x .. ", y:" .. y .. " by inflictor:" .. gridCell.lastInflictor.GetClassName());
+			Console.Printf("WTD:Cell shot at x:" .. x .. ", y:" .. y .. " by inflictor:" .. gridCell.lastInflictor.GetClassName());
 			board[x][y] = true;
 			MakeCellAlive(x, y);
 			return;
 		}
-		let imp = DoomImp(e.Thing);
+		let imp = ConwayImp(e.Thing);
 		if (imp != null) {
 			[x, y] = SzudzikUnpair(imp.tid);
 			if (!IsDead(imp)) {
-				Console.Printf("fired on dead imp at %i, %i", x, y);
+				Console.Printf("WTD:fired on living imp at %i, %i", x, y);
 				MakeCellDead(x, y);
+			} else {
+				Console.Printf("WTD:fired on dead imp at %i, %i", x, y);
+				MakeCellAlive(x, y);
 			}
 			return;
 		}
@@ -139,9 +142,13 @@ class ConwayHandler : EventHandler
 		return (boardSpot.pos.x + (x * GRID_TO_WORLD_SCALE), boardSpot.pos.y + (y * GRID_TO_WORLD_SCALE), boardSpot.pos.z);
 	}
 	
-	bool IsDead(Actor actor) {
-		return actor.InStateSequence(actor.CurState, actor.ResolveState("XDeath"))
+	bool IsDead(ConwayImp actor) {
+		let isDead = actor.InStateSequence(actor.CurState, actor.ResolveState("XDeath"))
 			|| actor.InStateSequence(actor.CurState, actor.ResolveState("Death"));
+					//Console.Printf("actor.CurState:%s", actor.CurState);
+		// let nameCount = ThingCountName(actor.Name, actor.tid);
+		Console.Printf("actor.name:" .. actor.GetClassName() .. " isDead:" .. !actor.alive);
+		return !actor.alive;
 	}
 	
 	void MakeCellAlive(int x, int y) {
@@ -150,13 +157,17 @@ class ConwayHandler : EventHandler
 		//Console.Printf("Spawn Cell tid:" .. cellTid);
 		if (cellActor == null) {
 			//Console.Printf("SPAWN:SPAWN " .. cellTid);
-			cellActor = player.Spawn("DoomImp", GetWorldPosForGrid(x, y), NO_REPLACE);
-			cellActor.ChangeTid(cellTid);
+			cellActor = player.Spawn("ConwayImp", GetWorldPosForGrid(x, y), NO_REPLACE);
+			let cellImp = ConwayImp(cellActor);
+			cellImp.ChangeTid(cellTid);
+			cellImp.alive = true;
 		} else {
 			// Raise if dead, otherwise do nothing
-			if (IsDead(cellActor)) {
+			let cellImp = ConwayImp(cellActor);
+			if (IsDead(cellImp)) {
 				//Console.Printf("SPAWN:REZ " .. cellTid);
-				cellActor.SetState(cellActor.ResolveState("Raise"));
+				cellImp.SetState(cellActor.ResolveState("Raise"));
+				cellImp.alive = true;
 				//Thing_Raise(cellTid, true);
 			} else {
 				//Console.Printf("SPAWN:NOP " .. cellTid);
@@ -174,8 +185,10 @@ class ConwayHandler : EventHandler
 		let cellActor = FindActor(cellTid);
 		if (cellActor != null) {
 			//Thing_Destroy(cellTid);
-			if (!IsDead(cellActor)) {
-				cellActor.SetState(cellActor.ResolveState("XDeath"));
+			let cellImp = ConwayImp(cellActor);
+			if (!IsDead(cellImp)) {
+				cellImp.SetState(cellActor.ResolveState("XDeath"));
+				cellImp.alive = false;
 				//Console.Printf("MakeCellDead tid:" .. cellTid);
 			}
 		}
