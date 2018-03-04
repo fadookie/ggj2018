@@ -4,7 +4,7 @@ class ConwayHandler : EventHandler
 
 	const BOARD_SPOT_TID = 65534;
 	
-	const GRID_SIZE = 20; //Keep this within 7 bits (127 or less) for tag packing
+	const GRID_SIZE = 20;
 	const GRID_TO_WORLD_SCALE = 50;
 	bool board[GRID_SIZE][GRID_SIZE];
 	bool boardNext[GRID_SIZE][GRID_SIZE];
