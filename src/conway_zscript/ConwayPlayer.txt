@@ -1,7 +1,19 @@
 class ConwayPlayer: DoomPlayer
 {
-	// override void PostBeginPlay()
-    // {
-		// A_Log("ConwayPlayer init");
-	// }
+	Default {
+		Player.WeaponSlot 4, "ConwaySimulationGun";
+		Player.WeaponSlot 2, "Pistol";
+		Player.WeaponSlot 3, "Shotgun";
+		//Player.StartItem "ConwaySimulationGun";
+		//Player.StartItem "Fist";
+		//Player.StartItem "Pistol";
+		//Player.StartItem "Shotgun";
+	}
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		A_Log("ConwayPlayer init");
+		A_GiveInventory("ConwaySimulationGun", 1);
+		A_GiveInventory("Shotgun", 1);
+	}
 }

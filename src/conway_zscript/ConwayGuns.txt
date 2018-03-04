@@ -1,0 +1,48 @@
+class ConwaySimulationGun : Weapon
+{
+	CVar runningCV;
+
+    Default {
+	    Weapon.SlotNumber 1;
+        Weapon.BobStyle "Smooth";
+        Weapon.BobRangeX 0.5;
+        Weapon.BobRangeY 0.2;
+        
+        +WEAPON.MELEEWEAPON;
+    }
+	
+    States
+    {
+    Ready:
+      PUNG A 1 A_WeaponReady;
+      Loop;
+    Deselect:
+      PUNG A 1 A_Lower;
+      Loop;
+    Select:
+      PUNG A 1 A_Raise;
+      Loop;
+    Fire:
+      PUNG B 1 ToggleSimulationRunning;
+      PUNG B 3;
+      PUNG C 4 A_Punch;
+      PUNG D 5;
+      PUNG C 4;
+      PUNG B 5 A_ReFire;
+      Goto Ready;
+    }
+
+	override void PostBeginPlay()
+	{
+		super.PostBeginPlay();
+		runningCV = CVar.FindCVar("running");
+	}
+
+	action void ToggleSimulationRunning() {
+		/* Functions must be declared with action keyword to be callable from a
+		state definition. In this context, `invoker` is the weapon and `self` is the player.
+		*/
+		let running = invoker.runningCV.GetInt() != 0;
+		invoker.runningCV.SetInt(!running);
+	}
+}
