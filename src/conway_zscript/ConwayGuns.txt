@@ -35,11 +35,11 @@ class ConwaySimulationGun : Weapon
 	  }
 	FireOff:
       CNWY A 5 ToggleSimulationRunning;
-      CNWY B 5;
+      CNWY B 5 A_PlaySound("switches/normbutn", CHAN_WEAPON);
       Goto ReadyOn;
 	FireOn:
       CNWY B 5 ToggleSimulationRunning;
-      CNWY A 5;
+      CNWY A 5 A_PlaySound("switches/normbutn", CHAN_WEAPON);
       Goto Ready;
     }
 
