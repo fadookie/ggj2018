@@ -13,22 +13,33 @@ class ConwaySimulationGun : Weapon
 	
     States
     {
-    Ready:
-      PUNG A 1 A_WeaponReady;
+    Ready: // Ready when off
+      CNWY A 1 A_WeaponReady;
       Loop;
+	ReadyOn:
+      CNWY B 1 A_WeaponReady;
+	  Loop;
     Deselect:
-      PUNG A 1 A_Lower;
+      CNWY A 1 A_Lower;
       Loop;
     Select:
-      PUNG A 1 A_Raise;
+      CNWY A 1 A_Raise;
       Loop;
     Fire:
-      PUNG B 1 ToggleSimulationRunning;
-      PUNG B 3;
-      PUNG C 4 A_Punch;
-      PUNG D 5;
-      PUNG C 4;
-      PUNG B 5 A_ReFire;
+	  TNT1 A 0 {
+		if(GetRunning()) {
+			return ResolveState("FireOn"); 
+		} else {
+			return ResolveState("FireOff"); 
+		}
+	  }
+	FireOff:
+      CNWY A 5 ToggleSimulationRunning;
+      CNWY B 5;
+      Goto ReadyOn;
+	FireOn:
+      CNWY B 5 ToggleSimulationRunning;
+      CNWY A 5;
       Goto Ready;
     }
 
@@ -42,7 +53,10 @@ class ConwaySimulationGun : Weapon
 		/* Functions must be declared with action keyword to be callable from a
 		state definition. In this context, `invoker` is the weapon and `self` is the player.
 		*/
-		let running = invoker.runningCV.GetInt() != 0;
-		invoker.runningCV.SetInt(!running);
+		invoker.runningCV.SetInt(!GetRunning());
+	}
+
+	action bool GetRunning() {
+		return invoker.runningCV.GetInt() != 0;
 	}
 }
