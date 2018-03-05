@@ -1,1 +1,2 @@
 noarchive server int running = 0;
+noarchive server int preset_change_flag = 0;

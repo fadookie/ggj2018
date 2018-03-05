@@ -10,6 +10,7 @@ class ConwayHandler : EventHandler
 	bool boardNext[GRID_SIZE][GRID_SIZE];
 	
 	CVar runningCV;
+	CVar presetChangeFlagCV;
 	int lastUpdateTime;
 	int generationCount;
 	
@@ -19,6 +20,7 @@ class ConwayHandler : EventHandler
 	override void WorldLoaded(WorldEvent e) {
 		Console.Printf("Hello World!");
 		runningCV = CVar.FindCVar("running");
+		presetChangeFlagCV = CVar.FindCVar("preset_change_flag");
 		player = FindPlayer();
 		boardSpot = FindActor(BOARD_SPOT_TID);
 		if (boardSpot == null) {
@@ -43,6 +45,10 @@ class ConwayHandler : EventHandler
 			UpdateWorldBoardView();
 			PrintBoard();
 			Console.Printf("Updated, generation=".. generationCount.. ", timeSeconds=" .. timeSeconds);
+		}
+		if (presetChangeFlagCV.GetInt() != 0) {
+			presetChangeFlagCV.SetInt(0);
+			Console.Printf("Recieved preset change message");
 		}
 	}
 

@@ -1,0 +1,13 @@
+#library "GLOBAL_ACS_STUFF"
+
+#include "zcommon.acs"
+
+/**
+ * Special trigger scripts
+ */
+
+
+script 1 (void) // Change preset
+{
+	SetCVar("preset_change_flag", 1);
+}
