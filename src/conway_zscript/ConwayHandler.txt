@@ -45,12 +45,11 @@ class ConwayHandler : EventHandler
 			lastUpdateTime = timeSeconds;
 			NextGen();
 			UpdateWorldBoardView();
-			PrintBoard();
+			//PrintBoard();
 			Console.Printf("Updated, generation=".. generationCount.. ", timeSeconds=" .. timeSeconds);
 		}
 		if (presetChangeFlagCV.GetInt() != 0) {
 			presetChangeFlagCV.SetInt(0);
-			Console.Printf("Recieved preset change message");
 			CyclePreset();
 		}
 	}
@@ -106,12 +105,12 @@ class ConwayHandler : EventHandler
 	}
 	
 	void InitBoardFromPreset() {
-		Console.Printf("InitBoardFromPreset currentPreset:%i", currentPreset);
+		//Console.Printf("InitBoardFromPreset currentPreset:%i", currentPreset);
 		switch (currentPreset) {
 			case 0:
 				return;
 			case 1:
-				//Glider
+				Console.Printf("Loading preset: Glider");
 				board[0][1] = true;
 				board[1][2] = true;
 				board[2][0] = true;
@@ -119,13 +118,13 @@ class ConwayHandler : EventHandler
 				board[2][2] = true;
 				return;
 			case 2:
-				//Spinner
+				Console.Printf("Loading preset: Spinner");
 				board[1][1] = true;
 				board[1][2] = true;
 				board[1][3] = true;
 				return;
 			case 3:
-				//R-Pentominos
+				Console.Printf("Loading preset: R-Pentomino");
 				board[3][4] = true;
 				board[3][5] = true;
 				board[4][3] = true;
@@ -167,7 +166,7 @@ class ConwayHandler : EventHandler
 			|| actor.InStateSequence(actor.CurState, actor.ResolveState("Death"));
 					//Console.Printf("actor.CurState:%s", actor.CurState);
 		// let nameCount = ThingCountName(actor.Name, actor.tid);
-		Console.Printf("actor.name:" .. actor.GetClassName() .. " isDead:" .. !actor.alive);
+		//Console.Printf("actor.name:" .. actor.GetClassName() .. " isDead:" .. !actor.alive);
 		return !actor.alive;
 	}
 	

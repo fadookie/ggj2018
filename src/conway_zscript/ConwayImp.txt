@@ -5,7 +5,7 @@ class ConwayImp : DoomImp
 	override void PostBeginPlay()
 	{
 		alive = true;
-		A_Log("ConwayImp init");
+		//A_Log("ConwayImp init");
 	}
 
 	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags = 0, double angle = 0) {
