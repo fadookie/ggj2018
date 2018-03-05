@@ -29,6 +29,7 @@ class ConwayHandler : EventHandler
 			Console.Printf("No board spot found with TID " .. BOARD_SPOT_TID .. ", creating one...");
 			boardSpot = player.Spawn("Shotgun", (0,0,0), NO_REPLACE);
 		}
+		currentPreset = 1;
 		InitBoardFromPreset();
 		SpawnBoardMarkers();
 		SpawnBoardInteractables();
