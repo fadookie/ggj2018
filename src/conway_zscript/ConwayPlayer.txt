@@ -1,7 +1,7 @@
 class ConwayPlayer: DoomPlayer
 {
 	Default {
-		Player.WeaponSlot 4, "ConwaySimulationGun";
+		Player.WeaponSlot 1, "ConwaySimulationGun";
 		Player.WeaponSlot 2, "Pistol";
 		Player.WeaponSlot 3, "Shotgun";
 		//Player.StartItem "ConwaySimulationGun";
@@ -14,6 +14,5 @@ class ConwayPlayer: DoomPlayer
 		super.PostBeginPlay();
 		A_Log("ConwayPlayer init");
 		A_GiveInventory("ConwaySimulationGun", 1);
-		A_GiveInventory("Shotgun", 1);
 	}
 }

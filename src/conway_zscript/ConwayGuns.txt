@@ -13,17 +13,47 @@ class ConwaySimulationGun : Weapon
 	
     States
     {
-    Ready: // Ready when off
+    Ready:
+	  TNT1 A 0 {
+		if(GetRunning()) {
+			return ResolveState("ReadyOn"); 
+		} else {
+			return ResolveState("ReadyOff"); 
+		}
+	  }
+	ReadyOff:
       CNWY A 1 A_WeaponReady;
       Loop;
 	ReadyOn:
       CNWY B 1 A_WeaponReady;
 	  Loop;
     Deselect:
+	  TNT1 A 0 {
+		if(GetRunning()) {
+			return ResolveState("DeselectOn"); 
+		} else {
+			return ResolveState("DeselectOff"); 
+		}
+	  }
+    DeselectOff:
       CNWY A 1 A_Lower;
       Loop;
-    Select:
+    DeselectOn:
+      CNWY B 1 A_Lower;
+      Loop;
+	Select:
+	  TNT1 A 0 {
+		if(GetRunning()) {
+			return ResolveState("SelectOn"); 
+		} else {
+			return ResolveState("SelectOff"); 
+		}
+	  }
+    SelectOff:
       CNWY A 1 A_Raise;
+      Loop;
+    SelectOn:
+      CNWY B 1 A_Raise;
       Loop;
     Fire:
 	  TNT1 A 0 {
