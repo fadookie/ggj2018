@@ -21,6 +21,7 @@ Episode "test map 01"
 Map "test map 01" "My Custom Map"
 {
 	music = "d_dead"
+	Sky1 = "SKY1"
 }
 
 DoomEdNums
