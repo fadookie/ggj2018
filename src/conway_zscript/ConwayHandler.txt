@@ -299,7 +299,9 @@ class ConwayHandler : EventHandler
 					for (let dy = -1; dy <= 1; dy++) {
 						if ( dx == 0 && dy == 0) {
 						} else if (x+dx < GRID_SIZE
+								&& x+dx >= 0
 								&& y+dy < GRID_SIZE
+								&& y+dy >= 0
 								&& board[x+dx][y+dy]) {
 							n++;
 						}
