@@ -361,7 +361,7 @@ script 11 (void) //Corpse clean counter
 	int fake_corpses_to_clean = FAKE_CORPSES_TO_CLEAN_TOTAL - corpses_cleaned;
 	if (corpses_cleaned >= CORPSES_TO_CLEAN)
 	{
-		Playsound(0,"slop");
+		Playsound(0,"misc/gibbed");
 		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
 		fadeto(0, 0, 0, 1.0, 3.0);
 		Delay(4 * TICS_PER_SECOND);
@@ -369,7 +369,7 @@ script 11 (void) //Corpse clean counter
 	}
 	else
 	{
-		Playsound(0,"slop");
+		Playsound(0,"misc/gibbed");
 		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
 		corpses_cleaned++;
 	}
@@ -403,7 +403,7 @@ script 15 (void) //Debris clean counter
 	int fake_corpses_to_clean = FAKE_CORPSES_TO_CLEAN_TOTAL - corpses_cleaned;
 	if (corpses_cleaned >= CORPSES_TO_CLEAN)
 	{
-		Playsound(0,"item");
+		Playsound(0,"misc/i_pkup");
 		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
 		fadeto(0, 0, 0, 1.0, 3.0);
 		Delay(4 * TICS_PER_SECOND);
@@ -411,7 +411,7 @@ script 15 (void) //Debris clean counter
 	}
 	else
 	{
-		Playsound(0,"item");
+		Playsound(0,"misc/i_pkup");
 		print(s:"\c[Green]Things to clean up: ",d:fake_corpses_to_clean);
 		corpses_cleaned++;
 	}
