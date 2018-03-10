@@ -52,6 +52,8 @@ defaultmap
 
 map MAP01 lookup "MAP01TITLE"
 {
+
+	Next = EndSequence, "credits1"
 }
 
 map MAP02 lookup "MAP02TITLE"
@@ -70,6 +72,79 @@ map Meme_Stage lookup "Meme_StageTITLE"
 {
 }
 
+
+intermission credits1 {
+    
+	// credits 1 --------------
+	Fader{
+		Background = "credits1"
+	    FadeType = FadeIn
+		Time = 2
+	}
+	
+	Image{
+		Background = "credits1"
+		Time = 3
+	}
+	
+	Fader{
+		Background = "credits1"
+		FadeType = FadeOut
+		Time = 2
+	}
+	
+	//credits 2 ------------------
+	
+	Fader{
+		Background = "credits2"
+	    FadeType = FadeIn
+		Time = 2
+	}
+	
+	Image{
+		Background = "credits2"
+		Time = 3
+	}
+	
+	Fader{
+		Background = "credits2"
+		FadeType = FadeOut
+		Time = 2
+	}
+	
+	//credits 3 ------------------
+	
+	Fader{
+		Background = "credits3"
+	    FadeType = FadeIn
+		Time = 2
+	}
+	
+	Image{
+		Background = "credits3"
+		Time = 3
+	}
+	
+	Fader{
+		Background = "credits3"
+		FadeType = FadeOut
+		Time = 4
+	}
+	
+	
+	
+	GotoTitle{}
+	
+}
+
+intermission credits2{
+
+}
+
+gameinfo {
+	creditpage = "titlepic"
+	finalepage = "credits"
+}
 
 DoomEdNums
 {
