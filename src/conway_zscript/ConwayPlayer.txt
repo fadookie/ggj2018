@@ -1,6 +1,7 @@
 class ConwayPlayer: DoomPlayer
 {
 	Default {
+		+NOGRAVITY;
 		Player.WeaponSlot 1, "ConwaySimulationGun";
 		Player.WeaponSlot 2, "Pistol";
 		Player.WeaponSlot 3, "Shotgun";
@@ -8,8 +9,8 @@ class ConwayPlayer: DoomPlayer
 	override void PostBeginPlay()
 	{
 		super.PostBeginPlay();
+		self.bFly = true;
 		A_Log("ConwayPlayer init");
 		A_GiveInventory("ConwaySimulationGun", 1);
-		A_GiveInventory("PowerFlight", 1);
 	}
 }
