@@ -1,7 +1,5 @@
 class ConwaySimulationGun : Weapon
 {
-	CVar runningCV;
-
     Default {
 	    Weapon.SlotNumber 1;
         Weapon.BobStyle "Smooth";
@@ -76,17 +74,17 @@ class ConwaySimulationGun : Weapon
 	override void PostBeginPlay()
 	{
 		super.PostBeginPlay();
-		runningCV = CVar.FindCVar("running");
+		;
 	}
 
 	action void ToggleSimulationRunning() {
 		/* Functions must be declared with action keyword to be callable from a
 		state definition. In this context, `invoker` is the weapon and `self` is the player.
 		*/
-		invoker.runningCV.SetInt(!GetRunning());
+		CVar.FindCVar("running").SetInt(!GetRunning());
 	}
 
 	action bool GetRunning() {
-		return invoker.runningCV.GetInt() != 0;
+		return CVar.FindCVar("running").GetInt() != 0;
 	}
 }

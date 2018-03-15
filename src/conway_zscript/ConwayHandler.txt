@@ -10,9 +10,6 @@ class ConwayHandler : EventHandler
 	bool board[GRID_SIZE][GRID_SIZE];
 	bool boardNext[GRID_SIZE][GRID_SIZE];
 	
-	CVar runningCV;
-	CVar presetChangeFlagCV;
-	CVar boardClearFlagCV;
 	int lastUpdateTime;
 	int generationCount;
 	int currentPreset;
@@ -22,9 +19,6 @@ class ConwayHandler : EventHandler
 	
 	override void WorldLoaded(WorldEvent e) {
 		Console.Printf("Hello World!");
-		runningCV = CVar.FindCVar("running");
-		presetChangeFlagCV = CVar.FindCVar("preset_change_flag");
-		boardClearFlagCV = CVar.FindCVar("board_clear_flag");
 		player = FindPlayer();
 		boardSpot = FindActor(BOARD_SPOT_TID);
 		if (boardSpot == null) {
@@ -43,6 +37,9 @@ class ConwayHandler : EventHandler
 	{
 		let timeSeconds = Thinker.Tics2Seconds(level.time);
 		//Console.Printf("timeSeconds=" .. timeSeconds .. " lastUpdate=" .. lastUpdateTime .. "dt=" .. timeSeconds - lastUpdateTime);
+		let runningCV = CVar.FindCVar("running");
+		let presetChangeFlagCV = CVar.FindCVar("preset_change_flag");
+		let boardClearFlagCV = CVar.FindCVar("board_clear_flag");
 		let running = runningCV.GetInt() != 0;
 		if (running && timeSeconds - lastUpdateTime >= UPDATE_FREQUENCY_SECONDS) {
 			lastUpdateTime = timeSeconds;
