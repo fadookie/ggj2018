@@ -1,2 +1,3 @@
 noarchive server int running = 0;
 noarchive server int preset_change_flag = 0;
+noarchive server int board_clear_flag = 0;

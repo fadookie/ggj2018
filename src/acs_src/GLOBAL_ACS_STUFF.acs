@@ -11,3 +11,9 @@ script 1 (void) // Change preset
 {
 	SetCVar("preset_change_flag", 1);
 }
+
+script 2 (void) // Clear board
+{
+	SetCVar("board_clear_flag", 1);
+}
+

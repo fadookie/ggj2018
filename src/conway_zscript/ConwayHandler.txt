@@ -4,7 +4,7 @@ class ConwayHandler : EventHandler
 
 	const BOARD_SPOT_TID = 65534;
 	
-	const GRID_SIZE = 20;
+	const GRID_SIZE = 50;
 	const GRID_TO_WORLD_SCALE = 50;
 	const NUM_PRESETS = 4;
 	bool board[GRID_SIZE][GRID_SIZE];
@@ -12,6 +12,7 @@ class ConwayHandler : EventHandler
 	
 	CVar runningCV;
 	CVar presetChangeFlagCV;
+	CVar boardClearFlagCV;
 	int lastUpdateTime;
 	int generationCount;
 	int currentPreset;
@@ -23,6 +24,7 @@ class ConwayHandler : EventHandler
 		Console.Printf("Hello World!");
 		runningCV = CVar.FindCVar("running");
 		presetChangeFlagCV = CVar.FindCVar("preset_change_flag");
+		boardClearFlagCV = CVar.FindCVar("board_clear_flag");
 		player = FindPlayer();
 		boardSpot = FindActor(BOARD_SPOT_TID);
 		if (boardSpot == null) {
@@ -48,6 +50,11 @@ class ConwayHandler : EventHandler
 			UpdateWorldBoardView();
 			//PrintBoard();
 			Console.Printf("Updated, generation=".. generationCount.. ", timeSeconds=" .. timeSeconds);
+		}
+		if (boardClearFlagCV.GetInt() != 0) {
+			Console.Printf("Clearing board.");
+			boardClearFlagCV.SetInt(0);
+			ClearBoard();
 		}
 		if (presetChangeFlagCV.GetInt() != 0) {
 			presetChangeFlagCV.SetInt(0);
@@ -109,8 +116,6 @@ class ConwayHandler : EventHandler
 		//Console.Printf("InitBoardFromPreset currentPreset:%i", currentPreset);
 		switch (currentPreset) {
 			case 0:
-				return;
-			case 1:
 				Console.Printf("Loading preset: Glider");
 				board[0][1] = true;
 				board[1][2] = true;
@@ -118,25 +123,37 @@ class ConwayHandler : EventHandler
 				board[2][1] = true;
 				board[2][2] = true;
 				return;
-			case 2:
+			case 1:
 				Console.Printf("Loading preset: Spinner");
 				board[1][1] = true;
 				board[1][2] = true;
 				board[1][3] = true;
 				return;
-			case 3:
-				Console.Printf("Loading preset: R-Pentomino");
-				board[3][4] = true;
+			case 2:
+				Console.Printf("Loading preset: Lightweight Spaceship");
+				board[0][3] = true;
+				board[0][5] = true;
+				board[1][2] = true;
+				board[2][2] = true;
+				board[3][2] = true;
 				board[3][5] = true;
+				board[4][2] = true;
 				board[4][3] = true;
 				board[4][4] = true;
-				board[5][4] = true;
+				return;
+			case 3:
+				Console.Printf("Loading preset: R-Pentomino");
+				// board[3][4] = true;
+				// board[3][5] = true;
+				// board[4][3] = true;
+				// board[4][4] = true;
+				// board[5][4] = true;
 
-				//board[22][24] = true;
-				//board[22][25] = true;
-				//board[23][23] = true;
-				//board[23][24] = true;
-				//board[24][24] = true;
+				board[22][24] = true;
+				board[22][25] = true;
+				board[23][23] = true;
+				board[23][24] = true;
+				board[24][24] = true;
 				return;
 			default:
 				Console.Printf("Unknown preset %i", currentPreset);
