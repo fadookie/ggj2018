@@ -8,7 +8,7 @@ class Imp: DoomPlayer
 	override void PostBeginPlay()
     {
 		super.PostBeginPlay();
-		A_Log("Player init");
+		//A_Log("Player init");
 		A_GiveInventory ("Mana1", 200);
 		//bInvulnerable = true;  // It works to set invulnerable flag here to switch to godmode mugshot - iddqd also works but not after teleport happens :/
 	}
@@ -53,13 +53,13 @@ class Imp: DoomPlayer
 				let numRespawns = numRespawnsCVar.GetInt();
 				
 				if (justUsedMemeTeleporter) {
-					A_Log("Skipping count for teleporting back from meme level");
+					//A_Log("Skipping count for teleporting back from meme level");
 					justUsedMemeTeleporter = false;
 				} else {
 					numRespawns++;
 					numRespawnsCVar.SetInt(numRespawns);
-					A_Log("Respawns:");
-					A_LogInt(numRespawns);
+					//A_Log("Respawns:");
+					//A_LogInt(numRespawns);
 				}
 				// Simulated teleport
 				let teleporter = GetTeleporter();
@@ -85,7 +85,7 @@ class Imp: DoomPlayer
 		
 		MemeTeleported:
 		TNT1 A 0 {
-			A_Log("Imp.MemeTeleported");
+			//A_Log("Imp.MemeTeleported");
 			justUsedMemeTeleporter = true;
 		}
 		Goto Spawn;
@@ -105,7 +105,7 @@ class Imp: DoomPlayer
 		
 		DisableGod: // Currently unused
 		TNT1 A 2 {
-			A_Log("Imp.DisableGod");
+			//A_Log("Imp.DisableGod");
 			//bInvulnerable = false;
 		}
 		Goto Spawn;
@@ -113,13 +113,13 @@ class Imp: DoomPlayer
 	
 	Actor GetTeleporter()
     {
-		A_Log("GetTeleporter");
+		//A_Log("GetTeleporter");
         let MonsterFinder = ActorIterator.Create(TELEPORT_TARGET_TID);
         Actor mo = null;
         while ( mo = Actor(MonsterFinder.Next()) )
         {
-			A_Log("got actor");
-			A_LogInt(mo.tid);
+			//A_Log("got actor");
+			//A_LogInt(mo.tid);
 			return mo;
         }
 		return mo;

@@ -45,7 +45,7 @@ int corpses_cleaned = 0;
  
 script "SetMusic" (int track)
 {
-	Log(s:"SetMusic:", i:track);
+	//Log(s:"SetMusic:", i:track);
 
 	switch (track) {
 		case MUSIC_E1M1:
@@ -386,7 +386,7 @@ script 12 (void) //Second door opens on last office visit
 
 script 13 (void) // Exit dialogue with buddy
 {
-	Log(s:"Exit dialoge script called");
+	//Log(s:"Exit dialoge script called");
 	talked_to_buddy = true;
 	ACS_Terminate(3, 0);
 	Delay(5 * TICS_PER_SECOND);

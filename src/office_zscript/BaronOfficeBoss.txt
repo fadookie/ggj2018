@@ -40,7 +40,7 @@ class BaronOfficeBoss: BaronOfHell
 		if (!lastDamageWasCoffee) {
 			source.bBuddha = false; // Actually kill target/player if possible
 		}
-		A_Log("Damaged by inflictor:" .. inflictor.GetClassName() .. " lastDamageWasCoffee:" .. lastDamageWasCoffee);
+		// A_Log("Damaged by inflictor:" .. inflictor.GetClassName() .. " lastDamageWasCoffee:" .. lastDamageWasCoffee);
 		return super.DamageMobj(inflictor, source, damage, mod, flags, angle);
 	}
 }

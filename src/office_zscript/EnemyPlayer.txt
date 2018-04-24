@@ -4,10 +4,12 @@ class EnemyPlayerBase : ScriptedMarine {
 	override void PostBeginPlay()
     {
 		super.PostBeginPlay();
+/*
 		A_Log("Hello World"); // foo
 		A_LogInt(tid);
 		A_Log("hates");
 		A_LogInt(HATED_TID);
+*/
 		Thing_Hate(tid, HATED_TID, 4);
 	}
 	
