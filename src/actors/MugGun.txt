@@ -15,7 +15,7 @@ actor MugGun: ImpGun 20101
 	Scale .5
 	
 	Inventory.PickupSound "weapon/impfire"
-	Inventory.PickupMessage "Boss Coffee Mug"
+	Inventory.PickupMessage "#1 Boss... Yeah right!"
 	
 	States
 	{
