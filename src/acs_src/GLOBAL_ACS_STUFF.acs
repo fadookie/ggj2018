@@ -133,7 +133,7 @@ script 1 (void) //Cross line near coffee guy
 	if (GetCVar ("numPlayerRespawns") == 1) {
 		PlaySound(BUDDY_TID, "impgibberishcoffee");
 
-		print(s:"\c[Green]This coffee sucks!!!");	
+		print(s:"\c[Green]This coffee sucks!!! Come talk to me... (with the spacebar)!!!");
 	}
 
 }
