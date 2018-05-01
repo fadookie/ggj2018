@@ -34,7 +34,7 @@ class BaronOfficeBoss: BaronOfHell
 		Stop;
 	}
 	
-	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags = 0, double angle = 0) {
+	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle) {
 		lastDamageWasCoffee = inflictor.GetClassName() == "CoffeeMug_Missile";
 		bFriendly = lastDamageWasCoffee;
 		if (!lastDamageWasCoffee) {

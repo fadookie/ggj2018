@@ -53,7 +53,7 @@ class BuddyImp : DoomImp
 		Goto See;
 	}
 	
-	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags = 0, double angle = 0) {
+	override int DamageMobj(Actor inflictor, Actor source, int damage, Name mod, int flags, double angle) {
 		//A_Log("Damaged by:" .. source .. ", friendly:" .. source.bFriendly);
 		lastDamageWasFriendly = source.bFriendly;
 		bBuddha = lastDamageWasFriendly;
