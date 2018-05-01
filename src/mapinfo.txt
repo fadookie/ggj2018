@@ -17,6 +17,8 @@ episode map01
 	name = "$EP1TITLE"
 	noskillmenu
 }
+
+/*
 episode map02
 {
 	name = "$EP2TITLE"
@@ -41,6 +43,7 @@ episode Meme_Stage
 	optional
 	noskillmenu
 }
+*/
 
 
 defaultmap
