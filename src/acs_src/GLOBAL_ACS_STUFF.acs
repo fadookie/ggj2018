@@ -89,11 +89,13 @@ script "SetPlayerType" (int type)
 
 script "BuddyRaise" (void)
 {
+	PlaySound(BUDDY_TID, "impgibberish1");
 	PrintBold(s:"\c[Yellow]Very funny, Terry. Quit screwing around or we might get busted again.");
 	Delay(3 * TICS_PER_SECOND);
 	// HudMessage(s:"\c[Yellow]Have you been out on that ledge so long you forgot how to talk to people?\nPress the ", k:"+use", s:" key.";
 		// HUDMSG_PLAIN, 1, CR_YELLOW, 1.5, 0.5, 3); // Nnot working...
 	if (!talked_to_buddy) {
+		PlaySound(BUDDY_TID, "impgibberish2");
 		PrintBold(s:"\c[Yellow]Have you been out on that ledge so long you forgot how to talk to people?");
 		Delay(3 * TICS_PER_SECOND);
 		PrintBold(s:"\c[Yellow]Press the ", k:"+use", s:" key, fool.");
@@ -101,6 +103,7 @@ script "BuddyRaise" (void)
 }
 
 script "E1M3PlayerEnter" (void) {
+	PlaySound(BUDDY_TID, "impgibberish3");
 	Print(s:"\c[Yellow]Hang on... sounds like we've got a live one.");
 	
 	Delay(2 * TICS_PER_SECOND);
@@ -227,6 +230,7 @@ script 3 (void) //First teleport out to work
 		
 		Delay(3 * TICS_PER_SECOND);
 		
+		PlaySound(BUDDY_TID, "impgibberish2");
 		PrintBold(s:"\c[Yellow]Have you been out on that ledge so long you forgot how to talk to people?");
 		Delay(3 * TICS_PER_SECOND);
 		PrintBold(s:"\c[Yellow]Press the ", k:"+use", s:" key, silly.");
